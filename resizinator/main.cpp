@@ -1,5 +1,5 @@
-#include <iostream>
+#include "common.h"
 
 int main() {
-    std::cout << "resize\n";
+    jrat::test();
 }
