@@ -1,6 +1,6 @@
-add_library(common
+add_library(common STATIC
     include/common.h
-    main.cpp
+    src/main.cpp
 )
 
 target_include_directories(common PUBLIC include)
