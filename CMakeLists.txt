@@ -5,7 +5,9 @@ project("jrat")
 
 set(BUILD_SHARED_LIBS FALSE)
 
-add_subdirectory(common)
-add_subdirectory(resizinator)
-add_subdirectory(installer)
 add_subdirectory(thirdparty/raylib)
+
+add_subdirectory(common)
+add_subdirectory(convertinator)
+add_subdirectory(installer)
+add_subdirectory(resizinator)
