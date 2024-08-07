@@ -2,6 +2,7 @@ add_executable(resizinator
 	main.cpp
 	"test.h"
 	test.cpp
+	window_example.h
 )
 
 target_include_directories(resizinator PRIVATE "../thirdparty/opencv/include")
