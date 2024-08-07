@@ -10,7 +10,7 @@ public:
     WindowExample() : Window(640, 480, "Example") {}
 
 protected:
-    virtual void update() override {};
+    virtual void update() override {}
     virtual void draw() override {
         DrawText("hello", 50, 50, 50, WHITE);
     }
