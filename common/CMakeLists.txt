@@ -1,6 +1,7 @@
 add_library(common STATIC
-    include/common.h
-    src/main.cpp
+    include/common/window.h
+    src/window.cpp
 )
 
 target_include_directories(common PUBLIC include)
+target_link_libraries(common raylib)

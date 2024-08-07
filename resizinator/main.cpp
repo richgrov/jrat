@@ -1,9 +1,13 @@
-#include "common.h"
 #include "opencv2/opencv.hpp"
 #include "test.h"
+#include "window_example.h"
+
+using namespace jrat;
 
 int main() {
-    jrat::test();
+    WindowExample example;
+    example.run();
+
     cv::Mat image;
     image = cv::imread("corpobs.png");
     cv::imshow("Original Image", image);
