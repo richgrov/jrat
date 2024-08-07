@@ -6,9 +6,10 @@
 
 #include <Windows.h>
 
-void registry_set(HKEY key, const std::string &value) {
+void registry_set(HKEY key, const std::string &name, const std::string &value) {
     LSTATUS res = RegSetValueEx(
-        key, "MUIVerb", 0, REG_SZ, reinterpret_cast<const BYTE *>(value.c_str()), value.size() + 1
+        key, name.c_str(), 0, REG_SZ, reinterpret_cast<const BYTE *>(value.c_str()),
+        value.size() + 1
     );
 
     if (res != ERROR_SUCCESS) {
@@ -32,6 +33,6 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    registry_set(menu_key, "JRAT");
+    registry_set(menu_key, "MUIVerb", "JRAT");
     return 0;
 }
