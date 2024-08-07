@@ -1,23 +1,13 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include "registry_key.h"
 
 #include <Windows.h>
 
+using namespace jrat;
+
 int main(int argc, char **argv) {
-    std::vector<std::string> file_types = {".png", ".jpeg"};
-
-    HKEY menu_key;
-    LSTATUS result = RegCreateKeyEx(
-        HKEY_CLASSES_ROOT, "*\\shell\\jrat", 0, nullptr, 0, KEY_ALL_ACCESS, nullptr, &menu_key,
-        nullptr
-    );
-
-    if (result != ERROR_SUCCESS) {
-        std::cerr << "failed to get registry handle: " << result << "\n";
-        return -1;
-    }
-
-    std::cout << "handle is " << menu_key << "\n";
+    RegistryKey menu(HKEY_CLASSES_ROOT, "*\\shell\\jrat");
+    menu.set_string("MUIVerb", "JRAT");
+    menu.set_string("SubCommands", "Windows.delete");
+    menu.set_string("AppliesTo", ".jpeg OR .jpg OR .png OR .tiff");
     return 0;
 }

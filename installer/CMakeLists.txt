@@ -3,9 +3,13 @@ if (NOT MSVC)
 endif()
 
 add_executable(installer
-  main.cpp
-  installer.manifest
+    main.cpp
+    registry_key.cpp
+    registry_key.h
+    installer.manifest
 )
+
+set_property(TARGET installer PROPERTY CXX_STANDARD 20)
 
 # In addition to requiring administrator mode in the installer.manifest, MSVC appears to link with
 # default options that disable it. They need to be overriden here. Typically, target_link_options
