@@ -1,8 +1,22 @@
+#include <format>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 #include <Windows.h>
+
+void registry_set(HKEY key, const std::string &value) {
+    LSTATUS res = RegSetValueEx(
+        key, "MUIVerb", 0, REG_SZ, reinterpret_cast<const BYTE *>(value.c_str()), value.size() + 1
+    );
+
+    if (res != ERROR_SUCCESS) {
+        throw std::runtime_error(
+            std::format("failed to set registry key to {}: error {}", value, res)
+        );
+    }
+}
 
 int main(int argc, char **argv) {
     std::vector<std::string> file_types = {".png", ".jpeg"};
@@ -18,6 +32,6 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    std::cout << "handle is " << menu_key << "\n";
+    registry_set(menu_key, "JRAT");
     return 0;
 }
