@@ -4,6 +4,8 @@ endif()
 
 add_executable(installer
     main.cpp
+    registry_key.cpp
+    registry_key.h
     installer.manifest
 )
 
