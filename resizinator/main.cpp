@@ -12,6 +12,6 @@ int main() {
     image = cv::imread("corpobs.png");
     cv::imshow("Original Image", image);
     cv::waitKey(2000);
-    WindowTest* window = new WindowTest();
+    WindowTest *window = new WindowTest();
     window->window_test();
 }
