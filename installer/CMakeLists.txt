@@ -3,8 +3,8 @@ if (NOT MSVC)
 endif()
 
 add_executable(installer
-  main.cpp
-  installer.manifest
+    main.cpp
+    installer.manifest
 )
 
 set_property(TARGET installer PROPERTY CXX_STANDARD 20)
