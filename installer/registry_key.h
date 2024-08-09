@@ -13,6 +13,7 @@ public:
     void set_string(const std::string &name, const std::string &value) const;
 
     static const RegistryKey CLASSES_ROOT;
+    static const RegistryKey LOCAL_MACHINE;
 
 private:
     inline explicit RegistryKey(void *key) {
