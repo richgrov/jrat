@@ -1,14 +1,6 @@
 #include "resizinator.h"
 #include <iostream>
 
-cv::Mat jrat::imread(std::string filepath) {
-    return cv::imread(filepath);
-}
-
-cv::Mat jrat::imread(std::string filepath, int flag) {
-    return cv::imread(filepath, flag);
-}
-
 cv::Mat jrat::resize(std::string filepath, int width, int height) {
     cv::Mat image = jrat::imread(filepath);
     cv::Mat resized_image;
