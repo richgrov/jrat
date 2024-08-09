@@ -2,6 +2,7 @@ add_library(common STATIC
     include/common/stringutil.h
     include/common/supported_types.h
     include/common/textbox.h
+    include/common/supported_files.h
     include/common/window.h
     src/window.cpp
 )
