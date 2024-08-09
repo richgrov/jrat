@@ -11,6 +11,8 @@ add_executable(installer
     installer.manifest
 )
 
+target_link_libraries(installer common)
+
 set_property(TARGET installer PROPERTY CXX_STANDARD 20)
 
 # In addition to requiring administrator mode in the installer.manifest, MSVC appears to link with
