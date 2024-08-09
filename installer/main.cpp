@@ -17,9 +17,19 @@ std::string build_supported_file_list(const std::vector<std::string> &files) {
 
 int main(int argc, char **argv) {
     std::string supported_file_list = build_supported_file_list(supported_files);
+
     RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell\\jrat");
     menu.set_string("MUIVerb", "JRAT");
-    menu.set_string("SubCommands", "Windows.delete");
+    menu.set_string("SubCommands", "jrat.resize");
     menu.set_string("AppliesTo", supported_file_list);
+
+    RegistryKey command_store(
+        RegistryKey::LOCAL_MACHINE,
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CommandStore\\shell"
+    );
+
+    RegistryKey resize_command(command_store, "jrat.resize");
+    resize_command.set_string("MUIVerb", "Resize...");
+    RegistryKey(resize_command, "command").set_string("", "notepad.exe %1");
     return 0;
 }
