@@ -1,8 +1,10 @@
 add_executable(resizinator 
 	main.cpp
-	"test.h"
-	test.cpp
+	"resize_ui.h"
+	"resize_ui.cpp"
 )
+
+set_property(TARGET resizinator PROPERTY CXX_STANDARD 20)
 
 target_include_directories(resizinator PRIVATE "../thirdparty/opencv/include")
 target_link_libraries(resizinator common)

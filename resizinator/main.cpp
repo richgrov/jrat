@@ -1,13 +1,9 @@
 #include "common.h"
 #include "opencv2/opencv.hpp"
-#include "test.h"
+#include "resize_ui.h"
 
 int main() {
     jrat::test();
-    cv::Mat image;
-    image = cv::imread("corpobs.png");
-    cv::imshow("Original Image", image);
-    cv::waitKey(2000);
-    WindowTest *window = new WindowTest();
-    window->window_test();
+    resize_ui* window = new resize_ui();
+    window->make_window();
 }
