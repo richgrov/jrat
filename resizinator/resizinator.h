@@ -4,8 +4,6 @@
 #include <string>
 
 namespace jrat {
-cv::Mat imread(std::string filepath);
-cv::Mat imread(std::string filepath, int flag);
 cv::Mat resize(std::string filepath, int width, int height);
 cv::Mat resize_aspect_ratio(std::string filepath, int width);
 void imwrite(std::string filepath, cv::Mat image);
