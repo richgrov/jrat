@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-static std::string supportedTypes[] = {
+static std::string supported_types[] = {
     "bmp", "dib",
     "jpeg", "jpg", "jpe",
     "jp2",
@@ -23,35 +23,35 @@ int main(int argc, char *argv[]) {
     }
 
     std::string file = argv[1];
-    std::string newType = argv[2];
-    std::string oldType;
+    std::string new_type = argv[2];
+    std::string old_type;
 
-    bool inputSupported = false;
-    bool outputSupported = false;
+    bool input_supported = false;
+    bool output_supported = false;
 
-    for (int i = 0; i < size(supportedTypes); i++) {
-        if (endsWith(toLowercase(file), supportedTypes[i])) {
-            oldType = supportedTypes[i];
-            inputSupported = true;
+    for (int i = 0; i < size(supported_types); i++) {
+        if (to_lowercase(file).ends_with(supported_types[i])) {
+            old_type = supported_types[i];
+            input_supported = true;
         }
 
-        if (toLowercase(newType) == supportedTypes[i]) {
-            outputSupported = true;
+        if (to_lowercase(new_type) == supported_types[i]) {
+            output_supported = true;
         }
     }
 
-    if (!outputSupported) {
+    if (!output_supported) {
         std::cout << "Unsupported output file type.";
         return 0;
     }
 
-    if (!inputSupported) {
+    if (!input_supported) {
         std::cout << "Unsupported input file type.";
         return 0;
     }
 
-    std::string outputFile = file.substr(0, file.find_last_of('.')) + "." + newType;
+    std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
     
     cv::Mat image = cv::imread(file);
-    cv::imwrite(outputFile, image);
+    cv::imwrite(output_file, image);
 }
