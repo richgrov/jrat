@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    if (argc < 5) {
+    if (argc < 5 || argc > 6) {
         error_panic();
         return 0;
     }
