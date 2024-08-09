@@ -1,5 +1,6 @@
 if (NOT MSVC)
-    message(FATAL_ERROR "MSVC is required for building the installer")
+    message(WARNING "MSVC is required for building the installer")
+    return()
 endif()
 
 add_executable(installer
