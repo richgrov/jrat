@@ -2,23 +2,26 @@
 
 #include <string>
 
-#include <Windows.h>
-#include <winreg.h>
-
 namespace jrat {
 
 class RegistryKey {
 public:
-    explicit RegistryKey(HKEY parent, const std::string &child);
+    explicit RegistryKey(RegistryKey parent, const std::string &child);
 
-    inline ~RegistryKey() {
-        RegCloseKey(key_);
-    }
+    ~RegistryKey();
 
     void set_string(const std::string &name, const std::string &value) const;
 
+    static const RegistryKey CLASSES_ROOT;
+
 private:
-    HKEY key_;
+    inline explicit RegistryKey(void *key) {
+        key_ = key;
+    }
+
+    // HKEY type is erased to prevent leaking Windows.h file, which has definitions that conflict
+    // with raylib.h
+    void *key_;
 };
 
 } // namespace jrat

@@ -8,9 +8,12 @@
 
 using namespace jrat;
 
-RegistryKey::RegistryKey(HKEY parent, const std::string &child) {
+const RegistryKey RegistryKey::CLASSES_ROOT = RegistryKey(HKEY_CLASSES_ROOT);
+
+RegistryKey::RegistryKey(const RegistryKey parent, const std::string &child) {
     LSTATUS result = RegCreateKeyEx(
-        HKEY_CLASSES_ROOT, child.c_str(), 0, nullptr, 0, KEY_ALL_ACCESS, nullptr, &key_, nullptr
+        reinterpret_cast<HKEY>(parent.key_), child.c_str(), 0, nullptr, 0, KEY_ALL_ACCESS, nullptr,
+        reinterpret_cast<HKEY *>(&key_), nullptr
     );
 
     if (result != ERROR_SUCCESS) {
@@ -20,10 +23,14 @@ RegistryKey::RegistryKey(HKEY parent, const std::string &child) {
     }
 }
 
+RegistryKey::~RegistryKey() {
+    RegCloseKey(reinterpret_cast<HKEY>(key_));
+}
+
 void RegistryKey::set_string(const std::string &name, const std::string &value) const {
     LSTATUS res = RegSetValueEx(
-        key_, name.c_str(), 0, REG_SZ, reinterpret_cast<const BYTE *>(value.c_str()),
-        value.size() + 1
+        reinterpret_cast<HKEY>(key_), name.c_str(), 0, REG_SZ,
+        reinterpret_cast<const BYTE *>(value.c_str()), static_cast<DWORD>(value.size() + 1)
     );
 
     if (res != ERROR_SUCCESS) {
