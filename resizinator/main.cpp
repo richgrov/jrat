@@ -4,6 +4,6 @@
 
 int main() {
     jrat::test();
-    resize_ui* window = new resize_ui();
+    resize_ui *window = new resize_ui(800, 400, "Hello");
     window->make_window();
 }
