@@ -15,17 +15,19 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    if (argc <= 6) {
-        jrat::error_panic();
+    if (argc < 5) {
+        error_panic();
         return 0;
     }
 
     std::string image_filepath = argv[1];
     std::string keep_aspect_ratio = argv[2];
-    bool keep_original_file = (argv[3] == "-O") ? true : false;
-    int width = std::atoi(argv[4]);
-    int height = std::atoi(argv[5]);
-    std::string new_image_filepath = argv[6];
+    int width = std::atoi(argv[3]);
+    int height = std::atoi(argv[4]);
+    std::string new_image_filepath;
+    if (argc == 6) {
+        new_image_filepath = argv[5];
+    }
     cv::Mat resized_image;
 
     if (keep_aspect_ratio == "-A") {
@@ -37,7 +39,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    image_filepath = (keep_original_file) ? image_filepath : new_image_filepath;
+    image_filepath = (argc == 5) ? image_filepath : new_image_filepath;
     imwrite(image_filepath, resized_image);
 
     /*WindowTest *window = new WindowTest();
