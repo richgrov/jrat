@@ -1,6 +1,5 @@
 add_executable(convertinator
 	main.cpp
-	stringutil.h
 )
 
 set_property(TARGET convertinator PROPERTY CXX_STANDARD 20)

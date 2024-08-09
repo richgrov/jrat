@@ -1,7 +1,7 @@
-#include "stringutil.h"
+#include "common/stringutil.h"
 #include <opencv2/opencv.hpp>
 #include <string>
-#include <iostream>
+#include <filesystem>
 
 static std::string supported_types[] = {
     "bmp", "dib",
@@ -18,7 +18,7 @@ static std::string supported_types[] = {
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        std::cout << "usage: convertinator [filename] [type]";
+        std::cout << "usage: convertinator [filename] [type] <remove original (-r)>";
         return 0;
     }
 
@@ -48,6 +48,10 @@ int main(int argc, char *argv[]) {
     if (!input_supported) {
         std::cout << "Unsupported input file type.";
         return 0;
+    }
+
+    if (argc > 3 && argv[3] == "-r") {
+        std::filesystem::remove(file);
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
