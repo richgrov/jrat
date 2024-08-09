@@ -9,5 +9,6 @@ add_subdirectory(thirdparty/raylib)
 
 add_subdirectory(common)
 add_subdirectory(convertinator)
+add_subdirectory(flipinator)
 add_subdirectory(installer)
 add_subdirectory(resizinator)
