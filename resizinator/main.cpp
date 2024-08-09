@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+#include "common/window.h"
+#include "resize_ui.h"
 #include "resizinator.h"
-#include "test.h"
 #include "window_example.h"
 #include <iostream>
 #include <stdlib.h>
@@ -8,11 +8,15 @@
 using namespace jrat;
 
 int main(int argc, char **argv) {
-    // WindowExample example;
-    // example.run();
-
     if (argv[1] == "--help") {
         jrat::error_panic();
+        return 0;
+    }
+    
+    if (argc == 2 || argc == 1)
+    {
+        resize_ui *ui = new resize_ui(800, 600, "hello");
+        ui->run();
         return 0;
     }
 
@@ -42,17 +46,4 @@ int main(int argc, char **argv) {
 
     image_filepath = (argc == 5) ? image_filepath : new_image_filepath;
     imwrite(image_filepath, resized_image);
-
-    /*WindowTest *window = new WindowTest();
-    window->window_test();*/
-=======
-#include "common.h"
-#include "opencv2/opencv.hpp"
-#include "resize_ui.h"
-
-int main() {
-    jrat::test();
-    resize_ui *window = new resize_ui(800, 400, "Hello");
-    window->make_window();
->>>>>>> 8096cd2 (added font and load that font)
 }

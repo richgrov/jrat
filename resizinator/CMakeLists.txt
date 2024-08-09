@@ -2,8 +2,6 @@ add_executable(resizinator
 	main.cpp
 	resizinator.cpp 
 	"resizinator.h"
-	"test.h"
-	test.cpp
 	window_example.h
 	"resize_ui.h"
 	"resize_ui.cpp"
