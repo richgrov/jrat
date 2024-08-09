@@ -1,0 +1,12 @@
+#pragma once
+#include <string>
+
+std::string to_lowercase(const std::string &string) {
+    std::string lowercase = "";
+
+    for (char c : string) {
+        lowercase += std::tolower(c); // why can't this take an std::string?
+    }
+
+    return lowercase;
+}
