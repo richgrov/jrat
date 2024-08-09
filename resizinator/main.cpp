@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
 int main() {
     jrat::test();
-    resize_ui* window = new resize_ui();
+    resize_ui *window = new resize_ui(800, 400, "Hello");
     window->make_window();
 >>>>>>> 8096cd2 (added font and load that font)
 }

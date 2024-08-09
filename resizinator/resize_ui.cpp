@@ -4,20 +4,17 @@
 
 void resize_ui::make_window() {
     // Initialization
-    const int screenWidth = 1280;
-    const int screenHeight = 768;
-    const char *windowTitle = "Hello world!";
     const char *message = "Hello world! It's great to be here.";
     const int fontSize = 40;
     const float msgSpacing = 1.0f;
 
-    InitWindow(screenWidth, screenHeight, windowTitle);
+    InitWindow(width_, height_, title_.c_str());
 
     // NOTE: The following only works after calling InitWindow() (i.e,. RayLib is initialized)
     const Font font = LoadFont("C:/PRO-100/jrat/common/resources/JetBrainsMono.ttf");
     const Vector2 msgSize = MeasureTextEx(font, message, fontSize, msgSpacing);
     const Vector2 msgPos =
-        Vector2{(screenWidth - msgSize.x) / 2, (screenHeight - msgSize.y) / 2};
+        Vector2{(width_ - msgSize.x) / 2, (height_ - msgSize.y) / 2};
 
     SetTargetFPS(60);
 
