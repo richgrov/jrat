@@ -29,16 +29,16 @@ int main(int argc, char **argv) {
     cv::Mat resized_image;
 
     if (keep_aspect_ratio == "-A") {
-        resize_aspect_ratio(image_filepath, width);
+        resized_image = resize_aspect_ratio(image_filepath, width);
     } else if (keep_aspect_ratio == "-a") {
-        resize(image_filepath, width, height);
+        resized_image = resize(image_filepath, width, height);
     } else {
         error_panic();
         return 0;
     }
 
     image_filepath = (keep_original_file) ? image_filepath : new_image_filepath;
-    jrat::imwrite(image_filepath, resized_image);
+    imwrite(image_filepath, resized_image);
 
     /*WindowTest *window = new WindowTest();
     window->window_test();*/
