@@ -6,7 +6,7 @@ namespace jrat {
 
 class RegistryKey {
 public:
-    explicit RegistryKey(const RegistryKey parent, const std::string &child);
+    explicit RegistryKey(RegistryKey parent, const std::string &child);
 
     ~RegistryKey();
 
