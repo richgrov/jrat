@@ -30,12 +30,12 @@ int main(int argc, char *argv[]) {
     bool output_supported = false;
 
     for (int i = 0; i < size(supported_types); i++) {
-        if (to_lowercase(file).ends_with(supported_types[i])) {
+        if (jrat::to_lowercase(file).ends_with(supported_types[i])) {
             old_type = supported_types[i];
             input_supported = true;
         }
 
-        if (to_lowercase(new_type) == supported_types[i]) {
+        if (jrat::to_lowercase(new_type) == supported_types[i]) {
             output_supported = true;
         }
     }

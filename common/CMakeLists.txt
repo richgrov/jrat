@@ -1,4 +1,5 @@
 add_library(common STATIC
+    include/common/stringutil.h
     include/common/window.h
     src/window.cpp
 )
