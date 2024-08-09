@@ -9,7 +9,6 @@ int main(int argc, char *argv[]) {
     }
 
     std::string file = argv[1];
-    std::string direction = jrat::to_lowercase(argv[2]);
     int int_direction = 0;
 
     if (direction == "horizontal" || direction == "h") {
