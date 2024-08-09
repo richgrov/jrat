@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "resizinator.h"
 #include "test.h"
 #include "window_example.h"
@@ -44,4 +45,14 @@ int main(int argc, char **argv) {
 
     /*WindowTest *window = new WindowTest();
     window->window_test();*/
+=======
+#include "common.h"
+#include "opencv2/opencv.hpp"
+#include "resize_ui.h"
+
+int main() {
+    jrat::test();
+    resize_ui* window = new resize_ui();
+    window->make_window();
+>>>>>>> 8096cd2 (added font and load that font)
 }

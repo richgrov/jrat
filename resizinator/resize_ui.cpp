@@ -1,6 +1,8 @@
-#include "test.h"
+#include "resize_ui.h"
+#include <filesystem>
+#include <iostream>
 
-void WindowTest::window_test() {
+void resize_ui::make_window() {
     // Initialization
     const int screenWidth = 1280;
     const int screenHeight = 768;
@@ -12,7 +14,7 @@ void WindowTest::window_test() {
     InitWindow(screenWidth, screenHeight, windowTitle);
 
     // NOTE: The following only works after calling InitWindow() (i.e,. RayLib is initialized)
-    const Font font = GetFontDefault();
+    const Font font = LoadFont("C:/PRO-100/jrat/common/resources/JetBrainsMono.ttf");
     const Vector2 msgSize = MeasureTextEx(font, message, fontSize, msgSpacing);
     const Vector2 msgPos =
         Vector2{(screenWidth - msgSize.x) / 2, (screenHeight - msgSize.y) / 2};
