@@ -7,6 +7,7 @@ cv::Mat jrat::resize(std::string filepath, int width, int height) {
 
     cv::Size original_image_size = image.size();
     cv::Size resized_image_size = cv::Size(width, height);
+
     if (original_image_size.area() < resized_image_size.area()) {
         cv::resize(image, resized_image, cv::Size(width, height), cv::INTER_CUBIC);
     } else {
@@ -25,6 +26,7 @@ cv::Mat jrat::resize_aspect_ratio(std::string filepath, int width) {
 
     cv::Size original_image_size = image.size();
     cv::Size resized_image_size = cv::Size(width, height);
+
     if (original_image_size.area() < resized_image_size.area()) {
         cv::resize(image, resized_image, cv::Size(width, height), cv::INTER_CUBIC);
     } else {
