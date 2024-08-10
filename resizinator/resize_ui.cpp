@@ -2,15 +2,8 @@
 #include <filesystem>
 #include <iostream>
 
-void jrat::resize_ui::update() {
+using namespace jrat;
 
-}
-
-void jrat::resize_ui::draw() {
-    const Vector2 pos = {width_ / 2, height_ / 2};
-    DrawTextEx(font_, "hello world", pos, 50, 1.0f, RED);
-}
-
-void jrat::resize_ui::load_font() {
+void jrat::Resize_Ui::load_font() {
     font_ = LoadFont("C:/PRO-100/jrat/common/resources/JetBrainsMono.ttf");
 }

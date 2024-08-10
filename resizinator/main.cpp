@@ -1,5 +1,9 @@
+#ifndef RAGUI_IMPLEMENTATION
+#define RAYGUI_IMPLEMENTATION
+#endif // !RAGUI_IMPLEMENTATION
+
 #include "common/window.h"
-#include "resize_ui.h"
+#include "Resize_Ui.h"
 #include "resizinator.h"
 #include "window_example.h"
 #include <iostream>
@@ -15,7 +19,7 @@ int main(int argc, char **argv) {
     
     if (argc == 2 || argc == 1)
     {
-        resize_ui *ui = new resize_ui(800, 600, "hello");
+        Resize_Ui *ui = new Resize_Ui(800, 600, "hello");
         ui->run();
         return 0;
     }

@@ -18,7 +18,7 @@ void Window::run() {
         update();
 
         BeginDrawing();
-        ClearBackground(BLACK);
+
         draw();
         EndDrawing();
     }

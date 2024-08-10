@@ -1,26 +1,23 @@
 #pragma once
-#include "common/window.h"
+#include "common/ui_framework.h"
 
-#include "raylib.h"
 #include <string>
 namespace jrat {
 
-    class resize_ui : public Window {
+    class Resize_Ui : public Ui_Frame {
     public:
-        resize_ui() = default;
-        resize_ui(int width, int height, const std::string &title) : Window(width, height, title) {
-            font_ = LoadFont("C:/PRO-100/jrat/common/resources/JetBrainsMono.ttf");
+
+        Resize_Ui() = default;
+        Resize_Ui(int width, int height, const std::string &title) : Ui_Frame(width, height, title) {
+            //font_ = LoadFont("C:/PRO-100/jrat/common/resources/JetBrainsMono.ttf");
+            create_text_box(10, 570, 100, 20);
+            create_text_box(135, 570, 100, 20);
         };
 
-        virtual void update() override;
-        virtual void draw() override;
         virtual void load_font() override;
 
     private:
 
-	 //   int width_{ 0 };
-     //   int height_{ 0 };
-     //   std::string title_;
         Font font_{ GetFontDefault() };
     };
 }
