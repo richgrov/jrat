@@ -5,6 +5,7 @@ project("jrat")
 
 set(BUILD_SHARED_LIBS FALSE)
 
+find_package(OpenCV REQUIRED)
 add_subdirectory(thirdparty/raylib)
 
 add_subdirectory(common)
