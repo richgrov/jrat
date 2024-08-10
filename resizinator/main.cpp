@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
     
     if (argc == 2 || argc == 1)
     {
-        Resize_Ui *ui = new Resize_Ui(800, 600, "hello");
-        ui->run();
+        Resize_Ui ui(800, 600, "hello");
+        ui.run();
         return 0;
     }
 
