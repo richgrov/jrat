@@ -1,5 +1,10 @@
+#ifndef RAGUI_IMPLEMENTATION
+#define RAYGUI_IMPLEMENTATION
+#endif // !RAGUI_IMPLEMENTATION
+
+#include "common/window.h"
+#include "Resize_Ui.h"
 #include "resizinator.h"
-#include "test.h"
 #include "window_example.h"
 #include <iostream>
 #include <stdlib.h>
@@ -7,11 +12,15 @@
 using namespace jrat;
 
 int main(int argc, char **argv) {
-    // WindowExample example;
-    // example.run();
-
     if (argv[1] == "--help") {
         jrat::error_panic();
+        return 0;
+    }
+    
+    if (argc == 2 || argc == 1)
+    {
+        ResizeUi ui(800, 600, "hello");
+        ui.run();
         return 0;
     }
 
@@ -41,7 +50,4 @@ int main(int argc, char **argv) {
 
     image_filepath = (argc == 5) ? image_filepath : new_image_filepath;
     imwrite(image_filepath, resized_image);
-
-    /*WindowTest *window = new WindowTest();
-    window->window_test();*/
 }
