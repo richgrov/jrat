@@ -38,15 +38,11 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 }
 
 void jrat::Window::load_image(const char *file_name) {
-<<<<<<< HEAD
     if (img_.height != 0) {
         throw std::runtime_error("Can't load more than one image at a time.");
     } else {
         img_ = LoadTexture(file_name);
     }
-=======
-    img_ = LoadTexture(file_name);
->>>>>>> f3414d2 (load image with absolute path)
 }
 
 void jrat::Window::draw_boxes() {
@@ -62,11 +58,7 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> f3414d2 (load image with absolute path)
     DrawTextureEx(img_, Vector2{50, 50}, 0, 1, Color{255, 255, 255, 255});
 }
 
