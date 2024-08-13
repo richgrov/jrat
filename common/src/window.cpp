@@ -19,10 +19,6 @@ Window::~Window() {
 }
 
 void Window::run() {
-    load_image("C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG");
-    SetWindowSize(img_.width + 100, img_.height + 100);
-    width_ = img_.width + 100;
-    height_ = img_.height + 100;
     create_text_box_left();
     create_text_box_left();
     while (!WindowShouldClose()) {
@@ -42,7 +38,9 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 }
 
 void jrat::Window::create_text_box_left() {
-    text_boxes_.emplace_back(TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20});
+    text_boxes_.emplace_back(
+        TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20}
+    );
     text_box_count_++;
 }
 
@@ -52,6 +50,14 @@ void jrat::Window::load_image(const char *file_name) {
     } else {
         img_ = LoadTexture(file_name);
     }
+}
+
+void jrat::Window::set_width_and_height() {
+    if (img_.height != 0) {
+        width_ = img_.width + 100;
+        height_ = img_.height + 100;
+    }
+    SetWindowSize(width_, height_);
 }
 
 void jrat::Window::draw_boxes() {

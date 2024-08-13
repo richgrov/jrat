@@ -22,6 +22,7 @@ public:
 
 protected:
     void load_image(const char *file_name);
+    void set_width_and_height();
     virtual void load_font() = 0;
     virtual void update() = 0;
     void update_boxes();

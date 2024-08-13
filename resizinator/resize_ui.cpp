@@ -1,13 +1,17 @@
 #include "resize_ui.h"
 #include "JetBrainsMono.h"
 
-
 using namespace jrat;
 
-jrat::ResizeUi::ResizeUi(int width, int height, const std::string &title)
+jrat::ResizeUi::ResizeUi(int width, int height, const std::string &title, const char *file_name)
     : Window(width, height, title) {
     font_ =
         LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
+    load_image(file_name);
+    set_width_and_height();
+    create_text_box_left();
+    create_text_box_left();
+    create_text_box_left();
 }
 
 void jrat::ResizeUi::load_font() {}
