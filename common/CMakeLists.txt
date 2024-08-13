@@ -1,8 +1,8 @@
 add_library(common STATIC
     include/common/stringutil.h
+    include/common/textbox.h
     include/common/window.h
     src/window.cpp
-    include/common/textbox.h
 )
 
 target_include_directories(common PUBLIC include)
