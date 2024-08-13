@@ -25,10 +25,19 @@ int main(int argc, char **argv) {
     }
 
     std::string image_filepath = argv[1];
+    cv::Mat image = cv::imread(image_filepath);
+
+    if (image.data == NULL) {
+        std::cout << "No image was found at: " + image_filepath << std::endl; 
+        error_panic();
+        return 0; 
+    }
+
     std::string keep_aspect_ratio = argv[2];
     int width = std::atoi(argv[3]);
     int height = std::atoi(argv[4]);
     std::string new_image_filepath;
+
     if (argc == 6) {
         new_image_filepath = argv[5];
     }
