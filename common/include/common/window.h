@@ -18,6 +18,7 @@ public:
     void run();
 
     void create_text_box(float x_pos, float y_pos, float width, float height);
+    void create_text_box_left();
 
 protected:
     void load_image(const char *file_name);
@@ -29,8 +30,9 @@ protected:
     void draw_image();
     int width_{0};
     int height_{0};
-    Font font_{NULL};
-    Texture2D img_{NULL};
+    int text_box_count_{0};
+    Font font_{};
+    Texture2D img_{};
 
     std::vector<TextBox> text_boxes_;
 

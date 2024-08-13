@@ -8,8 +8,6 @@ jrat::ResizeUi::ResizeUi(int width, int height, const std::string &title)
     : Window(width, height, title) {
     font_ =
         LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
-    create_text_box(10, 570, 100, 20);
-    create_text_box(135, 570, 100, 20);
 }
 
 void jrat::ResizeUi::load_font() {}

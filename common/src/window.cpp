@@ -21,20 +21,29 @@ Window::~Window() {
 void Window::run() {
     load_image("C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG");
     SetWindowSize(img_.width + 100, img_.height + 100);
+    width_ = img_.width + 100;
+    height_ = img_.height + 100;
+    create_text_box_left();
+    create_text_box_left();
     while (!WindowShouldClose()) {
         update();
         update_boxes();
         BeginDrawing();
 
         draw();
-        draw_boxes();
         draw_image();
+        draw_boxes();
         EndDrawing();
     }
 }
 
 void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float height) {
     text_boxes_.emplace_back(TextBox{x_pos, y_pos, width, height});
+}
+
+void jrat::Window::create_text_box_left() {
+    text_boxes_.emplace_back(TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20});
+    text_box_count_++;
 }
 
 void jrat::Window::load_image(const char *file_name) {
