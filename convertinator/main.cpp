@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
     
     cv::Mat image = cv::imread(file);
 
-    if (image.data == NULL) {
+    if (image.empty()) {
         std::cout << "No file found at " + file;
         return 0;
     }
