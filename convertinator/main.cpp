@@ -1,7 +1,9 @@
-#include "common/stringutil.h"
-#include <opencv2/opencv.hpp>
-#include <string>
 #include <filesystem>
+#include <string>
+
+#include <opencv2/opencv.hpp>
+
+#include "common/stringutil.h"
 
 static std::string supported_types[] = {
     "bmp", "dib",

@@ -1,7 +1,6 @@
 #pragma once
+
 #include <raygui.h>
-#include <string>
-#include <array>
 
 namespace jrat {
 

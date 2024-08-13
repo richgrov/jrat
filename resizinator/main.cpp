@@ -2,12 +2,8 @@
 #define RAYGUI_IMPLEMENTATION
 #endif // !RAGUI_IMPLEMENTATION
 
-#include "common/window.h"
-#include "Resize_Ui.h"
+#include "resize_ui.h"
 #include "resizinator.h"
-#include "window_example.h"
-#include <iostream>
-#include <stdlib.h>
 
 using namespace jrat;
 

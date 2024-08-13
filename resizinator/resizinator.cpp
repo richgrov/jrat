@@ -1,5 +1,9 @@
 #include "resizinator.h"
+
 #include <iostream>
+
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/opencv.hpp>
 
 cv::Mat jrat::resize(std::string filepath, int width, int height) {
     cv::Mat image = cv::imread(filepath);

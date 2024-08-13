@@ -1,6 +1,4 @@
 #include "resize_ui.h"
-#include <filesystem>
-#include <iostream>
 
 using namespace jrat;
 
