@@ -20,14 +20,17 @@ public:
     void create_text_box(float x_pos, float y_pos, float width, float height);
 
 protected:
+    virtual void load_image(const char* file_name);
     virtual void load_font() = 0;
     virtual void update() = 0;
+    virtual void update_boxes();
     virtual void draw() = 0;
     virtual void draw_boxes();
-    virtual void update_boxes();
+    virtual void draw_image();
     int width_{0};
     int height_{0};
     Font font_{NULL};
+    Texture2D img_{NULL};
 
     
     std::vector<TextBox> text_boxes_;
