@@ -10,6 +10,7 @@ Window::Window(int width, int height, const std::string &title) {
 }
 
 Window::~Window() {
+    UnloadTexture(img_);
     CloseWindow();
 }
 
@@ -33,7 +34,9 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 }
 
 void jrat::Window::load_image(const char *file_name) {
-    img_ = LoadTexture(file_name);
+    if (img_.height == 0) {
+        img_ = LoadTexture(file_name);
+    }
 }
 
 void jrat::Window::draw_boxes() {
@@ -49,7 +52,7 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-    
+
     DrawTextureEx(img_, Vector2{50, 50}, 0, 1, Color{255, 255, 255, 255});
 }
 
