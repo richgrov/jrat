@@ -1,5 +1,5 @@
 add_executable(flipinator
-	main.cpp
+    main.cpp
 )
 
 set_property(TARGET flipinator PROPERTY CXX_STANDARD 20)

@@ -1,5 +1,5 @@
 add_executable(convertinator
-	main.cpp
+    main.cpp
 )
 
 set_property(TARGET convertinator PROPERTY CXX_STANDARD 20)

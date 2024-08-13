@@ -1,10 +1,10 @@
 add_executable(resizinator 
-	main.cpp
-	resize_ui.h
-	resize_ui.cpp
-	resizinator.cpp 
-	resizinator.h
-	window_example.h
+    main.cpp
+    resize_ui.h
+    resize_ui.cpp
+    resizinator.cpp 
+    resizinator.h
+    window_example.h
 )
 
 set_property(TARGET resizinator PROPERTY CXX_STANDARD 20)
