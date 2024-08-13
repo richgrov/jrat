@@ -1,3 +1,5 @@
+#include <filesystem>
+
 #include "common/supported_files.h"
 #include "registry_key.h"
 
@@ -15,7 +17,11 @@ std::string build_supported_file_list(const std::vector<std::string> &files) {
     return result;
 }
 
+static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
+
 int main(int argc, char **argv) {
+    std::filesystem::create_directories(APP_DIR);
+
     std::string supported_file_list = build_supported_file_list(supported_files);
 
     RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell\\jrat");
