@@ -11,7 +11,7 @@ using namespace jrat;
 const RegistryKey RegistryKey::CLASSES_ROOT = RegistryKey(HKEY_CLASSES_ROOT);
 const RegistryKey RegistryKey::LOCAL_MACHINE = RegistryKey(HKEY_LOCAL_MACHINE);
 
-RegistryKey::RegistryKey(const RegistryKey parent, const std::string &child) {
+RegistryKey::RegistryKey(const RegistryKey &parent, const std::string &child) {
     LSTATUS result = RegCreateKeyEx(
         reinterpret_cast<HKEY>(parent.key_), child.c_str(), 0, nullptr, 0, KEY_ALL_ACCESS, nullptr,
         reinterpret_cast<HKEY *>(&key_), nullptr
