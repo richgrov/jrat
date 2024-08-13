@@ -42,7 +42,7 @@ void jrat::imwrite(std::string filepath, cv::Mat image) {
 }
 
 void jrat::error_panic() {
-    std::cout << "[filepath] [aspect ratio (-A/-a)] [keep original (-O/-o)] [width] [height] [new "
+    std::cout << "[filepath] [aspect ratio (-A/-a)] [width] [height] [new "
                  "file path]\n"
                  "-A: enable keep aspect ratio\n"
                  "-a: disable keep aspect ratio\n";
