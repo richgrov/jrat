@@ -1,6 +1,8 @@
 #include "registry_key.h"
 
+#include <cstdlib>
 #include <format>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 
@@ -25,7 +27,11 @@ RegistryKey::RegistryKey(const RegistryKey &parent, const std::string &child) {
 }
 
 RegistryKey::~RegistryKey() {
-    RegCloseKey(reinterpret_cast<HKEY>(key_));
+    LSTATUS result = RegCloseKey(reinterpret_cast<HKEY>(key_));
+    if (result != ERROR_SUCCESS) {
+        std::cerr << std::format("failed to close key: {}", result) << '\n';
+        std::abort();
+    }
 }
 
 void RegistryKey::set_string(const std::string &name, const std::string &value) const {
