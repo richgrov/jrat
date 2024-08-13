@@ -1,4 +1,6 @@
 #include "resize_ui.h"
+#include "JetBrainsMono.h"
+
 
 using namespace jrat;
 
