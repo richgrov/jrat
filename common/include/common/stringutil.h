@@ -4,7 +4,7 @@
 
 namespace jrat {
 
-std::string to_lowercase(const std::string &string) {
+static inline std::string to_lowercase(const std::string &string) {
     std::string lowercase = "";
 
     for (char c : string) {
