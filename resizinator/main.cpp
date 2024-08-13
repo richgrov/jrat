@@ -2,8 +2,16 @@
 #define RAYGUI_IMPLEMENTATION
 #endif // !RAGUI_IMPLEMENTATION
 
-#include "resize_ui.h"
 #include "resizinator.h"
+
+#include <iostream>
+#include <stdlib.h>
+
+#include <opencv2/opencv.hpp>
+
+#include "common/window.h"
+#include "resize_ui.h"
+#include "window_example.h"
 
 using namespace jrat;
 

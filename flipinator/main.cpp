@@ -1,5 +1,13 @@
 #include <iostream>
 
+#include <opencv2/opencv.hpp>
+
+#include "common/stringutil.h"
+
+static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "jp2", "png",
+                                        "webp", "pbm",  "pgm",  "ppm", "pxm", "pnm", "sr",
+                                        "ras",  "tiff", "tif",  "exr", "hdr", "pic"};
+
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "usage: flipinator [filename] [direction]";
