@@ -2,6 +2,7 @@
 
 #include "common/supported_files.h"
 #include "registry_key.h"
+#include "resources.h"
 
 using namespace jrat;
 
@@ -21,6 +22,8 @@ static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
 
 int main(int argc, char **argv) {
     std::filesystem::create_directories(APP_DIR);
+
+    std::span<unsigned char> convertinator = get_resource("CONVERTINATOR_EXE");
 
     std::string supported_file_list = build_supported_file_list(supported_files);
 

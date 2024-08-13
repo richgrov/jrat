@@ -7,8 +7,11 @@ add_executable(installer
     main.cpp
     registry_key.cpp
     registry_key.h
+    resources.cpp
+    resources.h
     
     installer.manifest
+    convertinator.rc
 )
 
 target_link_libraries(installer common)
