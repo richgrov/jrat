@@ -9,16 +9,16 @@ static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "j
                                         "ras",  "tiff", "tif",  "exr", "hdr", "pic"};
 
 int main(int argc, char *argv[]) {
-    if (argc < 5) {
+    if (argc < 6) {
         std::cout << "usage: cropinator [file name] [left] [right] [top] [bottom]";
         return 0;
     }
 
-    std::string file = argv[0];
-    std::string left = argv[1];
-    std::string right = argv[2];
-    std::string top = argv[3];
-    std::string bottom = argv[4];
+    std::string file = argv[1];
+    std::string left = argv[2];
+    std::string right = argv[3];
+    std::string top = argv[4];
+    std::string bottom = argv[5];
 
     cv::Mat image = cv::imread(file);
 
@@ -54,10 +54,12 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    cv::Mat ROI(image, cv::Rect(x, y, width, height));
-    cv::Mat cropped;
+    if (x < 0 || y < 0 || width < 0 || height < 0 || x > size.width || y > size.height ||
+        width > size.width || height > size.height) {
+        std::cout << "Dimensions are outside the provided image";
+        return 0;
+    }
 
-    ROI.copyTo(cropped);
-
+    cv::Mat cropped = image(cv::Range(y, height), cv::Range(x, width));
     cv::imwrite(file, cropped);
 }
