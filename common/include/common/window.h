@@ -1,10 +1,11 @@
 #pragma once
 
-#include "textbox.h"
-
-#include <raylib.h>
 #include <string>
 #include <vector>
+
+#include <raylib.h>
+
+#include "textbox.h"
 
 namespace jrat {
 

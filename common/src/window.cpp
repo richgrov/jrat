@@ -35,7 +35,7 @@ void jrat::Window::draw_boxes() {
 
     for (int i = 0; i < text_boxes_.size(); i++) {
         GuiTextBox(
-            text_boxes_[i].get_area(), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
+            text_boxes_[i].area(), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
             active_text_box_ == i
         );
     }
@@ -48,7 +48,7 @@ void jrat::Window::update_boxes() {
         bool box_found = false;
         for (int i = 0; i < text_boxes_.size(); i++) {
 
-            if (CheckCollisionPointRec(mouse_pos_, text_boxes_[i].get_area())) {
+            if (CheckCollisionPointRec(mouse_pos_, text_boxes_[i].area())) {
                 active_text_box_ = i;
                 box_found = true;
                 break;

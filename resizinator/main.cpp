@@ -2,12 +2,8 @@
 #define RAYGUI_IMPLEMENTATION
 #endif // !RAGUI_IMPLEMENTATION
 
-#include "common/window.h"
-#include "Resize_Ui.h"
+#include "resize_ui.h"
 #include "resizinator.h"
-#include "window_example.h"
-#include <iostream>
-#include <stdlib.h>
 
 using namespace jrat;
 
@@ -16,9 +12,8 @@ int main(int argc, char **argv) {
         jrat::error_panic();
         return 0;
     }
-    
-    if (argc == 2 || argc == 1)
-    {
+
+    if (argc == 2 || argc == 1) {
         ResizeUi ui(800, 600, "hello");
         ui.run();
         return 0;
