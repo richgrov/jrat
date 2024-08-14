@@ -5,10 +5,6 @@
 #include "common/stringutil.h"
 #include "common/supported_types.h"
 
-static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "jp2", "png",
-                                        "webp", "pbm",  "pgm",  "ppm", "pxm", "pnm", "sr",
-                                        "ras",  "tiff", "tif",  "exr", "hdr", "pic"};
-
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "usage: flipinator [filename] [direction]";
@@ -16,19 +12,6 @@ int main(int argc, char *argv[]) {
     }
 
     std::string file = argv[1];
-    bool supported = false;
-
-    for (std::string type : supported_types) {
-        if (jrat::to_lowercase(file).ends_with(type)) {
-            supported = true;
-        }
-    }
-
-    if (!supported) {
-        std::cout << "Unsupported file type.";
-        return 0;
-    }
-
     std::string direction = jrat::to_lowercase(argv[2]);
     int int_direction = 0;
 
