@@ -5,6 +5,10 @@
 #include "resize_ui.h"
 #include "resizinator.h"
 
+#include <iostream>
+
+#include "common/supported_types.h"
+
 using namespace jrat;
 
 int main(int argc, char **argv) {
@@ -25,6 +29,12 @@ int main(int argc, char **argv) {
     }
 
     std::string image_filepath = argv[1];
+
+    if (!jrat::is_supported(image_filepath)) {
+        std::cout << "Unsupported file type.";
+        return 0;
+    }
+
     std::string keep_aspect_ratio = argv[2];
     int width = std::atoi(argv[3]);
     int height = std::atoi(argv[4]);

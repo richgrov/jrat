@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "common/stringutil.h"
+#include "common/supported_types.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -13,6 +14,11 @@ int main(int argc, char *argv[]) {
     std::string file = argv[1];
     std::string direction = jrat::to_lowercase(argv[2]);
     int int_direction = 0;
+
+    if (!jrat::is_supported(file)) {
+        std::cout << "Unsupported file type.";
+        return 0;
+    }
 
     if (direction == "horizontal" || direction == "h") {
         int_direction = 1;
