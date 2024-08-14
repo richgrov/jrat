@@ -9,7 +9,7 @@ using namespace jrat;
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        std::cout << "usage: convertinator [filename] [type] <remove original (-r)>";
+        std::cout << "usage: convertinator [filename] [type]";
         return 0;
     }
 
@@ -25,10 +25,6 @@ int main(int argc, char *argv[]) {
     if (!is_supported(new_type)) {
         std::cout << "Unsupported output file type.";
         return 0;
-    }
-
-    if (argc > 3 && std::strcmp(argv[3], "-r") == 0) {
-        std::filesystem::remove(file);
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
