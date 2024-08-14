@@ -64,6 +64,7 @@ int main(int argc, char **argv) {
     add_dll_path();
 
     install_file("CONVERTINATOR_EXE", "convertinator.exe");
+    install_file("OPENCV_DLL", "opencv_world490.dll");
 
     std::string supported_file_list = build_supported_file_list(supported_files);
 

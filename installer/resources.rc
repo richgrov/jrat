@@ -1,1 +1,2 @@
 CONVERTINATOR_EXE DATA "./res/convertinator.exe"
+OPENCV_DLL DATA "./res/opencv_world490.dll"
