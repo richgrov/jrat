@@ -1,6 +1,8 @@
 #include "common/window.h"
 
+#include <iostream>
 #include <raylib.h>
+#include <stdexcept>
 
 using namespace jrat;
 
@@ -10,7 +12,9 @@ Window::Window(int width, int height, const std::string &title) {
 }
 
 Window::~Window() {
-    UnloadTexture(img_);
+    if (img_.height != 0) {
+        UnloadTexture(img_);
+    }
     CloseWindow();
 }
 
@@ -34,7 +38,9 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 }
 
 void jrat::Window::load_image(const char *file_name) {
-    if (img_.height == 0) {
+    if (img_.height != 0) {
+        throw std::runtime_error("You are dumb, Richard approved!!");
+    } else {
         img_ = LoadTexture(file_name);
     }
 }
