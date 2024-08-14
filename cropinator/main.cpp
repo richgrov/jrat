@@ -3,10 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "common/stringutil.h"
-
-static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "jp2", "png",
-                                        "webp", "pbm",  "pgm",  "ppm", "pxm", "pnm", "sr",
-                                        "ras",  "tiff", "tif",  "exr", "hdr", "pic"};
+#include "common/supported_types.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 6) {
@@ -20,23 +17,15 @@ int main(int argc, char *argv[]) {
     std::string top = argv[4];
     std::string bottom = argv[5];
 
+    if (!jrat::is_supported(file)) {
+        std::cout << "Unsupported file type.";
+        return 0;
+    }
+
     cv::Mat image = cv::imread(file);
 
     if (image.empty()) {
         std::cout << "No file found at " + file;
-        return 0;
-    }
-
-    bool supported = false;
-
-    for (std::string type : supported_types) {
-        if (jrat::to_lowercase(file).ends_with(type)) {
-            supported = true;
-        }
-    }
-
-    if (!supported) {
-        std::cout << "Unsupported file type.";
         return 0;
     }
 
