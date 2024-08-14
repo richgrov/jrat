@@ -1,4 +1,6 @@
 #include <filesystem>
+#include <fstream>
+#include <stdexcept>
 
 #include "common/supported_files.h"
 #include "registry_key.h"
@@ -7,6 +9,8 @@
 using namespace jrat;
 
 namespace {
+
+static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
 
 std::string build_supported_file_list(const std::vector<std::string> &files) {
     std::string result;
@@ -20,14 +24,22 @@ std::string build_supported_file_list(const std::vector<std::string> &files) {
     return result;
 }
 
-} // namespace
+void install_file(const char *id, const char *dest_name) {
+    std::span<unsigned char> contents = get_resource(id);
+    std::ofstream file(APP_DIR / dest_name, std::ios::binary);
+    if (!file.is_open()) {
+        throw std::runtime_error(std::format("couldn't open {}", dest_name));
+    }
 
-static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
+    file.write(reinterpret_cast<const char *>(&contents.front()), contents.size());
+}
+
+} // namespace
 
 int main(int argc, char **argv) {
     std::filesystem::create_directories(APP_DIR);
 
-    std::span<unsigned char> convertinator = get_resource("CONVERTINATOR_EXE");
+    install_file("CONVERTINATOR_EXE", "convertinator.exe");
 
     std::string supported_file_list = build_supported_file_list(supported_files);
 
