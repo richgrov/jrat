@@ -1,22 +1,19 @@
 #pragma once
 #include "common/window.h"
 
-
 #include <string>
 namespace jrat {
 
-    class ResizeUi : public Window {
-    public:
+class ResizeUi : public Window {
+public:
+    ResizeUi() = default;
+    ResizeUi(int width, int height, const std::string &title, const char *file_name);
 
-        ResizeUi() = default;
-        ResizeUi(int width, int height, const std::string &title);
+    virtual void update() override;
+    virtual void draw() override;
 
-        virtual void load_font() override;
-        virtual void update() override;
-        virtual void draw() override;
+    virtual void ui_boxes() override;
 
-    private:
-
-        Font font_{ GetFontDefault() };
-    };
-}
+private:
+};
+} // namespace jrat

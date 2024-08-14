@@ -9,3 +9,4 @@ add_library(common STATIC
 target_include_directories(common PUBLIC include)
 target_link_libraries(common raylib)
 target_include_directories(common PRIVATE ../thirdparty/raygui/src)
+target_include_directories(common PRIVATE resources)

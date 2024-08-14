@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     }
 
     if (argc == 2 || argc == 1) {
-        ResizeUi ui(800, 600, "hello");
+        ResizeUi ui(800, 600, "hello", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG");
         ui.run();
         return 0;
     }
