@@ -2,16 +2,16 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
+    if (argc < 2 || argc > 4) {
+        error_panic();
+        return 0;
+    }
+
     if (std::strcmp(argv[1], "--help") == 0) {
         error_panic();
         return 0;
     }
-
-    if (argc < 2) {
-        error_panic();
-        return 0;
-    }
-
+    
     std::string image_filepath = argv[1];
 
     cv::Mat image = cv::imread(image_filepath);
