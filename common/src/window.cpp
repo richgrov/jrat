@@ -37,11 +37,13 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
     text_boxes_.emplace_back(TextBox{x_pos, y_pos, width, height});
 }
 
-void jrat::Window::create_text_box_left() {
-    text_boxes_.emplace_back(
-        TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20}
-    );
-    text_box_count_++;
+void jrat::Window::create_text_box_left(int box_num) {
+    for (int i = 0; i < box_num; i++) {
+        text_boxes_.emplace_back(
+            TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20}
+        );
+        text_box_count_++;
+    }
 }
 
 void jrat::Window::load_image(const char *file_name) {

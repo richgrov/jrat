@@ -18,7 +18,7 @@ public:
     void run();
 
     void create_text_box(float x_pos, float y_pos, float width, float height);
-    void create_text_box_left();
+    void create_text_box_left(int box_num);
 
 protected:
     void load_image(const char *file_name);

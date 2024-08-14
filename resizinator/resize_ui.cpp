@@ -17,7 +17,5 @@ void jrat::ResizeUi::draw() {
 }
 
 void jrat::ResizeUi::ui_boxes() {
-    create_text_box_left();
-    create_text_box_left();
-    create_text_box_left();
+    create_text_box_left(3);
 }
