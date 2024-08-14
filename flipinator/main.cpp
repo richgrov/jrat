@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 #include "common/stringutil.h"
+#include "common/supported_types.h"
 
 static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "jp2", "png",
                                         "webp", "pbm",  "pgm",  "ppm", "pxm", "pnm", "sr",
@@ -30,6 +31,11 @@ int main(int argc, char *argv[]) {
 
     std::string direction = jrat::to_lowercase(argv[2]);
     int int_direction = 0;
+
+    if (!jrat::is_supported(file)) {
+        std::cout << "Unsupported file type.";
+        return 0;
+    }
 
     if (direction == "horizontal" || direction == "h") {
         int_direction = 1;

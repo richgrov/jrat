@@ -18,27 +18,13 @@ int main(int argc, char *argv[]) {
     std::string new_type = argv[2];
     std::string old_type;
 
-    bool input_supported = false;
-    bool output_supported = false;
-
-    for (int i = 0; i < size(supported_types); i++) {
-        if (to_lowercase(file).ends_with(supported_types[i])) {
-            old_type = supported_types[i];
-            input_supported = true;
-        }
-
-        if (to_lowercase(new_type) == supported_types[i]) {
-            output_supported = true;
-        }
-    }
-
-    if (!output_supported) {
-        std::cout << "Unsupported output file type.";
+    if (!jrat::is_supported(file)) {
+        std::cout << "Unsupported input file type.";
         return 0;
     }
-
-    if (!input_supported) {
-        std::cout << "Unsupported input file type.";
+    
+    if (!jrat::is_supported(new_type)) {
+        std::cout << "Unsupported output file type.";
         return 0;
     }
 

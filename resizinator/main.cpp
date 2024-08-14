@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "common/supported_types.h"
+
 using namespace jrat;
 
 int main(int argc, char **argv) {
@@ -30,6 +32,12 @@ int main(int argc, char **argv) {
     }
 
     std::string image_filepath = argv[1];
+
+    if (!jrat::is_supported(image_filepath)) {
+        std::cout << "Unsupported file type.";
+        return 0;
+    }
+
     cv::Mat image = cv::imread(image_filepath);
 
     if (image.empty()) {
