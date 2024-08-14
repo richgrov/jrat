@@ -4,14 +4,11 @@
 
 #include "resizinator.h"
 
-#include <iostream>
-#include <stdlib.h>
+#include "resize_ui.h"
 
 #include <opencv2/opencv.hpp>
 
-#include "common/window.h"
-#include "resize_ui.h"
-#include "window_example.h"
+#include <iostream>
 
 using namespace jrat;
 
