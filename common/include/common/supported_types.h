@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "stringutil.h"
+
 namespace jrat {
 
 // clang-format off
