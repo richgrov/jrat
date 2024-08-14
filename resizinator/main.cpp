@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 
     std::string image_filepath = argv[1];
 
-    if (!jrat::is_supported(image_filepath)) {
+    if (!is_supported(image_filepath)) {
         std::cout << "Unsupported file type.";
         return 0;
     }

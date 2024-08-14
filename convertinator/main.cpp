@@ -18,12 +18,12 @@ int main(int argc, char *argv[]) {
     std::string new_type = argv[2];
     std::string old_type;
 
-    if (!jrat::is_supported(file)) {
+    if (!is_supported(file)) {
         std::cout << "Unsupported input file type.";
         return 0;
     }
     
-    if (!jrat::is_supported(new_type)) {
+    if (!is_supported(new_type)) {
         std::cout << "Unsupported output file type.";
         return 0;
     }
