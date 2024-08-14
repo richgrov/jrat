@@ -27,12 +27,12 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    if (argc > 3 && argv[3] == "-r") {
+    if (argc > 3 && std::strcmp(argv[3], "-r") == 0) {
         std::filesystem::remove(file);
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
-
+    
     cv::Mat image = cv::imread(file);
 
     if (image.empty()) {
