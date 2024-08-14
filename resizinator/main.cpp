@@ -8,7 +8,7 @@
 using namespace jrat;
 
 int main(int argc, char **argv) {
-    if (argv[1] == "--help") {
+    if (std::strcmp(argv[1], "--help") == 0) {
         jrat::error_panic();
         return 0;
     }

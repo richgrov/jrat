@@ -5,18 +5,9 @@
 
 #include "common/stringutil.h"
 
-static std::string supported_types[] = {
-    "bmp", "dib",
-    "jpeg", "jpg", "jpe",
-    "jp2",
-    "png",
-    "webp",
-    "pbm",  "pgm",  "ppm", "pxm", "pnm",
-    "sr", "ras",
-    "tiff", "tif",
-    "exr",
-    "hdr", "pic"
-};
+static std::string supported_types[] = {"bmp",  "dib",  "jpeg", "jpg", "jpe", "jp2", "png",
+                                        "webp", "pbm",  "pgm",  "ppm", "pxm", "pnm", "sr",
+                                        "ras",  "tiff", "tif",  "exr", "hdr", "pic"};
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -52,12 +43,12 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    if (argc > 3 && argv[3] == "-r") {
+    if (argc > 3 && std::strcmp(argv[3], "-r") == 0) {
         std::filesystem::remove(file);
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
-    
+
     cv::Mat image = cv::imread(file);
     cv::imwrite(output_file, image);
 }
