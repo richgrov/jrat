@@ -2,8 +2,13 @@
 #define RAYGUI_IMPLEMENTATION
 #endif // !RAGUI_IMPLEMENTATION
 
-#include "resize_ui.h"
 #include "resizinator.h"
+
+#include "resize_ui.h"
+
+#include <opencv2/opencv.hpp>
+
+#include <iostream>
 
 using namespace jrat;
 
@@ -25,10 +30,19 @@ int main(int argc, char **argv) {
     }
 
     std::string image_filepath = argv[1];
+    cv::Mat image = cv::imread(image_filepath);
+
+    if (image.empty()) {
+        std::cout << "No image was found at: " + image_filepath << std::endl; 
+        error_panic();
+        return 0; 
+    }
+
     std::string keep_aspect_ratio = argv[2];
     int width = std::atoi(argv[3]);
     int height = std::atoi(argv[4]);
     std::string new_image_filepath;
+
     if (argc == 6) {
         new_image_filepath = argv[5];
     }
