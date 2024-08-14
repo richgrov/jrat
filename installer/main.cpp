@@ -6,6 +6,8 @@
 
 using namespace jrat;
 
+namespace {
+
 std::string build_supported_file_list(const std::vector<std::string> &files) {
     std::string result;
     for (int i = 0; i < files.size(); ++i) {
@@ -17,6 +19,8 @@ std::string build_supported_file_list(const std::vector<std::string> &files) {
     }
     return result;
 }
+
+} // namespace
 
 static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
 
