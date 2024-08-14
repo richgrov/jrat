@@ -10,6 +10,8 @@ public:
 
     ~RegistryKey();
 
+    std::string get_string(const std::string &name) const;
+
     void set_string(const std::string &name, const std::string &value) const;
 
     static const RegistryKey CLASSES_ROOT;
