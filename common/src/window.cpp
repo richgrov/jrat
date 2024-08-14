@@ -1,4 +1,5 @@
 #include "common/window.h"
+#include "JetBrainsMono.h"
 
 #include <iostream>
 #include <raylib.h>
@@ -19,8 +20,6 @@ Window::~Window() {
 }
 
 void Window::run() {
-    create_text_box_left();
-    create_text_box_left();
     while (!WindowShouldClose()) {
         update();
         update_boxes();
@@ -28,6 +27,7 @@ void Window::run() {
 
         draw();
         draw_image();
+        draw_ui_bar();
         draw_boxes();
         EndDrawing();
     }
@@ -60,6 +60,11 @@ void jrat::Window::set_width_and_height() {
     SetWindowSize(width_, height_);
 }
 
+void jrat::Window::load_font() {
+    font_ =
+        LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
+}
+
 void jrat::Window::draw_boxes() {
 
     ClearBackground(WHITE);
@@ -75,6 +80,17 @@ void jrat::Window::draw_boxes() {
 void jrat::Window::draw_image() {
 
     DrawTextureEx(img_, Vector2{50, 50}, 0, 1, Color{255, 255, 255, 255});
+}
+
+void jrat::Window::draw_ui_bar() {
+    GuiCheckBox(
+        Rectangle{(float)(125 * text_box_count_ + 10), (float)(height_ - 40), 30, 30}, "",
+        &check_box_checked_
+    );
+
+    GuiButton(
+        Rectangle{(float)(width_ - 125), (float)(height_ - 40), 100, 30}, ""
+    ); // returns true when clicked, wire up to save functionality
 }
 
 void jrat::Window::update_boxes() {

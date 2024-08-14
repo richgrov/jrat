@@ -9,11 +9,11 @@ public:
     ResizeUi() = default;
     ResizeUi(int width, int height, const std::string &title, const char *file_name);
 
-    virtual void load_font() override;
     virtual void update() override;
     virtual void draw() override;
 
+    virtual void ui_boxes() override;
+
 private:
-    Font font_{GetFontDefault()};
 };
 } // namespace jrat
