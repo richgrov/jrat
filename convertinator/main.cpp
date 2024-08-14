@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
-    if (argc > 3 && argv[3] == "-r") {
+    if (argc > 3 && std::strcmp(argv[3], "-r") == 0) {
         std::filesystem::remove(file);
     }
 
