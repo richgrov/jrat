@@ -3,7 +3,6 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "common/stringutil.h"
 #include "common/supported_types.h"
 
 using namespace jrat;
@@ -22,7 +21,7 @@ int main(int argc, char *argv[]) {
         std::cout << "Unsupported input file type.";
         return 0;
     }
-    
+
     if (!is_supported(new_type)) {
         std::cout << "Unsupported output file type.";
         return 0;

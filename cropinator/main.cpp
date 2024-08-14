@@ -2,7 +2,6 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "common/stringutil.h"
 #include "common/supported_types.h"
 
 int main(int argc, char *argv[]) {
@@ -31,7 +30,7 @@ int main(int argc, char *argv[]) {
 
     cv::Size size = image.size();
     int x, y, width, height;
-    
+
     try {
         x = std::stoi(left);
         y = std::stoi(top);

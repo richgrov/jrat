@@ -7,9 +7,14 @@ add_executable(installer
     main.cpp
     registry_key.cpp
     registry_key.h
+    resources.cpp
+    resources.h
     
     installer.manifest
+    resources.rc
 )
+
+target_link_libraries(installer common)
 
 set_property(TARGET installer PROPERTY CXX_STANDARD 20)
 

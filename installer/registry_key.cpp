@@ -1,16 +1,20 @@
 #include "registry_key.h"
 
+#include <cstdlib>
 #include <format>
+#include <iostream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 #include <Windows.h>
 
 using namespace jrat;
 
 const RegistryKey RegistryKey::CLASSES_ROOT = RegistryKey(HKEY_CLASSES_ROOT);
+const RegistryKey RegistryKey::LOCAL_MACHINE = RegistryKey(HKEY_LOCAL_MACHINE);
 
-RegistryKey::RegistryKey(const RegistryKey parent, const std::string &child) {
+RegistryKey::RegistryKey(const RegistryKey &parent, const std::string &child) {
     LSTATUS result = RegCreateKeyEx(
         reinterpret_cast<HKEY>(parent.key_), child.c_str(), 0, nullptr, 0, KEY_ALL_ACCESS, nullptr,
         reinterpret_cast<HKEY *>(&key_), nullptr
@@ -24,7 +28,40 @@ RegistryKey::RegistryKey(const RegistryKey parent, const std::string &child) {
 }
 
 RegistryKey::~RegistryKey() {
-    RegCloseKey(reinterpret_cast<HKEY>(key_));
+    LSTATUS result = RegCloseKey(reinterpret_cast<HKEY>(key_));
+    if (result != ERROR_SUCCESS) {
+        std::cerr << std::format("failed to close key: {}", result) << '\n';
+        std::abort();
+    }
+}
+
+std::string RegistryKey::get_string(const std::string &name) const {
+    DWORD size;
+    LSTATUS size_result = RegGetValue(
+        reinterpret_cast<HKEY>(key_), nullptr, name.c_str(), RRF_RT_REG_SZ, nullptr, nullptr, &size
+    );
+
+    if (size_result != ERROR_SUCCESS) {
+        throw std::runtime_error(
+            std::format("failed to get size of registry value {}: {}", name, size_result)
+        );
+    }
+
+    std::vector<char> buf;
+    buf.resize(size, ' ');
+
+    LSTATUS read_result = RegGetValue(
+        reinterpret_cast<HKEY>(key_), nullptr, name.c_str(), RRF_RT_REG_SZ, nullptr, buf.data(),
+        &size
+    );
+
+    if (read_result != ERROR_SUCCESS) {
+        throw std::runtime_error(
+            std::format("failed to read registry value {}: {}", name, read_result)
+        );
+    }
+
+    return std::string(buf.data());
 }
 
 void RegistryKey::set_string(const std::string &name, const std::string &value) const {

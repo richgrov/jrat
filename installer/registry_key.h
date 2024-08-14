@@ -6,13 +6,16 @@ namespace jrat {
 
 class RegistryKey {
 public:
-    explicit RegistryKey(RegistryKey parent, const std::string &child);
+    explicit RegistryKey(const RegistryKey &parent, const std::string &child);
 
     ~RegistryKey();
+
+    std::string get_string(const std::string &name) const;
 
     void set_string(const std::string &name, const std::string &value) const;
 
     static const RegistryKey CLASSES_ROOT;
+    static const RegistryKey LOCAL_MACHINE;
 
 private:
     inline explicit RegistryKey(void *key) {
