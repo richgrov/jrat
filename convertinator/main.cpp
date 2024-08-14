@@ -4,19 +4,9 @@
 #include <opencv2/opencv.hpp>
 
 #include "common/stringutil.h"
+#include "supported_types.h"
 
-static std::string supported_types[] = {
-    "bmp", "dib",
-    "jpeg", "jpg", "jpe",
-    "jp2",
-    "png",
-    "webp",
-    "pbm",  "pgm",  "ppm", "pxm", "pnm",
-    "sr", "ras",
-    "tiff", "tif",
-    "exr",
-    "hdr", "pic"
-};
+using namespace jrat;
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -32,12 +22,12 @@ int main(int argc, char *argv[]) {
     bool output_supported = false;
 
     for (int i = 0; i < size(supported_types); i++) {
-        if (jrat::to_lowercase(file).ends_with(supported_types[i])) {
+        if (to_lowercase(file).ends_with(supported_types[i])) {
             old_type = supported_types[i];
             input_supported = true;
         }
 
-        if (jrat::to_lowercase(new_type) == supported_types[i]) {
+        if (to_lowercase(new_type) == supported_types[i]) {
             output_supported = true;
         }
     }
@@ -57,7 +47,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
-    
+
     cv::Mat image = cv::imread(file);
     cv::imwrite(output_file, image);
 }
