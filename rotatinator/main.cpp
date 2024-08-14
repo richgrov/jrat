@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    double angle = std::atof(argv[2]) * -1;
+    double angle = std::atof(argv[2]);
     std::string resized_image_filepath;
 
     if (argc == 4) {
