@@ -1,13 +1,14 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "stringutil.h"
 
 namespace jrat {
 
 // clang-format off
-static std::string supported_types[] = {
+static std::vector<std::string> supported_types = {
     "bmp", "dib",
     "jpeg", "jpg", "jpe",
     "jp2",
