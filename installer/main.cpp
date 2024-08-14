@@ -34,10 +34,34 @@ void install_file(const char *id, const char *dest_name) {
     file.write(reinterpret_cast<const char *>(&contents.front()), contents.size());
 }
 
+void add_dll_path() {
+    std::string app_dir_str = APP_DIR.string();
+
+    RegistryKey env_vars(
+        RegistryKey::LOCAL_MACHINE,
+        "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment"
+    );
+    std::string path = env_vars.get_string("Path");
+
+    bool already_set = path.find(app_dir_str) != std::string::npos;
+    if (already_set) {
+        return;
+    }
+
+    if (!path.ends_with(";")) {
+        path.push_back(';');
+    }
+    path.append(app_dir_str);
+
+    env_vars.set_string("Path", path);
+}
+
 } // namespace
 
 int main(int argc, char **argv) {
     std::filesystem::create_directories(APP_DIR);
+
+    add_dll_path();
 
     install_file("CONVERTINATOR_EXE", "convertinator.exe");
 
