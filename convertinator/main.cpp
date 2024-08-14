@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
-
+    
     cv::Mat image = cv::imread(file);
 
     if (image.empty()) {
