@@ -3,8 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "common/stringutil.h"
-#include "common/supported_files.h"
+#include "common/supported_types.h"
 
 using namespace jrat;
 

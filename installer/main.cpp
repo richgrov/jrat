@@ -1,8 +1,9 @@
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <stdexcept>
 
-#include "common/supported_files.h"
+#include "common/supported_types.h"
 #include "registry_key.h"
 #include "resources.h"
 
@@ -12,14 +13,14 @@ namespace {
 
 static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
 
-std::string build_supported_file_list(const std::vector<std::string> &files) {
+std::string build_supported_file_list() {
     std::string result;
-    for (int i = 0; i < files.size(); ++i) {
+    for (int i = 0; i < std::size(supported_types); ++i) {
         if (i != 0) {
             result.append(" OR ");
         }
         result.push_back('.');
-        result.append(files[i]);
+        result.append(supported_types[i]);
     }
     return result;
 }
@@ -66,7 +67,7 @@ int main(int argc, char **argv) {
     install_file("CONVERTINATOR_EXE", "convertinator.exe");
     install_file("OPENCV_DLL", "opencv_world490.dll");
 
-    std::string supported_file_list = build_supported_file_list(supported_files);
+    std::string supported_file_list = build_supported_file_list();
 
     RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell\\jrat");
     menu.set_string("MUIVerb", "JRAT");
