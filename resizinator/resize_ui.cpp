@@ -6,7 +6,7 @@ jrat::ResizeUi::ResizeUi(int width, int height, const std::string &title, const 
     : Window(width, height, title) {
     load_font();
     load_image(file_name);
-    set_width_and_height();
+    set_dimensions_and_position();
     ui_boxes();
 }
 

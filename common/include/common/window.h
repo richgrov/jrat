@@ -18,11 +18,11 @@ public:
     void run();
 
     void create_text_box(float x_pos, float y_pos, float width, float height);
-    void create_text_box_left(int box_num);
+    void create_text_box_left(int box_count);
 
 protected:
     void load_image(const char *file_name);
-    void set_width_and_height();
+    void set_dimensions_and_position();
     virtual void load_font();
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
