@@ -39,9 +39,10 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 
 void jrat::Window::create_text_box_left(int box_num) {
     for (int i = 0; i < box_num; i++) {
-        text_boxes_.emplace_back(
-            TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20}
-        );
+        text_boxes_.emplace_back(TextBox{
+            (float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20,
+            text_box_count_ != 0
+        });
         text_box_count_++;
     }
 }
@@ -60,6 +61,10 @@ void jrat::Window::set_width_and_height() {
         height_ = img_.height + 100;
     }
     SetWindowSize(width_, height_);
+    SetWindowPosition(
+        (GetMonitorWidth(GetCurrentMonitor()) - width_) / 2,
+        (GetMonitorHeight(GetCurrentMonitor()) - height_) / 2
+    );
 }
 
 void jrat::Window::load_font() {
@@ -76,6 +81,13 @@ void jrat::Window::draw_boxes() {
             text_boxes_[i].area(), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
             active_text_box_ == i
         );
+        if (text_boxes_[i].has_x()) {
+            // no workie
+            DrawTextEx(
+                font_, "X", Vector2{text_boxes_[i].get_area()->x - 18.5f, (float)(height_ - 36)},
+                24.0f, 1.0f, Color{0, 0, 0, 255}
+            );
+        }
     }
 }
 
@@ -91,7 +103,7 @@ void jrat::Window::draw_ui_bar() {
     );
 
     GuiButton(
-        Rectangle{(float)(width_ - 125), (float)(height_ - 40), 100, 30}, ""
+        Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, ""
     ); // returns true when clicked, wire up to save functionality
 }
 

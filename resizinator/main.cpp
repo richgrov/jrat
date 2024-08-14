@@ -15,10 +15,10 @@
 using namespace jrat;
 
 int main(int argc, char **argv) {
-    if (std::strcmp(argv[1], "--help") == 0) {
-        jrat::error_panic();
-        return 0;
-    }
+    // if (std::strcmp(argv[1], "--help") == 0) {
+    //     jrat::error_panic();
+    //     return 0;
+    // }
 
     if (argc == 2 || argc == 1) {
         ResizeUi ui(800, 600, "hello", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG");
@@ -41,9 +41,9 @@ int main(int argc, char **argv) {
     cv::Mat image = cv::imread(image_filepath);
 
     if (image.empty()) {
-        std::cout << "No image was found at: " + image_filepath << std::endl; 
+        std::cout << "No image was found at: " + image_filepath << std::endl;
         error_panic();
-        return 0; 
+        return 0;
     }
 
     std::string keep_aspect_ratio = argv[2];
