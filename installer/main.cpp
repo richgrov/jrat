@@ -79,7 +79,8 @@ int main(int argc, char **argv) {
     );
 
     RegistryKey resize_command(command_store, "jrat.resize");
-    resize_command.set_string("MUIVerb", "Resize...");
-    RegistryKey(resize_command, "command").set_string("", "notepad.exe %1");
+    resize_command.set_string("MUIVerb", "Convert to .png");
+    RegistryKey(resize_command, "command")
+        .set_string("", (APP_DIR / "convertinator.exe %1 png").string());
     return 0;
 }
