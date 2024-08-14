@@ -39,7 +39,7 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 
 void jrat::Window::load_image(const char *file_name) {
     if (img_.height != 0) {
-        throw std::runtime_error("You are dumb, Richard approved!!");
+        throw std::runtime_error("Can't load more than one image at a time.");
     } else {
         img_ = LoadTexture(file_name);
     }
