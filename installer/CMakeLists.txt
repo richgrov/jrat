@@ -11,7 +11,7 @@ add_executable(installer
     resources.h
     
     installer.manifest
-    convertinator.rc
+    resources.rc
 )
 
 target_link_libraries(installer common)
