@@ -109,6 +109,13 @@ int main(int argc, char **argv) {
 
     std::string supported_file_list = build_supported_file_list(supported_types);
 
+    std::vector<MenuOption> operations = {
+        {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
+        {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")
+        },
+    };
+    add_menu("JRAT", "jrat", operations, supported_file_list);
+
     std::vector<MenuOption> conversions;
     for (const std::string &type : supported_types) {
         conversions.push_back(MenuOption{
