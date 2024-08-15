@@ -3,6 +3,11 @@ if (NOT MSVC)
     return()
 endif()
 
+if (NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/res)
+    message(WARNING "Not building installer because the res/ folder doesn't exist")
+    return()
+endif()
+
 add_executable(installer
     main.cpp
     registry_key.cpp
