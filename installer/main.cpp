@@ -90,7 +90,7 @@ void add_menu(
 }
 
 std::string full_command(const std::string &app_name, const std::string args = "") {
-    return (APP_DIR / app_name).string() + args;
+    return (APP_DIR / app_name).string() + " " + args;
 }
 
 } // namespace
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
         conversions.push_back(MenuOption{
             .display = "Convert to ." + type,
             .id = "jrat.convert." + type,
-            .command = (APP_DIR / "convertinator.exe").string() + " %1 " + type,
+            .command = full_command("convertinator.exe", " %1 " + type),
         });
     }
     add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
