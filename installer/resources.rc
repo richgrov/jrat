@@ -1,2 +1,7 @@
+FLIPINATOR_EXE DATA "./res/flipinator.exe"
 CONVERTINATOR_EXE DATA "./res/convertinator.exe"
+CROPINATOR_EXE DATA "./res/cropinator.exe"
+RESIZINATOR_EXE DATA "./res/resizinator.exe"
+ROTATINATOR_EXE DATA "./res/rotatinator.exe"
+
 OPENCV_DLL DATA "./res/opencv_world490.dll"

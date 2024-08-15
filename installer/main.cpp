@@ -65,7 +65,11 @@ int main(int argc, char **argv) {
 
     add_dll_path();
 
+    install_file("FLIPINATOR_EXE", "flipinator.exe");
     install_file("CONVERTINATOR_EXE", "convertinator.exe");
+    install_file("CROPINATOR_EXE", "cropinator.exe");
+    install_file("RESIZINATOR_EXE", "resizinator.exe");
+    install_file("ROTATINATOR_EXE", "rotatinator.exe");
     install_file("OPENCV_DLL", "opencv_world490.dll");
 
     std::string supported_file_list = build_supported_file_list(supported_types);
