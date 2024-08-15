@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
     for (const std::string &type : supported_types) {
         conversions.push_back(MenuOption{
             .display = "Convert to ." + type,
-            .id = "jrat.convert." + type,
+            .id = "convert." + type,
             .command = full_command("convertinator.exe", " %1 " + type),
         });
     }
