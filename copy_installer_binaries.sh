@@ -1,3 +1,8 @@
+if [[ $1 -eq 0 ]] then
+  echo "error: specify build directory"
+  exit 1
+fi
+
 if [[ $(uname) == *"MINGW"* ]] then
   exe_suffix=".exe"
   lib_suffix=".dll"
