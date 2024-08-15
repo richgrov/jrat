@@ -25,9 +25,9 @@ void Window::run() {
         update_boxes();
         BeginDrawing();
 
+        draw_ui_bar();
         draw();
         draw_image();
-        draw_ui_bar();
         draw_boxes();
         EndDrawing();
     }
@@ -58,7 +58,7 @@ void jrat::Window::load_image(const char *file_name) {
 void jrat::Window::set_dimensions_and_position() {
     if (img_.height != 0) {
         width_ = img_.width + 100;
-        height_ = img_.height + 100;
+        height_ = img_.height + 150;
     }
     SetWindowSize(width_, height_);
     SetWindowPosition(
@@ -97,6 +97,7 @@ void jrat::Window::draw_image() {
 }
 
 void jrat::Window::draw_ui_bar() {
+    DrawRectangle(0, height_ - 50, width_, 50, Color{255, 255, 255, 255});
     GuiCheckBox(
         Rectangle{(float)(125 * text_box_count_ + 10), (float)(height_ - 40), 30, 30}, "",
         &check_box_checked_
