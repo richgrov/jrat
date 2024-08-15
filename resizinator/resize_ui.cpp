@@ -12,9 +12,7 @@ jrat::ResizeUi::ResizeUi(int width, int height, const std::string &title, const 
 
 void jrat::ResizeUi::update() {}
 
-void jrat::ResizeUi::draw() {
-    DrawTextEx(font_, "X", Vector2{1, 1}, 40.0f, 1.0f, BLACK);
-}
+void jrat::ResizeUi::draw() {}
 
 void jrat::ResizeUi::ui_boxes() {
     create_text_box_left(3);
