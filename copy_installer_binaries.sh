@@ -1,4 +1,4 @@
-if [[ $1 -eq 0 ]]; then
+if [[ ! $1 ]]; then
   echo "error: specify build directory"
   exit 1
 fi
