@@ -25,9 +25,9 @@ void Window::run() {
         update_boxes();
         BeginDrawing();
 
+        draw_ui_bar();
         draw();
         draw_image();
-        draw_ui_bar();
         draw_boxes();
         EndDrawing();
     }
@@ -37,11 +37,12 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
     text_boxes_.emplace_back(TextBox{x_pos, y_pos, width, height});
 }
 
-void jrat::Window::create_text_box_left(int box_num) {
-    for (int i = 0; i < box_num; i++) {
-        text_boxes_.emplace_back(
-            TextBox{(float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20}
-        );
+void jrat::Window::create_text_box_left(int box_count) {
+    for (int i = 0; i < box_count; i++) {
+        text_boxes_.emplace_back(TextBox{
+            (float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20,
+            text_box_count_ != 0
+        });
         text_box_count_++;
     }
 }
@@ -54,12 +55,16 @@ void jrat::Window::load_image(const char *file_name) {
     }
 }
 
-void jrat::Window::set_width_and_height() {
+void jrat::Window::set_dimensions_and_position() {
     if (img_.height != 0) {
         width_ = img_.width + 100;
-        height_ = img_.height + 100;
+        height_ = img_.height + 150;
     }
     SetWindowSize(width_, height_);
+    SetWindowPosition(
+        (GetMonitorWidth(GetCurrentMonitor()) - width_) / 2,
+        (GetMonitorHeight(GetCurrentMonitor()) - height_) / 2
+    );
 }
 
 void jrat::Window::load_font() {
@@ -69,13 +74,20 @@ void jrat::Window::load_font() {
 
 void jrat::Window::draw_boxes() {
 
-    ClearBackground(WHITE);
+    ClearBackground(DARKGRAY);
 
     for (int i = 0; i < text_boxes_.size(); i++) {
         GuiTextBox(
-            text_boxes_[i].area(), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
+            *(text_boxes_[i].area()), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
             active_text_box_ == i
         );
+        if (text_boxes_[i].has_x()) {
+            // no workie
+            DrawTextEx(
+                font_, "X", Vector2{text_boxes_[i].area()->x - 18.5f, (float)(height_ - 36)}, 24.0f,
+                1.0f, Color{0, 0, 0, 255}
+            );
+        }
     }
 }
 
@@ -85,13 +97,14 @@ void jrat::Window::draw_image() {
 }
 
 void jrat::Window::draw_ui_bar() {
+    DrawRectangle(0, height_ - 50, width_, 50, Color{255, 255, 255, 255});
     GuiCheckBox(
         Rectangle{(float)(125 * text_box_count_ + 10), (float)(height_ - 40), 30, 30}, "",
         &check_box_checked_
     );
 
     GuiButton(
-        Rectangle{(float)(width_ - 125), (float)(height_ - 40), 100, 30}, ""
+        Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, ""
     ); // returns true when clicked, wire up to save functionality
 }
 
@@ -102,7 +115,7 @@ void jrat::Window::update_boxes() {
         bool box_found = false;
         for (int i = 0; i < text_boxes_.size(); i++) {
 
-            if (CheckCollisionPointRec(mouse_pos_, text_boxes_[i].area())) {
+            if (CheckCollisionPointRec(mouse_pos_, *(text_boxes_[i].area()))) {
                 active_text_box_ = i;
                 box_found = true;
                 break;
