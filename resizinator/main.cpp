@@ -20,7 +20,9 @@ int main(int argc, char **argv) {
         return 0;
     }
     if (argc == 2 || argc == 1) {
-        ResizeUi ui(800, 600, "Resizinator", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG");
+        ResizeUi ui(
+            800, 600, "Resizinator", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG"
+        );
         ui.run();
         return 0;
     }
