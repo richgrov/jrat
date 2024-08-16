@@ -21,6 +21,7 @@ Window::~Window() {
 
 void Window::run() {
     while (!WindowShouldClose()) {
+        update_mouse();
         update();
         update_boxes();
         BeginDrawing();
@@ -108,9 +109,11 @@ void jrat::Window::draw_ui_bar() {
     ); // returns true when clicked, wire up to save functionality
 }
 
-void jrat::Window::update_boxes() {
-
+void jrat::Window::update_mouse() {
     mouse_pos_ = GetMousePosition();
+}
+
+void jrat::Window::update_boxes() {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         bool box_found = false;
         for (int i = 0; i < text_boxes_.size(); i++) {
