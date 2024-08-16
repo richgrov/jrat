@@ -78,13 +78,13 @@ void jrat::Window::draw_boxes() {
 
     for (int i = 0; i < text_boxes_.size(); i++) {
         GuiTextBox(
-            *(text_boxes_[i].area()), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
+            (text_boxes_[i].area()), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
             active_text_box_ == i
         );
         if (text_boxes_[i].has_x()) {
             // no workie
             DrawTextEx(
-                font_, "X", Vector2{text_boxes_[i].area()->x - 18.5f, (float)(height_ - 36)}, 24.0f,
+                font_, "X", Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - 36)}, 24.0f,
                 1.0f, Color{0, 0, 0, 255}
             );
         }
