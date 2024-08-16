@@ -15,5 +15,10 @@ public:
     virtual void ui_boxes() override;
 
 private:
+    int resize_width_;
+    int resize_height_;
+    bool keep_aspect_ratio_;
+    std::string open_file_;
+    std::string save_file_;
 };
 } // namespace jrat

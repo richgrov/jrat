@@ -45,9 +45,15 @@ void jrat::imwrite(std::string filepath, cv::Mat image) {
     cv::imwrite(filepath, image);
 }
 
-void jrat::error_panic() {
-    std::cout << "[filepath] [aspect ratio (-A/-a)] [width] [height] [new "
-                 "file path]\n"
-                 "-A: enable keep aspect ratio\n"
-                 "-a: disable keep aspect ratio\n";
+void jrat::print_help() {
+    std::cout << "usage: resizinator [filepath] --ui\n";
+    std::cout << "or resizinator [filepath] [width] [height] <keep aspect ratio (-a)>\n";
+}
+
+void jrat::write_image(
+    std::string filepath, int width, int height, bool keep_aspect_ratio, std::string savepath
+) {
+    cv::Mat resized_image = keep_aspect_ratio ? resize_aspect_ratio(filepath, width)
+                                              : resize(filepath, width, height);
+    imwrite(savepath, resized_image);
 }

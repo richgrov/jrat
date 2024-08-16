@@ -12,6 +12,10 @@ cv::Mat resize_aspect_ratio(std::string filepath, int width);
 
 void imwrite(std::string filepath, cv::Mat image);
 
-void error_panic();
+void print_help();
+
+void write_image(
+    std::string filepath, int width, int height, bool keep_aspect_ratio, std::string savepath
+);
 
 } // namespace jrat
