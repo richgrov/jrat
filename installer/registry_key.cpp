@@ -48,7 +48,7 @@ std::string RegistryKey::get_string(const std::string &name) const {
     }
 
     std::vector<char> buf;
-    buf.resize(size, ' ');
+    buf.resize(size + 1, ' '); // +1 for null terminator not being accounted for in all cases
 
     LSTATUS read_result = RegGetValue(
         reinterpret_cast<HKEY>(key_), nullptr, name.c_str(), RRF_RT_REG_SZ, nullptr, buf.data(),
