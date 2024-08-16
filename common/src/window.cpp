@@ -21,6 +21,7 @@ Window::~Window() {
 
 void Window::run() {
     while (!WindowShouldClose()) {
+        update_mouse();
         update();
         update_boxes();
         BeginDrawing();
@@ -57,8 +58,11 @@ void jrat::Window::load_image(const char *file_name) {
 
 void jrat::Window::set_dimensions_and_position() {
     if (img_.height != 0) {
-        width_ = img_.width + 100;
-        height_ = img_.height + 150;
+        width_ = GetMonitorWidth(GetCurrentMonitor());
+        float temp_height = sqrtf((img_.width * img_.width + img_.height * img_.height)) + 15;
+        height_ = temp_height < GetMonitorHeight(GetCurrentMonitor())
+                      ? temp_height
+                      : GetMonitorHeight(GetCurrentMonitor()) - 50;
     }
     SetWindowSize(width_, height_);
     SetWindowPosition(
@@ -93,7 +97,10 @@ void jrat::Window::draw_boxes() {
 
 void jrat::Window::draw_image() {
 
-    DrawTextureEx(img_, Vector2{50, 50}, 0, 1, Color{255, 255, 255, 255});
+    DrawTextureEx(
+        img_, Vector2{(float)(width_ - img_.width) / 2, (float)(height_ - img_.height) / 2}, 0, 1,
+        Color{255, 255, 255, 255}
+    );
 }
 
 void jrat::Window::draw_ui_bar() {
@@ -103,19 +110,23 @@ void jrat::Window::draw_ui_bar() {
         &check_box_checked_
     );
 
-    GuiButton(
-        Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, ""
-    ); // returns true when clicked, wire up to save functionality
+    if ((GuiButton(Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, "")
+        )) { // returns true when clicked, wire up to save functionality
+
+        save_image();
+    }
+}
+
+void jrat::Window::update_mouse() {
+    mouse_pos_ = GetMousePosition();
 }
 
 void jrat::Window::update_boxes() {
-
-    mouse_pos_ = GetMousePosition();
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         bool box_found = false;
         for (int i = 0; i < text_boxes_.size(); i++) {
 
-            if (CheckCollisionPointRec(mouse_pos_, *(text_boxes_[i].area()))) {
+            if (CheckCollisionPointRec(mouse_pos_, text_boxes_[i].area())) {
                 active_text_box_ = i;
                 box_found = true;
                 break;

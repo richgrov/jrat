@@ -11,7 +11,7 @@ public:
 
     virtual void update() override;
     virtual void draw() override;
-
+    virtual void save_image() override;
     virtual void ui_boxes() override;
 
 private:

@@ -26,6 +26,8 @@ protected:
     virtual void load_font();
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
+    virtual void save_image() = 0;
+    virtual void update_mouse();
     void update_boxes();
     virtual void draw() = 0;
     void draw_boxes();

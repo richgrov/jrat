@@ -14,6 +14,8 @@ void jrat::ResizeUi::update() {}
 
 void jrat::ResizeUi::draw() {}
 
+void jrat::ResizeUi::save_image() {}
+
 void jrat::ResizeUi::ui_boxes() {
     create_text_box_left(3);
 }
