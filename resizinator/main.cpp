@@ -15,20 +15,8 @@
 using namespace jrat;
 
 int main(int argc, char **argv) {
-    if (std::strcmp(argv[1], "--help") == 0) {
-        jrat::error_panic();
-        return 0;
-    }
-    if (argc == 2 || argc == 1) {
-        ResizeUi ui(
-            800, 600, "Resizinator", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.PNG"
-        );
-        ui.run();
-        return 0;
-    }
-
-    if (argc < 5 || argc > 6) {
-        error_panic();
+    if (argc < 3 || std::strcmp(argv[1], "--help") == 0) {
+        print_help();
         return 0;
     }
 
@@ -43,29 +31,31 @@ int main(int argc, char **argv) {
 
     if (image.empty()) {
         std::cout << "No image was found at: " + image_filepath << std::endl;
-        error_panic();
+        print_help();
         return 0;
     }
 
-    std::string keep_aspect_ratio = argv[2];
-    int width = std::atoi(argv[3]);
-    int height = std::atoi(argv[4]);
-    std::string new_image_filepath;
-
-    if (argc == 6) {
-        new_image_filepath = argv[5];
-    }
-    cv::Mat resized_image;
-
-    if (keep_aspect_ratio == "-A") {
-        resized_image = resize_aspect_ratio(image_filepath, width);
-    } else if (keep_aspect_ratio == "-a") {
-        resized_image = resize(image_filepath, width, height);
-    } else {
-        error_panic();
+    if (std::strcmp(argv[2], "--ui") == 0) {
+        ResizeUi ui(800, 600, "Resizinator", image_filepath.c_str());
+        ui.run();
         return 0;
     }
 
-    image_filepath = (argc == 5) ? image_filepath : new_image_filepath;
-    imwrite(image_filepath, resized_image);
+    int width, height;
+    bool keep_aspect_ratio = false;
+    std::string save_path = image_filepath; // maybe allow this to be set?
+
+    try {
+        width = std::stoi(argv[2]);
+        height = std::stoi(argv[3]);
+    } catch (const std::exception &ex) {
+        std::cout << "width and height must be integers";
+        return 0;
+    }
+
+    if (argc > 3 && std::strcmp(argv[4], "-a") == 0) {
+        keep_aspect_ratio = true;
+    }
+
+    write_image(image_filepath, width, height, keep_aspect_ratio, save_path);
 }
