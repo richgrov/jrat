@@ -110,9 +110,11 @@ void jrat::Window::draw_ui_bar() {
         &check_box_checked_
     );
 
-    GuiButton(
-        Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, ""
-    ); // returns true when clicked, wire up to save functionality
+    if ((GuiButton(Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, "")
+        )) { // returns true when clicked, wire up to save functionality
+
+        save_image();
+    }
 }
 
 void jrat::Window::update_mouse() {
