@@ -128,6 +128,7 @@ int main(int argc, char **argv) {
         }
         add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
 
+        message_box("Installation complete!");
         return 0;
     } catch (const std::exception &e) {
         std::string msg("A fatal installation error has occurred:\n");
