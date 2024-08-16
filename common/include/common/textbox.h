@@ -11,8 +11,8 @@ public:
     TextBox(float x_pos, float y_pos, float width, float height, bool has_x)
         : area_{Rectangle{x_pos, y_pos, width, height}}, has_x_{has_x} {}
 
-    Rectangle *area() {
-        return &area_;
+    Rectangle &area() {
+        return area_;
     }
     int get_max_length() const {
         return max_length_;
