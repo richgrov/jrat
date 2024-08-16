@@ -4,6 +4,6 @@
 
 namespace jrat {
 
-void report_fatal_error(const std::string &msg);
+void message_box(const std::string &msg);
 
 } // namespace jrat
