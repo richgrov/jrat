@@ -5,5 +5,6 @@
 using namespace jrat;
 
 void jrat::report_fatal_error(const std::string &msg) {
-    MessageBox(nullptr, msg.c_str(), "Installer cannot continue", MB_OK);
+    std::string full_msg = "A fatal installation error has occurred:\n" + msg;
+    MessageBox(nullptr, full_msg.c_str(), "Installer cannot continue", MB_OK);
 }
