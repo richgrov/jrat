@@ -6,6 +6,7 @@
 #include "common/supported_types.h"
 #include "registry_key.h"
 #include "resources.h"
+#include "ui.h"
 
 using namespace jrat;
 
@@ -96,35 +97,39 @@ std::string full_command(const std::string &app_name, const std::string args = "
 } // namespace
 
 int main(int argc, char **argv) {
-    std::filesystem::create_directories(APP_DIR);
+    try {
+        std::filesystem::create_directories(APP_DIR);
 
-    add_dll_path();
+        add_dll_path();
 
-    install_file("FLIPINATOR_EXE", "flipinator.exe");
-    install_file("CONVERTINATOR_EXE", "convertinator.exe");
-    install_file("CROPINATOR_EXE", "cropinator.exe");
-    install_file("RESIZINATOR_EXE", "resizinator.exe");
-    install_file("ROTATINATOR_EXE", "rotatinator.exe");
-    install_file("OPENCV_DLL", "opencv_world490.dll");
+        install_file("FLIPINATOR_EXE", "flipinator.exe");
+        install_file("CONVERTINATOR_EXE", "convertinator.exe");
+        install_file("CROPINATOR_EXE", "cropinator.exe");
+        install_file("RESIZINATOR_EXE", "resizinator.exe");
+        install_file("ROTATINATOR_EXE", "rotatinator.exe");
+        install_file("OPENCV_DLL", "opencv_world490.dll");
 
-    std::string supported_file_list = build_supported_file_list(supported_types);
+        std::string supported_file_list = build_supported_file_list(supported_types);
 
-    std::vector<MenuOption> operations = {
-        {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
-        {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")
-        },
-    };
-    add_menu("JRAT", "jrat", operations, supported_file_list);
+        std::vector<MenuOption> operations = {
+            {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
+            {"Rotate 90 counter-clockwise", "rotate90ccw",
+             full_command("rotatinator.exe", "%1 -90 %1")},
+        };
+        add_menu("JRAT", "jrat", operations, supported_file_list);
 
-    std::vector<MenuOption> conversions;
-    for (const std::string &type : supported_types) {
-        conversions.push_back(MenuOption{
-            .display = "Convert to ." + type,
-            .id = "convert." + type,
-            .command = full_command("convertinator.exe", " %1 " + type),
-        });
+        std::vector<MenuOption> conversions;
+        for (const std::string &type : supported_types) {
+            conversions.push_back(MenuOption{
+                .display = "Convert to ." + type,
+                .id = "convert." + type,
+                .command = full_command("convertinator.exe", " %1 " + type),
+            });
+        }
+        add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
+
+        return 0;
+    } catch (const std::exception &e) {
+        report_fatal_error(e.what());
     }
-    add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
-
-    return 0;
 }
