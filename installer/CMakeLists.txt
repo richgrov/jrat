@@ -14,6 +14,8 @@ add_executable(installer
     registry_key.h
     resources.cpp
     resources.h
+    ui.cpp
+    ui.h
     
     installer.manifest
     resources.rc
