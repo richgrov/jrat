@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    cv::Mat image = cv::imread(image_filepath);
+    cv::Mat image = cv::imread(image_filepath, cv::IMREAD_UNCHANGED);
 
     if (image.empty()) {
         std::cout << "No image was found at: " + image_filepath << std::endl;
