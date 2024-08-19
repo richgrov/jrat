@@ -10,7 +10,7 @@
 
 int run(int argc, char **argv);
 
-#ifdef NDEBUG
+#ifdef JRAT_WINMAIN
 
 // NOLINTBEGIN(misc-definitions-in-headers)
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE prev, LPSTR command, int show_command) {
