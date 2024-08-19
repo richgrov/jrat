@@ -23,15 +23,15 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prev, LPSTR command, int show_c
     bool new_arg = true;
 
     for (char *c = cmd_line; *c != '\0'; ++c) {
-        if (*c == ' ') {
-            *c = '\0';
-            new_arg = true;
-        } else if (new_arg) {
+        if (new_arg) {
             args[argc++] = c;
             if (argc >= sizeof(args)) {
-                std::cerr << "remaining args beyond 16 were truncated\n";
+                std::cerr << "warning: some args were truncated\n";
             }
             new_arg = false;
+        } else if (*c == ' ') {
+            *c = '\0';
+            new_arg = true;
         }
     }
 
