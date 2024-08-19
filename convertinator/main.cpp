@@ -3,11 +3,12 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 
 using namespace jrat;
 
-int main(int argc, char *argv[]) {
+int run(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "usage: convertinator [filename] [type]";
         return 0;
@@ -28,7 +29,6 @@ int main(int argc, char *argv[]) {
     }
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + "." + new_type;
-    
     cv::Mat image = cv::imread(file, cv::IMREAD_UNCHANGED);
 
     if (image.empty()) {
@@ -37,4 +37,5 @@ int main(int argc, char *argv[]) {
     }
 
     cv::imwrite(output_file, image);
+    return 0;
 }

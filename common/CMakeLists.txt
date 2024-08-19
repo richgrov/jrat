@@ -1,4 +1,5 @@
 add_library(common STATIC
+    include/common/entrypoint.h
     include/common/stringutil.h
     include/common/supported_types.h
     include/common/textbox.h
