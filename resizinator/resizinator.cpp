@@ -6,7 +6,7 @@
 #include <opencv2/opencv.hpp>
 
 cv::Mat jrat::resize(std::string filepath, int width, int height) {
-    cv::Mat image = cv::imread(filepath);
+    cv::Mat image = cv::imread(filepath, cv::IMREAD_UNCHANGED);
     cv::Mat resized_image;
 
     cv::Size original_image_size = image.size();
@@ -22,7 +22,7 @@ cv::Mat jrat::resize(std::string filepath, int width, int height) {
 }
 
 cv::Mat jrat::resize_aspect_ratio(std::string filepath, int width) {
-    cv::Mat image = cv::imread(filepath);
+    cv::Mat image = cv::imread(filepath, cv::IMREAD_UNCHANGED);
     cv::Mat resized_image;
 
     int aspect_ratio = image.cols / image.rows;
