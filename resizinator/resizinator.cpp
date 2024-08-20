@@ -5,8 +5,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
 
-cv::Mat jrat::resize(std::string filepath, int width, int height) {
-    cv::Mat image = cv::imread(filepath, cv::IMREAD_UNCHANGED);
+cv::Mat jrat::resize(cv::Mat &image, int width, int height) {
     cv::Mat resized_image;
 
     cv::Size original_image_size = image.size();
@@ -21,8 +20,7 @@ cv::Mat jrat::resize(std::string filepath, int width, int height) {
     return resized_image;
 }
 
-cv::Mat jrat::resize_aspect_ratio(std::string filepath, int width) {
-    cv::Mat image = cv::imread(filepath, cv::IMREAD_UNCHANGED);
+cv::Mat jrat::resize_aspect_ratio(cv::Mat &image, int width) {
     cv::Mat resized_image;
 
     int aspect_ratio = image.cols / image.rows;
@@ -40,7 +38,7 @@ cv::Mat jrat::resize_aspect_ratio(std::string filepath, int width) {
     return resized_image;
 }
 
-void jrat::imwrite(std::string filepath, cv::Mat image) {
+void jrat::imwrite(std::string filepath, const cv::Mat &image) {
     std::cout << "wrote to " << filepath << std::endl;
     cv::imwrite(filepath, image);
 }
@@ -51,9 +49,9 @@ void jrat::print_help() {
 }
 
 void jrat::write_image(
-    std::string filepath, int width, int height, bool keep_aspect_ratio, std::string savepath
+    cv::Mat &image, int width, int height, bool keep_aspect_ratio, std::string savepath
 ) {
-    cv::Mat resized_image = keep_aspect_ratio ? resize_aspect_ratio(filepath, width)
-                                              : resize(filepath, width, height);
+    cv::Mat resized_image = keep_aspect_ratio ? resize_aspect_ratio(image, width)
+                                              : resize(image, width, height);
     imwrite(savepath, resized_image);
 }
