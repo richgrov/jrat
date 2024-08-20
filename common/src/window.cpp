@@ -53,10 +53,9 @@ void jrat::Window::create_text_box_left(int box_count) {
 void jrat::Window::load_image(const char *file_name) {
     if (img_.height != 0) {
         throw std::runtime_error("Can't load more than one image at a time.");
-    } else {
-        Image img = imageToBytes(file_name);
-        img_ = LoadTextureFromImage(img);
     }
+    Image img = imageToBytes(file_name);
+    img_ = LoadTextureFromImage(img);
 }
 
 void jrat::Window::set_dimensions_and_position() {

@@ -10,18 +10,16 @@ typedef unsigned char byte;
 static inline Image imageToBytes(const char *filepath) {
     cv::Mat image = cv::imread(filepath, cv::IMREAD_UNCHANGED);
     if (image.empty()) {
-        std::cout << "empty image" << std::endl;
+        throw new std::runtime_error("OpenCV couldn't read file");
     }
     std::vector<byte> buffer;
     if (!cv::imencode(".png", image, buffer)) {
-        std::cerr << "no image D:" << std::endl;
+        throw new std::runtime_error("OpenCV couln't encode file");
     }
     Image image_ray = LoadImageFromMemory(".png", buffer.data(), buffer.size());
     if (image_ray.data == nullptr) {
-        std::cerr << "no image" << std::endl;
+        throw new std::runtime_error("Raylib has failed to convert to image.");
     }
-    std::cout << buffer.size() << std::endl;
-    std::cout << image_ray.width << " " << image_ray.height << std::endl;
     return image_ray;
 }
 
