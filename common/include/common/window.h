@@ -9,9 +9,11 @@
 
 namespace jrat {
 
+typedef unsigned char byte;
+
 class Window {
 public:
-    explicit Window(int width, int height, const std::string &title);
+    explicit Window(int width, int height, const std::string &title, const char *file_path);
 
     ~Window();
 
@@ -33,6 +35,7 @@ protected:
     void draw_boxes();
     void draw_image();
     void draw_ui_bar();
+    char *image_path_{};
     int width_{0};
     int height_{0};
     int text_box_count_{0};

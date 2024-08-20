@@ -1,5 +1,6 @@
 #include "common/window.h"
 #include "JetBrainsMono.h"
+#include "common/image_to_byte.h"
 
 #include <iostream>
 #include <raylib.h>
@@ -7,9 +8,10 @@
 
 using namespace jrat;
 
-Window::Window(int width, int height, const std::string &title) {
+Window::Window(int width, int height, const std::string &title, const char *image_path) {
     InitWindow(width, height, title.c_str());
     SetTargetFPS(60);
+    image_path_ = const_cast<char *>(image_path);
 }
 
 Window::~Window() {
@@ -51,9 +53,9 @@ void jrat::Window::create_text_box_left(int box_count) {
 void jrat::Window::load_image(const char *file_name) {
     if (img_.height != 0) {
         throw std::runtime_error("Can't load more than one image at a time.");
-    } else {
-        img_ = LoadTexture(file_name);
     }
+    Image img = imageToBytes(file_name);
+    img_ = LoadTextureFromImage(img);
 }
 
 void jrat::Window::set_dimensions_and_position() {
