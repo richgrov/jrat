@@ -13,6 +13,8 @@ RotateUi::RotateUi(int width, int height, const std::string &title, const char *
 
     open_image_ = image;
     save_file_ = file_name;
+
+    angle_ = 0;
 }
 
 void RotateUi::update() {}

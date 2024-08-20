@@ -1,6 +1,8 @@
 #include "resize_ui.h"
 #include "resizinator.h"
 
+#include <opencv2/opencv.hpp>
+
 using namespace jrat;
 
 ResizeUi::ResizeUi(
@@ -14,6 +16,12 @@ ResizeUi::ResizeUi(
 
     open_image_ = image;
     save_file_ = file_name;
+    
+    cv::Size size = image.size();
+
+    resize_width_ = size.width;
+    resize_height_ = size.height;
+    keep_aspect_ratio_ = false;
 }
 
 void ResizeUi::update() {}
