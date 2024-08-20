@@ -11,7 +11,6 @@ set_property(TARGET resizinator PROPERTY CXX_STANDARD 20)
 target_link_libraries(resizinator common)
 target_link_libraries(resizinator raylib)
 target_include_directories(resizinator PRIVATE "../thirdparty/raygui/src")
-target_include_directories(resizinator PRIVATE "../common/resources")
 
 target_include_directories(resizinator PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(resizinator ${OpenCV_LIBS})
