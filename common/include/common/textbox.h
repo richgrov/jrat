@@ -22,6 +22,16 @@ public:
     }
     char content_[9] = {0};
 
+    void set_content(std::string string) {
+        if (string.size() > max_length_) {
+            throw std::runtime_error("Content size longer than max size.");
+        }
+
+        for (int i = 0; i < string.size(); i++) {
+            content_[i] = string[i];
+        }
+    }
+
 private:
     bool has_x_{false};
     Rectangle area_;
