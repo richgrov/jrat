@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     }
 
     if (std::strcmp(argv[2], "--ui") == 0) {
-        ResizeUi ui(800, 600, "Resizinator", image_filepath.c_str());
+        ResizeUi ui(800, 600, "Resizinator", image_filepath.c_str(), image);
         ui.run();
         return 0;
     }
@@ -57,5 +57,5 @@ int main(int argc, char **argv) {
         keep_aspect_ratio = true;
     }
 
-    write_image(image_filepath, width, height, keep_aspect_ratio, save_path);
+    write_image(image, width, height, keep_aspect_ratio, save_path);
 }

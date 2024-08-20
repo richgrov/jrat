@@ -6,16 +6,16 @@
 
 namespace jrat {
 
-cv::Mat resize(std::string filepath, int width, int height);
+cv::Mat resize(cv::Mat &image, int width, int height);
 
-cv::Mat resize_aspect_ratio(std::string filepath, int width);
+cv::Mat resize_aspect_ratio(cv::Mat &image, int width);
 
-void imwrite(std::string filepath, cv::Mat image);
+void imwrite(std::string filepath, const cv::Mat &image);
 
 void print_help();
 
 void write_image(
-    std::string filepath, int width, int height, bool keep_aspect_ratio, std::string savepath
+    cv::Mat &image, int width, int height, bool keep_aspect_ratio, std::string savepath
 );
 
 } // namespace jrat
