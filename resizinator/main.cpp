@@ -1,6 +1,4 @@
-#ifndef RAGUI_IMPLEMENTATION
 #define RAYGUI_IMPLEMENTATION
-#endif // !RAGUI_IMPLEMENTATION
 
 #include "resizinator.h"
 
@@ -44,7 +42,7 @@ int jrat::run(int argc, char **argv) {
 
     int width, height;
     bool keep_aspect_ratio = false;
-    std::string save_path = image_filepath; // maybe allow this to be set?
+    std::string savepath = argc > 5 ? argv[5] : image_filepath;
 
     try {
         width = std::stoi(argv[2]);
@@ -58,6 +56,6 @@ int jrat::run(int argc, char **argv) {
         keep_aspect_ratio = true;
     }
 
-    write_image(image, width, height, keep_aspect_ratio, save_path);
+    write_image(image, width, height, keep_aspect_ratio, savepath);
     return 0;
 }

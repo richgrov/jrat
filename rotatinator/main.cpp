@@ -1,6 +1,4 @@
-#ifndef RAGUI_IMPLEMENTATION
 #define RAYGUI_IMPLEMENTATION
-#endif // !RAGUI_IMPLEMENTATION
 
 #include <iostream>
 
@@ -33,7 +31,7 @@ int jrat::run(int argc, char **argv) {
     }
 
     double angle;
-    std::string savepath = image_filepath; // maybe allow this to be set?
+    std::string savepath = argc > 3 ? argv[3] : image_filepath;
 
     try {
         angle = std::stold(argv[2]);

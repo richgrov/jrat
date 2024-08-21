@@ -49,7 +49,9 @@ int jrat::run(int argc, char *argv[]) {
         return 0;
     }
 
+    std::string output_file = argc > 6 ? argv[6] : file;
+
     cv::Mat cropped = image(cv::Range(y, height), cv::Range(x, width));
-    cv::imwrite(file, cropped);
+    cv::imwrite(output_file, cropped);
     return 0;
 }

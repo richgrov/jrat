@@ -29,9 +29,20 @@ void ResizeUi::update() {}
 void ResizeUi::draw() {}
 
 void ResizeUi::save_image() {
+    read_boxes();
     write_image(open_image_, resize_width_, resize_height_, keep_aspect_ratio_, save_file_);
 }
 
 void ResizeUi::ui_boxes() {
-    create_text_box_left(3);
+    create_text_box_left(2);
+}
+
+void ResizeUi::read_boxes() {
+    try {
+        resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
+        resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
+        // todo: read checkbox for keep aspect ratio
+    } catch (const std::exception &ex) {
+        std::cerr << "textbox couldn't be converted to int";
+    }
 }
