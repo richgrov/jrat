@@ -14,6 +14,7 @@ void jrat::write_image(cv::Mat image, double angle, std::string savepath) {
 
     cv::Rect2f bounding_box = cv::RotatedRect(cv::Point2f(), image.size(), angle).boundingRect2f();
 
+    // changes the size of the bounding box to show the entire image instead of cropping it
     rotation_matrix.at<double>(0, 2) += bounding_box.width / 2.0 - image.cols / 2.0;
     rotation_matrix.at<double>(1, 2) += bounding_box.height / 2.0 - image.rows / 2.0;
 
