@@ -8,13 +8,13 @@ add_library(common STATIC
     src/window.cpp
 )
 
-function(jrat_add_window_executable target_name files)
+function(jrat_add_window_executable target_name)
     if (WIN32 AND (${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo"))
         message(STATUS "Building with console disabled because release mode is active")
-        add_executable(${target_name} WIN32 ${files})
         target_compile_definitions(${target_name} PRIVATE JRAT_WINMAIN)
+        add_executable(${target_name} WIN32 ${ARGN})
     else()
-        add_executable(${target_name} ${files})
+        add_executable(${target_name} ${ARGN})
     endif()
 endfunction()
 
