@@ -1,6 +1,7 @@
 #include "rotate_ui.h"
-#include "common/window.h"
 #include "rotatinator.h"
+
+#include <iostream>
 
 using namespace jrat;
 
@@ -22,9 +23,18 @@ void RotateUi::update() {}
 void RotateUi::draw() {}
 
 void RotateUi::save_image() {
+    read_boxes();
     write_image(open_image_, angle_, save_file_);
 }
 
 void RotateUi::ui_boxes() {
     create_text_box_left(1);
+}
+
+void RotateUi::read_boxes() {
+    try {
+        angle_ = std::stold(std::string(text_boxes_[0].content_));
+    } catch (const std::exception &ex) {
+        std::cerr << "textbox couldn't be converted to double";
+    }
 }

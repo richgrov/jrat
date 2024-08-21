@@ -23,15 +23,13 @@ static std::vector<std::string> supported_types = {
 // clang-format on
 
 static inline bool is_supported(std::string &fileName) {
-    bool supported = false;
-
     for (std::string type : supported_types) {
         if (to_lowercase(fileName).ends_with(type)) {
-            supported = true;
+            return true;
         }
     }
 
-    return supported;
+    return false;
 }
 
 } // namespace jrat

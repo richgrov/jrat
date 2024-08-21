@@ -36,8 +36,9 @@ int jrat::run(int argc, char *argv[]) {
     }
 
     cv::Mat flip;
+    std::string savepath = argc > 3 ? argv[3] : file;
 
     cv::flip(image, flip, int_direction);
-    cv::imwrite(file, flip);
+    cv::imwrite(savepath, flip);
     return 0;
 }
