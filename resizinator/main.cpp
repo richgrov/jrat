@@ -10,11 +10,12 @@
 
 #include <iostream>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 
 using namespace jrat;
 
-int main(int argc, char **argv) {
+int run(int argc, char **argv) {
     if (argc < 3 || std::strcmp(argv[1], "--help") == 0) {
         print_help();
         return 0;

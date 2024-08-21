@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <vector>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 #include "registry_key.h"
 #include "resources.h"
@@ -96,7 +97,7 @@ std::string full_command(const std::string &app_name, const std::string args = "
 
 } // namespace
 
-int main(int argc, char **argv) {
+int jrat::run(int argc, char **argv) {
     try {
         std::filesystem::create_directories(APP_DIR);
 

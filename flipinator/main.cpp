@@ -2,10 +2,11 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "common/entrypoint.h"
 #include "common/stringutil.h"
 #include "common/supported_types.h"
 
-int main(int argc, char *argv[]) {
+int jrat::run(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "usage: flipinator [filename] [direction]";
         return 0;

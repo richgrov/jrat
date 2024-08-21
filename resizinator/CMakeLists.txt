@@ -1,4 +1,4 @@
-add_executable(resizinator 
+jrat_add_window_executable(resizinator 
     main.cpp
     resize_ui.h
     resize_ui.cpp
