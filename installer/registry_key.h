@@ -14,6 +14,8 @@ public:
 
     void set_string(const std::string &name, const std::string &value) const;
 
+    void delete_child(const std::string &child);
+
     static const RegistryKey CLASSES_ROOT;
     static const RegistryKey LOCAL_MACHINE;
 

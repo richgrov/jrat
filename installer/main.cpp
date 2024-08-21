@@ -91,45 +91,81 @@ void add_menu(
     menu.set_string("AppliesTo", file_pattern);
 }
 
+void delete_menu(const std::string &id, const std::vector<std::string> &sub_menu_ids) {
+    RegistryKey command_store(
+        RegistryKey::LOCAL_MACHINE,
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CommandStore\\shell"
+    );
+
+    for (const std::string &sub_menu_id : sub_menu_ids) {
+        command_store.delete_child(id + "." + sub_menu_id);
+    }
+
+    RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell");
+    menu.delete_child(id);
+}
+
 std::string full_command(const std::string &app_name, const std::string args = "") {
     return (APP_DIR / app_name).string() + " " + args;
+}
+
+void install() {
+    std::filesystem::create_directories(APP_DIR);
+
+    add_dll_path();
+
+    install_file("FLIPINATOR_EXE", "flipinator.exe");
+    install_file("CONVERTINATOR_EXE", "convertinator.exe");
+    install_file("CROPINATOR_EXE", "cropinator.exe");
+    install_file("RESIZINATOR_EXE", "resizinator.exe");
+    install_file("ROTATINATOR_EXE", "rotatinator.exe");
+    install_file("OPENCV_DLL", "opencv_world490.dll");
+
+    std::string supported_file_list = build_supported_file_list(supported_types);
+
+    std::vector<MenuOption> operations = {
+        {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
+        {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")
+        },
+    };
+    add_menu("JRAT", "jrat", operations, supported_file_list);
+
+    std::vector<MenuOption> conversions;
+    for (const std::string &type : supported_types) {
+        conversions.push_back(MenuOption{
+            .display = "Convert to ." + type,
+            .id = "convert." + type,
+            .command = full_command("convertinator.exe", " %1 " + type),
+        });
+    }
+    add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
+
+    message_box("Installation complete!");
+}
+
+void uninstall() {
+    std::filesystem::remove_all(APP_DIR);
+
+    delete_menu("jrat", {"rotate90cw", "rotate90ccw"});
+
+    std::vector<std::string> conversions;
+    for (const std::string &type : supported_types) {
+        conversions.push_back("convert." + type);
+    }
+    delete_menu("jratconvert", conversions);
+
+    message_box("Uninstallation complete!");
 }
 
 } // namespace
 
 int jrat::run(int argc, char **argv) {
     try {
-        std::filesystem::create_directories(APP_DIR);
-
-        add_dll_path();
-
-        install_file("FLIPINATOR_EXE", "flipinator.exe");
-        install_file("CONVERTINATOR_EXE", "convertinator.exe");
-        install_file("CROPINATOR_EXE", "cropinator.exe");
-        install_file("RESIZINATOR_EXE", "resizinator.exe");
-        install_file("ROTATINATOR_EXE", "rotatinator.exe");
-        install_file("OPENCV_DLL", "opencv_world490.dll");
-
-        std::string supported_file_list = build_supported_file_list(supported_types);
-
-        std::vector<MenuOption> operations = {
-            {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
-            {"Rotate 90 counter-clockwise", "rotate90ccw",
-             full_command("rotatinator.exe", "%1 -90 %1")},
-        };
-        add_menu("JRAT", "jrat", operations, supported_file_list);
-
-        std::vector<MenuOption> conversions;
-        for (const std::string &type : supported_types) {
-            conversions.push_back(MenuOption{
-                .display = "Convert to ." + type,
-                .id = "convert." + type,
-                .command = full_command("convertinator.exe", " %1 " + type),
-            });
+        if (argc > 1 && std::string("--uninstall") == argv[1]) {
+            uninstall();
+        } else {
+            install();
         }
-        add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
-
-        message_box("Installation complete!");
         return 0;
     } catch (const std::exception &e) {
         std::string msg("A fatal installation error has occurred:\n");
