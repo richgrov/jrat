@@ -58,4 +58,5 @@ int main(int argc, char **argv) {
     }
 
     write_image(image, width, height, keep_aspect_ratio, save_path);
+    return 0;
 }

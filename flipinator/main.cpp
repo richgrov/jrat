@@ -38,4 +38,5 @@ int main(int argc, char *argv[]) {
 
     cv::flip(image, flip, int_direction);
     cv::imwrite(file, flip);
+    return 0;
 }

@@ -2,10 +2,12 @@
 #define RAYGUI_IMPLEMENTATION
 #endif // !RAGUI_IMPLEMENTATION
 
-#include "rotatinator.h"
-#include "rotate_ui.h"
-#include <opencv2/opencv.hpp>
 #include <iostream>
+
+#include <opencv2/opencv.hpp>
+
+#include "rotate_ui.h"
+#include "rotatinator.h"
 
 using namespace jrat;
 
@@ -14,7 +16,7 @@ int main(int argc, char **argv) {
         print_help();
         return 0;
     }
-    
+
     std::string image_filepath = argv[1];
     cv::Mat image = cv::imread(image_filepath, cv::IMREAD_UNCHANGED);
 
@@ -40,4 +42,5 @@ int main(int argc, char **argv) {
     }
 
     write_image(image, angle, savepath);
+    return 0;
 }

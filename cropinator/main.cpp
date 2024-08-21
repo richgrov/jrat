@@ -50,4 +50,5 @@ int main(int argc, char *argv[]) {
 
     cv::Mat cropped = image(cv::Range(y, height), cv::Range(x, width));
     cv::imwrite(file, cropped);
+    return 0;
 }

@@ -133,5 +133,6 @@ int main(int argc, char **argv) {
     } catch (const std::exception &e) {
         std::string msg("A fatal installation error has occurred:\n");
         message_box(msg + e.what());
+        return 1;
     }
 }
