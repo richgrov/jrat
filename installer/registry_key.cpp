@@ -77,3 +77,10 @@ void RegistryKey::set_string(const std::string &name, const std::string &value) 
         );
     }
 }
+
+void RegistryKey::delete_child(const std::string &child) {
+    LSTATUS res = RegDeleteTree(reinterpret_cast<HKEY>(key_), child.c_str());
+    if (res != ERROR_SUCCESS) {
+        throw std::runtime_error(std::format("failed to delete registry child {}: {}", child, res));
+    }
+}
