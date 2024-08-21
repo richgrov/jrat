@@ -8,7 +8,7 @@
 
 using namespace jrat;
 
-int run(int argc, char *argv[]) {
+int jrat::run(int argc, char *argv[]) {
     if (argc < 3) {
         std::cout << "usage: convertinator [filename] [type]";
         return 0;

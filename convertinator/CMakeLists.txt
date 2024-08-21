@@ -1,12 +1,6 @@
 set(SOURCE_FILES main.cpp)
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "Release" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
-    message(STATUS "Building with console disabled because release mode is active")
-    add_executable(convertinator WIN32 ${SOURCE_FILES})
-    target_compile_definitions(convertinator PRIVATE JRAT_WINMAIN)
-else()
-    add_executable(convertinator ${SOURCE_FILES})
-endif()
+jrat_add_window_executable(convertinator ${SOURCE_FILES})
 
 set_property(TARGET convertinator PROPERTY CXX_STANDARD 20)
 

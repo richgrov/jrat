@@ -8,7 +8,7 @@ if (NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/res)
     return()
 endif()
 
-add_executable(installer
+jrat_add_window_executable(installer
     main.cpp
     registry_key.cpp
     registry_key.h

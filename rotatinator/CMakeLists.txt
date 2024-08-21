@@ -1,4 +1,4 @@
-add_executable(rotatinator
+jrat_add_window_executable(rotatinator
 	main.cpp
 	rotate_ui.cpp
 	rotate_ui.h

@@ -10,11 +10,12 @@
 
 #include <iostream>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 
 using namespace jrat;
 
-int main(int argc, char **argv) {
+int jrat::run(int argc, char **argv) {
     if (argc < 3 || std::strcmp(argv[1], "--help") == 0) {
         print_help();
         return 0;
@@ -58,4 +59,5 @@ int main(int argc, char **argv) {
     }
 
     write_image(image, width, height, keep_aspect_ratio, save_path);
+    return 0;
 }

@@ -1,4 +1,4 @@
-add_executable(flipinator
+jrat_add_window_executable(flipinator
     main.cpp
 )
 

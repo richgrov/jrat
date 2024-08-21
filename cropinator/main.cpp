@@ -2,9 +2,10 @@
 
 #include <opencv2/opencv.hpp>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 
-int main(int argc, char *argv[]) {
+int jrat::run(int argc, char *argv[]) {
     if (argc < 6) {
         std::cout << "usage: cropinator [file name] [left] [right] [top] [bottom]";
         return 0;
@@ -50,4 +51,5 @@ int main(int argc, char *argv[]) {
 
     cv::Mat cropped = image(cv::Range(y, height), cv::Range(x, width));
     cv::imwrite(file, cropped);
+    return 0;
 }
