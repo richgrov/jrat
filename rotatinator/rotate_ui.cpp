@@ -1,6 +1,6 @@
 #include "rotate_ui.h"
-#include "rotatinator.h"
 #include "common/window.h"
+#include "rotatinator.h"
 
 using namespace jrat;
 
