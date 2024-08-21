@@ -9,19 +9,20 @@ ResizeUi::ResizeUi(
     int width, int height, const std::string &title, const char *file_name, cv::Mat image
 )
     : Window(width, height, title, file_name) {
-    load_font();
-    load_image(file_name);
-    set_dimensions_and_position();
-    ui_boxes();
-
-    open_image_ = image;
-    save_file_ = file_name;
-    
     cv::Size size = image.size();
 
     resize_width_ = size.width;
     resize_height_ = size.height;
     keep_aspect_ratio_ = false;
+
+    load_font();
+    load_image(file_name);
+    set_dimensions_and_position();
+    ui_boxes();
+    set_boxes();
+
+    open_image_ = image;
+    save_file_ = file_name;
 }
 
 void ResizeUi::update() {}
@@ -45,4 +46,9 @@ void ResizeUi::read_boxes() {
     } catch (const std::exception &ex) {
         std::cerr << "textbox couldn't be converted to int";
     }
+}
+
+void ResizeUi::set_boxes() {
+    text_boxes_[0].set_content(std::to_string(resize_width_));
+    text_boxes_[1].set_content(std::to_string(resize_height_));
 }
