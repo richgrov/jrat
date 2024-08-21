@@ -9,10 +9,10 @@ public:
 
 protected:
 
-    virtual void ui_boxes();
-    virtual void update();
-    virtual void save_image();
-    virtual void draw();
+    virtual void ui_boxes() override;
+    virtual void update() override;
+    virtual void save_image() override;
+    virtual void draw() override;
 
 
 };
