@@ -91,6 +91,20 @@ void add_menu(
     menu.set_string("AppliesTo", file_pattern);
 }
 
+void delete_menu(const std::string &id, const std::vector<std::string> &sub_menu_ids) {
+    RegistryKey command_store(
+        RegistryKey::LOCAL_MACHINE,
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CommandStore\\shell"
+    );
+
+    for (const std::string &sub_menu_id : sub_menu_ids) {
+        command_store.delete_child(id + "." + sub_menu_id);
+    }
+
+    RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell");
+    menu.delete_child(id);
+}
+
 std::string full_command(const std::string &app_name, const std::string args = "") {
     return (APP_DIR / app_name).string() + " " + args;
 }
@@ -131,6 +145,14 @@ void install() {
 
 void uninstall() {
     std::filesystem::remove_all(APP_DIR);
+
+    delete_menu("jrat", {"rotate90cw", "rotate90ccw"});
+
+    std::vector<std::string> conversions;
+    for (const std::string &type : supported_types) {
+        conversions.push_back("convert." + type);
+    }
+    delete_menu("jratconvert", conversions);
 
     message_box("Uninstallation complete!");
 }
