@@ -25,6 +25,7 @@ public:
 protected:
     void load_image(const char *file_name);
     void set_dimensions_and_position();
+    void close_window();
     virtual void load_font();
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
@@ -48,6 +49,7 @@ protected:
 
     int active_text_box_{-1};
     bool check_box_checked_{true};
+    bool running_{true};
 
     // image manipulation
     double angle_{0};

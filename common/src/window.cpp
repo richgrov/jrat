@@ -26,7 +26,7 @@ Window::~Window() {
 }
 
 void Window::run() {
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose() && running_) {
         update_mouse();
         update();
         update_boxes();
@@ -75,6 +75,10 @@ void jrat::Window::set_dimensions_and_position() {
         (GetMonitorWidth(GetCurrentMonitor()) - width_) / 2,
         (GetMonitorHeight(GetCurrentMonitor()) - height_) / 2
     );
+}
+
+void jrat::Window::close_window() {
+    running_ = false;
 }
 
 void jrat::Window::load_font() {
