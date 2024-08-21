@@ -1,8 +1,9 @@
 #include "TEST.h"
 
+
 namespace jrat {
 
-TestUI::TestUI(int width, int height, const std::string &title, const char *file_name)
+TestUI::TestUI(int width, int height, const std::string &title, const char *file_name) 
     : Window(width, height, title, file_name) {
     load_font();
     load_image(file_name);
