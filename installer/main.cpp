@@ -129,11 +129,21 @@ void install() {
     message_box("Installation complete!");
 }
 
+void uninstall() {
+    std::filesystem::remove_all(APP_DIR);
+
+    message_box("Uninstallation complete!");
+}
+
 } // namespace
 
 int jrat::run(int argc, char **argv) {
     try {
-        install();
+        if (argc > 1 && std::string("--uninstall") == argv[1]) {
+            uninstall();
+        } else {
+            install();
+        }
         return 0;
     } catch (const std::exception &e) {
         std::string msg("A fatal installation error has occurred:\n");
