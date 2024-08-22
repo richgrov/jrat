@@ -30,5 +30,4 @@ target_include_directories(common PRIVATE resources)
 target_include_directories(common PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(common ${OpenCV_LIBS})
 
-
 add_subdirectory(TESTING)
