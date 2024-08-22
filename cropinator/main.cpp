@@ -1,9 +1,12 @@
+#define RAYGUI_IMPLEMENTATION
+
 #include <string>
 
 #include <opencv2/opencv.hpp>
 
 #include "common/entrypoint.h"
 #include "common/supported_types.h"
+#include "ui.h"
 
 int jrat::run(int argc, char *argv[]) {
     if (argc < 2) {
@@ -25,7 +28,8 @@ int jrat::run(int argc, char *argv[]) {
     }
 
     if (argc < 6) {
-        std::cout << "(ui here)\n";
+        CropUi ui(file.c_str());
+        ui.run();
         return 0;
     }
 
