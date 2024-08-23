@@ -8,7 +8,7 @@ class CropUi : public Window {
 public:
     CropUi(const char *filepath);
 
-    virtual void ui_boxes() override {}
+    virtual void ui_boxes() override;
     virtual void update() override {}
     virtual void save_image() override {}
 
