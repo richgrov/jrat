@@ -2,20 +2,22 @@
 #include "rotatinator.h"
 
 #include <iostream>
+#include <format>
 
 using namespace jrat;
 
 RotateUi::RotateUi(int width, int height, const std::string &title, const char *file_name, cv::Mat &image)
     : Window(width, height, title, file_name) {
+    angle_ = 0;
+
     load_font();
     load_image(file_name);
     set_dimensions_and_position();
     ui_boxes();
+    set_boxes();
 
     open_image_ = image;
     save_file_ = file_name;
-
-    angle_ = 0;
 }
 
 void RotateUi::update() {}
@@ -37,4 +39,8 @@ void RotateUi::read_boxes() {
     } catch (const std::exception &ex) {
         std::cerr << "textbox couldn't be converted to double";
     }
+}
+
+void RotateUi::set_boxes() {
+    text_boxes_[0].set_content(std::format("{}", angle_));
 }

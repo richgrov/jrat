@@ -16,6 +16,7 @@ public:
     virtual void save_image() override;
     virtual void ui_boxes() override;
     void read_boxes();
+    void set_boxes();
 
 private:
     int resize_width_;
