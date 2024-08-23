@@ -96,7 +96,6 @@ void jrat::Window::draw_boxes() {
             active_text_box_ == i
         );
         if (text_boxes_[i].has_x()) {
-            // no workie
             DrawTextEx(
                 font_, "X", Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - 36)}, 24.0f,
                 1.0f, Color{0, 0, 0, 255}
@@ -121,11 +120,18 @@ void jrat::Window::draw_image() {
 
 void jrat::Window::draw_ui_bar() {
     DrawRectangle(0, height_ - 50, width_, 50, Color{255, 255, 255, 255});
-    GuiCheckBox(
-        Rectangle{(float)(125 * text_box_count_ + 10), (float)(height_ - 40), 30, 30}, "",
-        &check_box_checked_
-    );
+    for (int checkbox_count = 0; checkbox_count < check_box_checked_.size(); checkbox_count++) {
+        bool check_bool = check_box_checked_[checkbox_count];
+        Rectangle check_box_rect;
+        check_box_rect = {
+            (float)(125 * text_box_count_ + 10 + 40 * checkbox_count), (float)(height_ - 40), 30, 30
+        };
 
+        int changed = GuiCheckBox(check_box_rect, "", &check_bool);
+        if (changed == 1) {
+            check_box_checked_[checkbox_count] = !check_box_checked_[checkbox_count];
+        }
+    }
     if ((GuiButton(Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, "")
         )) { // returns true when clicked, wire up to save functionality
 
@@ -136,6 +142,12 @@ void jrat::Window::draw_ui_bar() {
 void jrat::Window::update_mouse() {
     mouse_pos_ = GetMousePosition();
 }
+
+void jrat::Window::add_checkbox_auto() {
+    check_box_checked_.push_back(false);
+}
+
+void jrat::Window::add_checkbox(float width, float height, float x_pos, float y_pos) {}
 
 void jrat::Window::update_boxes() {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {

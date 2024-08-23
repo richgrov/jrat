@@ -9,6 +9,8 @@ TestUI::TestUI(int width, int height, const std::string &title, const char *file
     load_image(file_name);
     set_dimensions_and_position();
     ui_boxes();
+    add_checkbox_auto();
+    add_checkbox_auto();
 }
 
 void TestUI::ui_boxes() {
