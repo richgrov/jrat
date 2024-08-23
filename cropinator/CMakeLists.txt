@@ -1,5 +1,7 @@
 jrat_add_window_executable(cropinator
     main.cpp
+    ui.cpp
+    ui.h
 )
 
 set_property(TARGET cropinator PROPERTY CXX_STANDARD 20)

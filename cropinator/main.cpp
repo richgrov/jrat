@@ -1,22 +1,20 @@
+#define RAYGUI_IMPLEMENTATION
+
 #include <string>
 
 #include <opencv2/opencv.hpp>
 
 #include "common/entrypoint.h"
 #include "common/supported_types.h"
+#include "ui.h"
 
 int jrat::run(int argc, char *argv[]) {
-    if (argc < 6) {
-        std::cout << "usage: cropinator [file name] [left] [right] [top] [bottom]";
-        return 0;
+    if (argc < 2) {
+        std::cerr << "usage: cropinator <file name> [left] [right] [top] [bottom]\n";
+        return 1;
     }
 
     std::string file = argv[1];
-    std::string left = argv[2];
-    std::string right = argv[3];
-    std::string top = argv[4];
-    std::string bottom = argv[5];
-
     if (!jrat::is_supported(file)) {
         std::cout << "Unsupported file type.";
         return 0;
@@ -29,15 +27,21 @@ int jrat::run(int argc, char *argv[]) {
         return 0;
     }
 
+    if (argc < 6) {
+        CropUi ui(file.c_str(), std::move(image));
+        ui.run();
+        return 0;
+    }
+
     cv::Size size = image.size();
     int x, y, width, height;
 
     try {
-        x = std::stoi(left);
-        y = std::stoi(top);
+        x = std::stoi(argv[2]);
+        y = std::stoi(argv[4]);
 
-        width = size.width - std::stoi(right);
-        height = size.height - std::stoi(bottom);
+        width = size.width - std::stoi(argv[3]);
+        height = size.height - std::stoi(argv[5]);
     } catch (const std::exception &ex) {
         std::cout << "left, right, top, & bottom must all be integers";
         return 0;
