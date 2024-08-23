@@ -15,6 +15,7 @@ public:
     virtual void update() override;
     virtual void draw() override;
     virtual void save_image() override;
+    virtual void undo_click() override;
     virtual void ui_boxes() override;
     void read_boxes();
     void set_boxes();

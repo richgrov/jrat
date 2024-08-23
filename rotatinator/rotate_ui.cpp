@@ -28,6 +28,8 @@ void RotateUi::save_image() {
     write_image(open_image_, angle_, save_file_);
 }
 
+void jrat::RotateUi::undo_click() {}
+
 void RotateUi::ui_boxes() {
     create_text_box_left(1);
 }
