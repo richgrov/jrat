@@ -59,6 +59,30 @@ void add_dll_path() {
     env_vars.set_string("Path", path);
 }
 
+void remove_dll_path() {
+    std::string app_dir_str = APP_DIR.string();
+
+    RegistryKey env_vars(
+        RegistryKey::LOCAL_MACHINE,
+        "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment"
+    );
+    std::string path = env_vars.get_string("Path");
+
+    size_t start = path.find(app_dir_str);
+    if (start == std::string::npos) {
+        return;
+    }
+
+    size_t end = start + app_dir_str.size();
+    size_t len = app_dir_str.size();
+    if (end < path.size() && path[end] == ';') {
+        len++;
+    }
+
+    path.erase(start, len);
+    env_vars.set_string("Path", path);
+}
+
 struct MenuOption {
     std::string display;
     std::string id;
@@ -145,6 +169,7 @@ void install() {
 
 void uninstall() {
     std::filesystem::remove_all(APP_DIR);
+    remove_dll_path();
 
     delete_menu("jrat", {"rotate90cw", "rotate90ccw"});
 
