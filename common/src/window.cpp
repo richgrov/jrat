@@ -149,6 +149,10 @@ void jrat::Window::update_mouse() {
 
 void jrat::Window::add_checkbox_auto() {
     check_box_checked_.push_back(false);
+}
+
+void jrat::Window::add_checkbox_auto() {
+    check_box_checked_.push_back(false);
     Rectangle rect = {
         (float)(125 * text_box_count_ + 10 + 40 * check_box_rects_.size()), (float)(height_ - 40),
         30, 30
