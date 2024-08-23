@@ -6,7 +6,7 @@ namespace jrat {
 
 class CropUi : public Window {
 public:
-    CropUi(const char *filepath) : Window(1280, 720, "Resize Image", filepath) {}
+    CropUi(const char *filepath);
 
     virtual void ui_boxes() override {}
     virtual void update() override {}
