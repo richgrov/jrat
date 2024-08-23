@@ -48,6 +48,9 @@ protected:
 
     int active_text_box_{-1};
     bool check_box_checked_{true};
+
+    // image manipulation
+    double angle_{0};
 };
 
 } // namespace jrat

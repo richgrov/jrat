@@ -20,7 +20,6 @@ public:
     void set_boxes();
 
 private:
-    double angle_;
     cv::Mat open_image_;
     std::string save_file_;
 };
