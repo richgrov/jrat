@@ -20,7 +20,9 @@ RotateUi::RotateUi(int width, int height, const std::string &title, const char *
     save_file_ = file_name;
 }
 
-void RotateUi::update() {}
+void RotateUi::update() {
+    read_boxes();
+}
 
 void RotateUi::draw() {}
 
@@ -36,9 +38,7 @@ void RotateUi::ui_boxes() {
 void RotateUi::read_boxes() {
     try {
         angle_ = std::stold(std::string(text_boxes_[0].content_));
-    } catch (const std::exception &ex) {
-        std::cerr << "textbox couldn't be converted to double";
-    }
+    } catch (const std::exception &ex) {}
 }
 
 void RotateUi::set_boxes() {

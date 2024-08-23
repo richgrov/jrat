@@ -1,10 +1,14 @@
+#define _USE_MATH_DEFINES
+
 #include "common/window.h"
 #include "JetBrainsMono.h"
 #include "common/image_to_byte.h"
 
 #include <iostream>
+#include <cmath>
 #include <raylib.h>
 #include <stdexcept>
+#include <raymath.h>
 
 using namespace jrat;
 
@@ -98,11 +102,15 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
+    Rectangle source = {0.0f, 0.0f, (float)img_.width, (float)img_.height};
+    Rectangle destination = {
+        (float)(width_ - img_.width) / 2, (float)(height_ - img_.height),
+        (float)img_.width,
+        (float)img_.height
+    };
+    Vector2 origin = {img_.width / 2, img_.height / 2};
 
-    DrawTextureEx(
-        img_, Vector2{(float)(width_ - img_.width) / 2, (float)(height_ - img_.height) / 2}, 0, 1,
-        Color{255, 255, 255, 255}
-    );
+    DrawTexturePro(img_, source, destination, origin, angle_, Color{255, 255, 255, 255});
 }
 
 void jrat::Window::draw_ui_bar() {
