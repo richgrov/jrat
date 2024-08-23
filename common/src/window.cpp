@@ -102,13 +102,15 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
+    float offset_width = img_.width / 2;
+    float offset_height = img_.height / 2;
+
     Rectangle source = {0.0f, 0.0f, (float)img_.width, (float)img_.height};
     Rectangle destination = {
-        (float)(width_ - img_.width) / 2, (float)(height_ - img_.height),
-        (float)img_.width,
-        (float)img_.height
+        (float)((width_ - img_.width) / 2) + offset_width, (float)((height_ - img_.height) / 2) + offset_height,
+        (float)img_.width, (float)img_.height
     };
-    Vector2 origin = {img_.width / 2, img_.height / 2};
+    Vector2 origin = {offset_width, offset_height};
 
     DrawTexturePro(img_, source, destination, origin, angle_, Color{255, 255, 255, 255});
 }
