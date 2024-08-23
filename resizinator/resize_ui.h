@@ -4,6 +4,7 @@
 #include <opencv2/core/mat.hpp>
 
 #include <string>
+#include <stack>
 namespace jrat {
 
 class ResizeUi : public Window {
@@ -14,6 +15,7 @@ public:
     virtual void update() override;
     virtual void draw() override;
     virtual void save_image() override;
+    virtual void undo_click() override;
     virtual void ui_boxes() override;
     void read_boxes();
     void set_boxes();
@@ -24,5 +26,6 @@ private:
     bool keep_aspect_ratio_;
     cv::Mat open_image_;
     std::string save_file_;
+    std::stack<cv::Size> undo_;
 };
 } // namespace jrat

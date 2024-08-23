@@ -29,6 +29,13 @@ void ResizeUi::save_image() {
     write_image(open_image_, resize_width_, resize_height_, keep_aspect_ratio_, save_file_);
 }
 
+void jrat::ResizeUi::undo_click() {
+    if (undo_.empty()) {
+        return;
+    }
+    undo_.pop();
+}
+
 void ResizeUi::ui_boxes() {
     create_text_box_left(2);
 }
