@@ -3,6 +3,7 @@
 #include <stdexcept>
 
 #include <raygui.h>
+#include <stdexcept>
 
 namespace jrat {
 
