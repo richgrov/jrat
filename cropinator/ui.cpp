@@ -21,7 +21,8 @@ void CropUi::save_image() {
     int bottom = get_textbox(2);
     int right = get_textbox(3);
 
-    cv::Mat cropped = image_(cv::Range(top, bottom - top), cv::Range(left, right - left));
+    cv::Mat cropped =
+        image_(cv::Range(top, image_.rows - bottom), cv::Range(left, image_.cols - right));
     cv::imwrite(filepath_, cropped);
 }
 
