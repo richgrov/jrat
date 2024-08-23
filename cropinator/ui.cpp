@@ -2,12 +2,13 @@
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgcodecs.hpp>
+
 #include <string>
 
 using namespace jrat;
 
-CropUi::CropUi(const char *filepath)
-    : Window(1280, 720, "Resize Image", filepath), filepath_(filepath) {
+CropUi::CropUi(const char *filepath, cv::Mat &&image)
+    : Window(1280, 720, "Resize Image", filepath), image_(image), filepath_(filepath) {
     load_font();
     load_image(filepath);
     set_dimensions_and_position();
@@ -20,8 +21,7 @@ void CropUi::save_image() {
     int bottom = get_textbox(2);
     int right = get_textbox(3);
 
-    cv::Mat original = cv::imread(filepath_, cv::IMREAD_UNCHANGED);
-    cv::Mat cropped = original(cv::Range(top, bottom - top), cv::Range(left, right - left));
+    cv::Mat cropped = image_(cv::Range(top, bottom - top), cv::Range(left, right - left));
     cv::imwrite(filepath_, cropped);
 }
 

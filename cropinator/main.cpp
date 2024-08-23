@@ -28,7 +28,7 @@ int jrat::run(int argc, char *argv[]) {
     }
 
     if (argc < 6) {
-        CropUi ui(file.c_str());
+        CropUi ui(file.c_str(), std::move(image));
         ui.run();
         return 0;
     }
