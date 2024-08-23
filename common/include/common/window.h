@@ -19,16 +19,15 @@ public:
 
     void run();
 
-
 protected:
     virtual void draw() = 0;
     virtual void save_image() = 0;
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
-    virtual void add_checkbox(float width, float height, float x_pos, float y_pos);
     virtual void load_font();
     virtual void update_mouse();
     void add_checkbox_auto();
+    void add_checkbox(float x, float y);
     void close_window();
     void create_text_box(float x_pos, float y_pos, float width, float height);
     void create_text_box_left(int box_count);
@@ -47,6 +46,7 @@ protected:
     Texture2D img_{};
 
     std::vector<TextBox> text_boxes_;
+    std::vector<Rectangle> check_box_rects_;
 
     Vector2 mouse_pos_{0, 0};
 

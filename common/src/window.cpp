@@ -122,12 +122,8 @@ void jrat::Window::draw_ui_bar() {
     DrawRectangle(0, height_ - 50, width_, 50, Color{255, 255, 255, 255});
     for (int checkbox_count = 0; checkbox_count < check_box_checked_.size(); checkbox_count++) {
         bool check_bool = check_box_checked_[checkbox_count];
-        Rectangle check_box_rect;
-        check_box_rect = {
-            (float)(125 * text_box_count_ + 10 + 40 * checkbox_count), (float)(height_ - 40), 30, 30
-        };
 
-        int changed = GuiCheckBox(check_box_rect, "", &check_bool);
+        int changed = GuiCheckBox(check_box_rects_[checkbox_count], "", &check_bool);
         if (changed == 1) {
             check_box_checked_[checkbox_count] = !check_box_checked_[checkbox_count];
         }
@@ -145,9 +141,18 @@ void jrat::Window::update_mouse() {
 
 void jrat::Window::add_checkbox_auto() {
     check_box_checked_.push_back(false);
+    Rectangle rect = {
+        (float)(125 * text_box_count_ + 10 + 40 * check_box_rects_.size()), (float)(height_ - 40),
+        30, 30
+    };
+    check_box_rects_.push_back(rect);
 }
 
-void jrat::Window::add_checkbox(float width, float height, float x_pos, float y_pos) {}
+void jrat::Window::add_checkbox(float x, float y) {
+    check_box_checked_.push_back(false);
+    Rectangle rect = {x, y, 30, 30};
+    check_box_rects_.push_back(rect);
+}
 
 void jrat::Window::update_boxes() {
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
