@@ -175,6 +175,12 @@ void jrat::Window::draw_ui_bar() {
         save_image();
         CloseWindow();
     }
+
+    if ((GuiButton(Rectangle{(float)(110), (float)(height_ - 40), 100, 30}, "")
+        )) { // returns true when clicked, wire up to undo functionality
+
+        undo_click();
+    }
 }
 
 void jrat::Window::update_mouse() {
