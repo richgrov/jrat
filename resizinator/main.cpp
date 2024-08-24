@@ -47,7 +47,7 @@ int jrat::run(int argc, char **argv) {
     try {
         width = std::stoi(argv[2]);
         height = std::stoi(argv[3]);
-    } catch (const std::exception &ex) {
+    } catch (const std::exception &) {
         std::cout << "width and height must be integers";
         return 0;
     }

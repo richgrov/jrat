@@ -42,7 +42,7 @@ int jrat::run(int argc, char *argv[]) {
 
         width = size.width - std::stoi(argv[3]);
         height = size.height - std::stoi(argv[5]);
-    } catch (const std::exception &ex) {
+    } catch (const std::exception &) {
         std::cout << "left, right, top, & bottom must all be integers";
         return 0;
     }
