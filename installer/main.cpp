@@ -148,6 +148,11 @@ std::vector<MenuOption> create_conversion_options() {
 const std::vector<MenuOption> operations = {
     {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
     {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")},
+    {"Rotate...", "rotatecustom", full_command("rotatinator.exe", "%1")},
+    {"Resize...", "resize", full_command("resizinator.exe", "%1")},
+    {"Crop...", "crop", full_command("cropinator.exe", "%1")},
+    {"Flip horizontally", "fliph", full_command("flipinator.exe", "%1 h")},
+    {"Flip vertically", "flipv", full_command("flipinator.exe", "%1 v")},
 };
 
 const std::vector<MenuOption> conversions = create_conversion_options();
