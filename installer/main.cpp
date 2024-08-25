@@ -115,14 +115,14 @@ void add_menu(
     menu.set_string("AppliesTo", file_pattern);
 }
 
-void delete_menu(const std::string &id, const std::vector<std::string> &sub_menu_ids) {
+void delete_menu(const std::string &id, const std::vector<MenuOption> &sub_menu_ids) {
     RegistryKey command_store(
         RegistryKey::LOCAL_MACHINE,
         "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CommandStore\\shell"
     );
 
-    for (const std::string &sub_menu_id : sub_menu_ids) {
-        command_store.delete_child(id + "." + sub_menu_id);
+    for (const MenuOption &option : sub_menu_ids) {
+        command_store.delete_child(id + "." + option.id);
     }
 
     RegistryKey menu(RegistryKey::CLASSES_ROOT, "*\\shell");
@@ -132,6 +132,25 @@ void delete_menu(const std::string &id, const std::vector<std::string> &sub_menu
 std::string full_command(const std::string &app_name, const std::string args = "") {
     return (APP_DIR / app_name).string() + " " + args;
 }
+
+std::vector<MenuOption> create_conversion_options() {
+    std::vector<MenuOption> conversions;
+    for (const std::string &type : supported_types) {
+        conversions.push_back(MenuOption{
+            .display = "Convert to ." + type,
+            .id = "convert." + type,
+            .command = full_command("convertinator.exe", " %1 " + type),
+        });
+    }
+    return conversions;
+}
+
+const std::vector<MenuOption> operations = {
+    {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
+    {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")},
+};
+
+const std::vector<MenuOption> conversions = create_conversion_options();
 
 void install() {
     std::filesystem::create_directories(APP_DIR);
@@ -147,21 +166,7 @@ void install() {
 
     std::string supported_file_list = build_supported_file_list(supported_types);
 
-    std::vector<MenuOption> operations = {
-        {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
-        {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")
-        },
-    };
     add_menu("JRAT", "jrat", operations, supported_file_list);
-
-    std::vector<MenuOption> conversions;
-    for (const std::string &type : supported_types) {
-        conversions.push_back(MenuOption{
-            .display = "Convert to ." + type,
-            .id = "convert." + type,
-            .command = full_command("convertinator.exe", " %1 " + type),
-        });
-    }
     add_menu("JRAT: Convert", "jratconvert", conversions, supported_file_list);
 
     message_box("Installation complete!");
@@ -171,12 +176,7 @@ void uninstall() {
     std::filesystem::remove_all(APP_DIR);
     remove_dll_path();
 
-    delete_menu("jrat", {"rotate90cw", "rotate90ccw"});
-
-    std::vector<std::string> conversions;
-    for (const std::string &type : supported_types) {
-        conversions.push_back("convert." + type);
-    }
+    delete_menu("jrat", operations);
     delete_menu("jratconvert", conversions);
 
     message_box("Uninstallation complete!");
