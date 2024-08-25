@@ -13,7 +13,7 @@ using namespace jrat;
 
 namespace {
 
-static const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
+const std::filesystem::path APP_DIR = "C:\\Program Files\\JRAT";
 
 std::string build_supported_file_list(const std::vector<std::string> &files) {
     std::string result;
