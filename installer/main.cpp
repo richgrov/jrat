@@ -138,7 +138,7 @@ std::vector<MenuOption> create_conversion_options() {
     for (const std::string &type : supported_types) {
         conversions.push_back(MenuOption{
             .display = "Convert to ." + type,
-            .id = "convert." + type,
+            .id = type,
             .command = full_command("convertinator.exe", " %1 " + type),
         });
     }
