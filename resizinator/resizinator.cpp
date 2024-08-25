@@ -44,14 +44,14 @@ void jrat::imwrite(std::string filepath, const cv::Mat &image) {
 }
 
 void jrat::print_help() {
-    std::cout << "usage: resizinator [filepath] --ui\n";
+    std::cout << "usage: resizinator [filepath]\n";
     std::cout << "or resizinator [filepath] [width] [height] <keep aspect ratio (-a)>\n";
 }
 
 void jrat::write_image(
     cv::Mat &image, int width, int height, bool keep_aspect_ratio, std::string savepath
 ) {
-    cv::Mat resized_image = keep_aspect_ratio ? resize_aspect_ratio(image, width)
-                                              : resize(image, width, height);
+    cv::Mat resized_image =
+        keep_aspect_ratio ? resize_aspect_ratio(image, width) : resize(image, width, height);
     imwrite(savepath, resized_image);
 }
