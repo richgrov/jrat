@@ -43,7 +43,7 @@ void ResizeUi::read_boxes() {
         resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
         resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
         // todo: read checkbox for keep aspect ratio
-    } catch (const std::exception &ex) {
+    } catch (const std::exception &) {
         std::cerr << "textbox couldn't be converted to int";
     }
 }
