@@ -30,6 +30,10 @@ public:
             throw std::runtime_error("Content size longer than max size.");
         }
 
+        for (int i = 0; i < 9; i++) {
+            content_[i] = '\0';
+        }
+
         for (int i = 0; i < string.size(); i++) {
             content_[i] = string[i];
         }

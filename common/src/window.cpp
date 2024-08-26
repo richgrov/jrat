@@ -11,6 +11,7 @@
 
 #include <raylib.h>
 #include <raymath.h>
+#include <stdexcept>
 
 #include "JetBrainsMono.h"
 #include "common/image_to_byte.h"
@@ -72,21 +73,12 @@ void jrat::Window::create_text_box_left() {
 
 void jrat::Window::create_text_box_left(int box_count) {
     for (int i = 0; i < box_count; i++) {
-        create_text_box_left();
+        text_boxes_.emplace_back(TextBox{
+            (float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20,
+            text_box_count_ != 0
+        });
+        text_box_count_++;
     }
-}
-
-void jrat::Window::create_text_box_left(const char *label) {
-    float x_pos = 125 * text_box_count_ + 10;
-    float y_pos = height_ - 35;
-
-    TextBox text_box = {x_pos, y_pos, 100, 20, false};
-
-    text_box_count_++;
-    text_boxes_.emplace_back(text_box);
-    labels_.push_back(label);
-    label_positions_.push_back(x_pos);
-    label_positions_.push_back(y_pos - 35);
 }
 
 void jrat::Window::load_image(const char *file_name) {
@@ -176,7 +168,7 @@ void jrat::Window::draw_ui_bar() {
         CloseWindow();
     }
 
-    if ((GuiButton(Rectangle{(float)(110), (float)(height_ - 40), 100, 30}, "")
+    if ((GuiButton(Rectangle{(float)(10), (float)(height_ - 40), 100, 30}, "")
         )) { // returns true when clicked, wire up to undo functionality
 
         undo_click();
