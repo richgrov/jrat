@@ -38,6 +38,13 @@ protected:
     void set_dimensions_and_position();
     void update_boxes();
 
+    void set_image_mask(float x, float y, float width, float height) {
+        img_mask_.x = x;
+        img_mask_.y = y;
+        img_mask_.width = width;
+        img_mask_.height = height;
+    }
+
     char *image_path_{};
     int width_{0};
     int height_{0};
@@ -56,6 +63,9 @@ protected:
 
     // image manipulation
     double angle_{0};
+
+private:
+    Rectangle img_mask_{};
 };
 
 } // namespace jrat

@@ -22,6 +22,8 @@ function(jrat_add_window_executable target_name)
     endif()
 endfunction()
 
+set_property(TARGET common PROPERTY CXX_STANDARD 20)
+
 target_include_directories(common PUBLIC include)
 target_link_libraries(common raylib)
 target_include_directories(common PUBLIC ../thirdparty/raygui/src)

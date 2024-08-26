@@ -11,7 +11,7 @@ public:
     CropUi(const char *filepath, cv::Mat &&image);
 
     virtual void ui_boxes() override;
-    virtual void update() override {}
+    virtual void update() override;
     virtual void save_image() override;
 
     virtual void draw() override {}

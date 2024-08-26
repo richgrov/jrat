@@ -1,14 +1,14 @@
-#define _USE_MATH_DEFINES
-
 #include "common/window.h"
+
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <stdexcept>
+
+#include <raylib.h>
+#include <raymath.h>
+
 #include "JetBrainsMono.h"
 #include "common/image_to_byte.h"
-
-#include <iostream>
-#include <cmath>
-#include <raylib.h>
-#include <stdexcept>
-#include <raymath.h>
 
 using namespace jrat;
 
@@ -60,6 +60,8 @@ void jrat::Window::load_image(const char *file_name) {
     }
     Image img = imageToBytes(file_name);
     img_ = LoadTextureFromImage(img);
+    img_mask_.width = static_cast<float>(img_.width);
+    img_mask_.height = static_cast<float>(img_.height);
 }
 
 void jrat::Window::set_dimensions_and_position() {
@@ -105,17 +107,23 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-    float offset_width = img_.width / 2;
-    float offset_height = img_.height / 2;
+    float img_width = static_cast<float>(img_.width);
+    float img_height = static_cast<float>(img_.height);
+    float offset_width = img_width / 2;
+    float offset_height = img_height / 2;
 
-    Rectangle source = {0.0f, 0.0f, (float)img_.width, (float)img_.height};
+    float dest_x = (width_ - img_width) / 2.f + offset_width;
+    float dest_y = (height_ - img_height) / 2.f + offset_height;
+
     Rectangle destination = {
-        (float)((width_ - img_.width) / 2) + offset_width, (float)((height_ - img_.height) / 2) + offset_height,
-        (float)img_.width, (float)img_.height
+        .x = dest_x + img_mask_.x,
+        .y = dest_y + img_mask_.y,
+        .width = img_mask_.width,
+        .height = img_mask_.height,
     };
-    Vector2 origin = {offset_width, offset_height};
 
-    DrawTexturePro(img_, source, destination, origin, angle_, Color{255, 255, 255, 255});
+    Vector2 origin = {offset_width, offset_height};
+    DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
 }
 
 void jrat::Window::draw_ui_bar() {

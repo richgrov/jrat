@@ -15,6 +15,21 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
     ui_boxes();
 }
 
+void CropUi::update() {
+    try {
+        int top = std::stoi(std::string(text_boxes_[0].content_));
+        int left = std::stoi(std::string(text_boxes_[1].content_));
+        int bottom = std::stoi(std::string(text_boxes_[2].content_));
+        int right = std::stoi(std::string(text_boxes_[3].content_));
+
+        set_image_mask(
+            static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
+            img_.height - top - bottom
+        );
+    } catch (const std::exception &) {
+    }
+}
+
 void CropUi::save_image() {
     int top = get_textbox(0);
     int left = get_textbox(1);
