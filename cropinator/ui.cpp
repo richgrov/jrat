@@ -21,7 +21,11 @@ void CropUi::update() {
         int left = std::stoi(std::string(text_boxes_[1].content_));
         int bottom = std::stoi(std::string(text_boxes_[2].content_));
         int right = std::stoi(std::string(text_boxes_[3].content_));
-        set_crop(left, right, top, bottom);
+
+        set_image_mask(
+            static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
+            img_.height - top - bottom
+        );
     } catch (const std::exception &) {
     }
 }

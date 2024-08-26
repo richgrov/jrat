@@ -38,11 +38,11 @@ protected:
     void set_dimensions_and_position();
     void update_boxes();
 
-    void set_crop(int left, int right, int top, int bottom) {
-        crop_left_ = static_cast<float>(left);
-        crop_right_ = static_cast<float>(right);
-        crop_top_ = static_cast<float>(top);
-        crop_bottom_ = static_cast<float>(bottom);
+    void set_image_mask(float x, float y, float width, float height) {
+        img_mask_.x = x;
+        img_mask_.y = y;
+        img_mask_.width = width;
+        img_mask_.height = height;
     }
 
     char *image_path_{};
@@ -65,10 +65,7 @@ protected:
     double angle_{0};
 
 private:
-    float crop_left_{0};
-    float crop_right_{0};
-    float crop_top_{0};
-    float crop_bottom_{0};
+    Rectangle img_mask_{};
 };
 
 } // namespace jrat
