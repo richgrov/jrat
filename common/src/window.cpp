@@ -1,13 +1,14 @@
-#define _USE_MATH_DEFINES
-
 #include "common/window.h"
-#include "JetBrainsMono.h"
-#include "common/image_to_byte.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
+#include <stdexcept>
+
 #include <raylib.h>
 #include <raymath.h>
-#include <stdexcept>
+
+#include "JetBrainsMono.h"
+#include "common/image_to_byte.h"
 
 using namespace jrat;
 
