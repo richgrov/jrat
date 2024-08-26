@@ -71,23 +71,12 @@ void jrat::Window::load_image(const char *file_name) {
 }
 
 void jrat::Window::set_dimensions_and_position() {
-
     int monitor = GetCurrentMonitor();
-    int monitor_width = GetMonitorWidth(monitor);
-    int monitor_height = GetMonitorHeight(monitor);
+    width_ = GetMonitorWidth(monitor) / 2;
+    height_ = GetMonitorHeight(monitor) / 2;
 
-    if (img_.height != 0) {
-        width_ = GetMonitorWidth(GetCurrentMonitor());
-        float temp_height = sqrtf((img_.width * img_.width + img_.height * img_.height)) + 15;
-        height_ = temp_height < GetMonitorHeight(GetCurrentMonitor())
-                      ? temp_height
-                      : GetMonitorHeight(GetCurrentMonitor()) - 50;
-    }
     SetWindowSize(width_, height_);
-    SetWindowPosition(
-        (GetMonitorWidth(GetCurrentMonitor()) - width_) / 2,
-        (GetMonitorHeight(GetCurrentMonitor()) - height_) / 2
-    );
+    SetWindowPosition(width_ - width_ / 2, height_ - height_ / 2);
 }
 
 void jrat::Window::close_window() {
