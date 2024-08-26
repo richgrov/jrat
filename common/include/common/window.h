@@ -39,10 +39,10 @@ protected:
     void update_boxes();
 
     void set_crop(int left, int right, int top, int bottom) {
-        crop_left_ = left;
-        crop_right_ = right;
-        crop_top_ = top;
-        crop_bottom_ = bottom;
+        crop_left_ = static_cast<float>(left);
+        crop_right_ = static_cast<float>(right);
+        crop_top_ = static_cast<float>(top);
+        crop_bottom_ = static_cast<float>(bottom);
     }
 
     char *image_path_{};
