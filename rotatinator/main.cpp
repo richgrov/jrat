@@ -11,7 +11,7 @@
 using namespace jrat;
 
 int jrat::run(int argc, char **argv) {
-    if (argc < 3 || std::strcmp(argv[1], "--help") == 0) {
+    if (argc < 2 || std::strcmp(argv[1], "--help") == 0) {
         print_help();
         return 0;
     }
@@ -24,7 +24,7 @@ int jrat::run(int argc, char **argv) {
         return 0;
     }
 
-    if (std::strcmp(argv[2], "--ui") == 0) {
+    if (argc < 3) {
         RotateUi ui(800, 600, "Rotatinator", image_filepath.c_str(), image);
         ui.run();
         return 0;

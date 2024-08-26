@@ -4,33 +4,13 @@
 
 #ifdef JRAT_WINMAIN
 
-#include <iostream>
-
 #include <Windows.h>
+#include <stdlib.h>
 
 // NOLINTBEGIN(misc-definitions-in-headers)
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE prev, LPSTR command, int show_command) {
     // NOLINTEND(misc-definitions-in-headers)
-    char *args[16];
-    LPSTR cmd_line = GetCommandLine();
-
-    int argc = 0;
-    bool new_arg = true;
-
-    for (char *c = cmd_line; *c != '\0'; ++c) {
-        if (new_arg) {
-            args[argc++] = c;
-            if (argc >= sizeof(args)) {
-                std::cerr << "warning: some args were truncated\n";
-            }
-            new_arg = false;
-        } else if (*c == ' ') {
-            *c = '\0';
-            new_arg = true;
-        }
-    }
-
-    return jrat::run(argc, args);
+    return jrat::run(__argc, __argv);
 }
 
 #else // if NDEBUG
