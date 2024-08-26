@@ -3,8 +3,8 @@
 
 #include <opencv2/core/mat.hpp>
 
-#include <string>
 #include <stack>
+#include <string>
 namespace jrat {
 
 class ResizeUi : public Window {
