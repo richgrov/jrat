@@ -12,6 +12,12 @@
 
 using namespace jrat;
 
+namespace {
+
+constexpr float IMAGE_SCREEN_CONVERAGE = 0.9f;
+
+} // namespace
+
 Window::Window(const std::string &title, const char *image_path) : width_(800), height_(600) {
     InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
@@ -105,8 +111,8 @@ void jrat::Window::draw_image() {
     float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
     float scale = (height_ - 50) / hypot;
 
-    float scaled_width = static_cast<float>(img_.width) * scale;
-    float scaled_height = static_cast<float>(img_.height) * scale;
+    float scaled_width = static_cast<float>(img_.width) * scale * IMAGE_SCREEN_CONVERAGE;
+    float scaled_height = static_cast<float>(img_.height) * scale * IMAGE_SCREEN_CONVERAGE;
 
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
