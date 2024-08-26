@@ -3,6 +3,7 @@
 
 #include <opencv2/core/mat.hpp>
 
+#include <stack>
 #include <string>
 
 namespace jrat {
@@ -23,5 +24,6 @@ public:
 private:
     cv::Mat open_image_;
     std::string save_file_;
+    std::stack<double> undo_;
 };
 } // namespace jrat
