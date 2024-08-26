@@ -105,32 +105,30 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-    float offset_width = img_.width / 2.;
-    float offset_height = img_.height / 2.;
+    float img_width = static_cast<float>(img_.width);
+    float img_height = static_cast<float>(img_.height);
+    float offset_width = img_width / 2;
+    float offset_height = img_height / 2;
 
-    Rectangle source = {0.0f, 0.0f, (float)img_.width, (float)img_.height};
+    Rectangle source = {
+        .x = crop_left_,
+        .y = crop_top_,
+        .width = img_width - crop_left_ - crop_right_,
+        .height = img_height - crop_top_ - crop_bottom_,
+    };
 
-    float dest_x = (width_ - img_.width) / 2. + offset_width;
-    float dest_y = (height_ - img_.height) / 2. + offset_height;
-    float img_width = img_.width;
-    float img_height = img_.height;
+    float dest_x = (width_ - img_width) / 2.f + offset_width;
+    float dest_y = (height_ - img_height) / 2.f + offset_height;
 
-    Rectangle destination = {dest_x, dest_y, img_width, img_height};
+    Rectangle destination = {
+        .x = dest_x + crop_left_,
+        .y = dest_y + crop_top_,
+        .width = img_width - crop_left_ - crop_right_,
+        .height = img_height - crop_top_ - crop_bottom_,
+    };
+
     Vector2 origin = {offset_width, offset_height};
-
     DrawTexturePro(img_, source, destination, origin, angle_, Color{255, 255, 255, 255});
-
-    Rectangle crop_left = {dest_x, dest_y, crop_left_, img_height};
-    DrawRectanglePro(crop_left, origin, angle_, WHITE);
-
-    Rectangle crop_right = {dest_x + img_width - crop_right_, dest_y, crop_right_, img_height};
-    DrawRectanglePro(crop_right, origin, angle_, WHITE);
-
-    Rectangle crop_top = {dest_x, dest_y, img_width, crop_top_};
-    DrawRectanglePro(crop_top, origin, angle_, WHITE);
-
-    Rectangle crop_bottom = {dest_x, dest_y + img_height - crop_bottom_, img_width, crop_bottom_};
-    DrawRectanglePro(crop_bottom, origin, angle_, WHITE);
 }
 
 void jrat::Window::draw_ui_bar() {
