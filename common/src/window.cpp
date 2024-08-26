@@ -4,11 +4,11 @@
 #include "JetBrainsMono.h"
 #include "common/image_to_byte.h"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include <raylib.h>
-#include <stdexcept>
 #include <raymath.h>
+#include <stdexcept>
 
 using namespace jrat;
 
@@ -105,17 +105,32 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-    float offset_width = img_.width / 2;
-    float offset_height = img_.height / 2;
+    float offset_width = img_.width / 2.;
+    float offset_height = img_.height / 2.;
 
     Rectangle source = {0.0f, 0.0f, (float)img_.width, (float)img_.height};
-    Rectangle destination = {
-        (float)((width_ - img_.width) / 2) + offset_width, (float)((height_ - img_.height) / 2) + offset_height,
-        (float)img_.width, (float)img_.height
-    };
+
+    float dest_x = (width_ - img_.width) / 2. + offset_width;
+    float dest_y = (height_ - img_.height) / 2. + offset_height;
+    float img_width = img_.width;
+    float img_height = img_.height;
+
+    Rectangle destination = {dest_x, dest_y, img_width, img_height};
     Vector2 origin = {offset_width, offset_height};
 
     DrawTexturePro(img_, source, destination, origin, angle_, Color{255, 255, 255, 255});
+
+    Rectangle crop_left = {dest_x, dest_y, crop_left_, img_height};
+    DrawRectanglePro(crop_left, origin, angle_, WHITE);
+
+    Rectangle crop_right = {dest_x + img_width - crop_right_, dest_y, crop_right_, img_height};
+    DrawRectanglePro(crop_right, origin, angle_, WHITE);
+
+    Rectangle crop_top = {dest_x, dest_y, img_width, crop_top_};
+    DrawRectanglePro(crop_top, origin, angle_, WHITE);
+
+    Rectangle crop_bottom = {dest_x, dest_y + img_height - crop_bottom_, img_width, crop_bottom_};
+    DrawRectanglePro(crop_bottom, origin, angle_, WHITE);
 }
 
 void jrat::Window::draw_ui_bar() {

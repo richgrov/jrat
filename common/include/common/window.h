@@ -38,6 +38,13 @@ protected:
     void set_dimensions_and_position();
     void update_boxes();
 
+    void set_crop(int left, int right, int top, int bottom) {
+        crop_left_ = left;
+        crop_right_ = right;
+        crop_top_ = top;
+        crop_bottom_ = bottom;
+    }
+
     char *image_path_{};
     int width_{0};
     int height_{0};
@@ -56,6 +63,12 @@ protected:
 
     // image manipulation
     double angle_{0};
+
+private:
+    float crop_left_{0};
+    float crop_right_{0};
+    float crop_top_{0};
+    float crop_bottom_{0};
 };
 
 } // namespace jrat
