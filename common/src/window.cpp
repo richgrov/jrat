@@ -1,7 +1,14 @@
+#define _USE_MATH_DEFINES
+
+#ifndef RAYGUI_IMPLEMENTATION
+#define RAYGUI_IMPLEMENTATION
+#endif // !RAYGUI_IMPLEMENTATION
+
 #include "common/window.h"
 
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <raymath.h>
 #include <stdexcept>
 
 #include <raylib.h>
