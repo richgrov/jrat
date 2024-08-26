@@ -51,14 +51,33 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
     text_boxes_.emplace_back(TextBox{x_pos, y_pos, width, height});
 }
 
+void jrat::Window::create_text_box_left() {
+    float x_pos = 125 * text_box_count_ + 10;
+    float y_pos = height_ - 35;
+
+    TextBox text_box = {x_pos, y_pos, 100, 20, text_box_count_ != 0};
+
+    text_boxes_.emplace_back(text_box);
+    text_box_count_++;
+}
+
 void jrat::Window::create_text_box_left(int box_count) {
     for (int i = 0; i < box_count; i++) {
-        text_boxes_.emplace_back(TextBox{
-            (float)(125 * text_box_count_ + 10), (float)(height_ - 35), 100, 20,
-            text_box_count_ != 0
-        });
-        text_box_count_++;
+        create_text_box_left();
     }
+}
+
+void jrat::Window::create_text_box_left(const char *label) {
+    float x_pos = 125 * text_box_count_ + 10;
+    float y_pos = height_ - 35;
+
+    TextBox text_box = {x_pos, y_pos, 100, 20, false};
+
+    text_box_count_++;
+    text_boxes_.emplace_back(text_box);
+    labels_.push_back(label);
+    label_positions_.push_back(x_pos);
+    label_positions_.push_back(y_pos - 35);
 }
 
 void jrat::Window::load_image(const char *file_name) {
@@ -143,6 +162,12 @@ void jrat::Window::draw_ui_bar() {
             check_box_checked_[checkbox_count] = !check_box_checked_[checkbox_count];
         }
     }
+    for (int label_count = 0; label_count < labels_.size(); label_count++) {
+        DrawText(
+            labels_[label_count], label_positions_[2 * label_count],
+            label_positions_[2 * label_count + 1], 20, Color{255, 255, 255, 255}
+        );
+    }
     if ((GuiButton(Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, "")
         )) { // returns true when clicked, wire up to save functionality
 
@@ -152,15 +177,6 @@ void jrat::Window::draw_ui_bar() {
 
 void jrat::Window::update_mouse() {
     mouse_pos_ = GetMousePosition();
-}
-
-void jrat::Window::add_checkbox_auto() {
-    check_box_checked_.push_back(false);
-    Rectangle rect = {
-        (float)(125 * text_box_count_ + 10 + 40 * check_box_rects_.size()), (float)(height_ - 40),
-        30, 30
-    };
-    check_box_rects_.push_back(rect);
 }
 
 void jrat::Window::add_checkbox_auto() {
