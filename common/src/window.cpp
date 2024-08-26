@@ -5,7 +5,6 @@
 #include "common/image_to_byte.h"
 
 #include <cmath>
-#include <iostream>
 #include <raylib.h>
 #include <raymath.h>
 #include <stdexcept>
