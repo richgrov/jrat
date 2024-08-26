@@ -60,8 +60,8 @@ void jrat::Window::load_image(const char *file_name) {
     }
     Image img = imageToBytes(file_name);
     img_ = LoadTextureFromImage(img);
-    img_mask_.width = img_.width;
-    img_mask_.height = img_.height;
+    img_mask_.width = static_cast<float>(img_.width);
+    img_mask_.height = static_cast<float>(img_.height);
 }
 
 void jrat::Window::set_dimensions_and_position() {
