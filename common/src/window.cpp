@@ -12,10 +12,18 @@
 
 using namespace jrat;
 
-Window::Window(int width, int height, const std::string &title, const char *image_path) {
-    InitWindow(width, height, title.c_str());
+Window::Window(const std::string &title, const char *image_path)
+    : width_(800),
+      height_(600),
+      font_(LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0)
+      ) {
+
+    InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
     image_path_ = const_cast<char *>(image_path);
+
+    load_image(image_path);
+    set_dimensions_and_position();
 }
 
 Window::~Window() {
@@ -65,6 +73,11 @@ void jrat::Window::load_image(const char *file_name) {
 }
 
 void jrat::Window::set_dimensions_and_position() {
+
+    int monitor = GetCurrentMonitor();
+    int monitor_width = GetMonitorWidth(monitor);
+    int monitor_height = GetMonitorHeight(monitor);
+
     if (img_.height != 0) {
         width_ = GetMonitorWidth(GetCurrentMonitor());
         float temp_height = sqrtf((img_.width * img_.width + img_.height * img_.height)) + 15;
@@ -81,11 +94,6 @@ void jrat::Window::set_dimensions_and_position() {
 
 void jrat::Window::close_window() {
     running_ = false;
-}
-
-void jrat::Window::load_font() {
-    font_ =
-        LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
 }
 
 void jrat::Window::draw_boxes() {

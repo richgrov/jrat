@@ -35,7 +35,7 @@ int jrat::run(int argc, char **argv) {
     }
 
     if (argc < 4) {
-        ResizeUi ui(800, 600, "Resizinator", image_filepath.c_str(), image);
+        ResizeUi ui("Resizinator", image_filepath.c_str(), image);
         ui.run();
         return 0;
     }

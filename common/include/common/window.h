@@ -13,7 +13,7 @@ typedef unsigned char byte;
 
 class Window {
 public:
-    explicit Window(int width, int height, const std::string &title, const char *file_path);
+    explicit Window(const std::string &title, const char *file_path);
 
     ~Window();
 
@@ -24,7 +24,6 @@ protected:
     virtual void save_image() = 0;
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
-    virtual void load_font();
     virtual void update_mouse();
     void add_checkbox_auto();
     void add_checkbox(float x, float y);
@@ -34,8 +33,6 @@ protected:
     void draw_boxes();
     void draw_image();
     void draw_ui_bar();
-    void load_image(const char *file_name);
-    void set_dimensions_and_position();
     void update_boxes();
 
     void set_image_mask(float x, float y, float width, float height) {
@@ -65,6 +62,9 @@ protected:
     double angle_{0};
 
 private:
+    void load_image(const char *file_name);
+    void set_dimensions_and_position();
+
     Rectangle img_mask_{};
 };
 

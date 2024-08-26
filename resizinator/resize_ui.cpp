@@ -5,19 +5,14 @@
 
 using namespace jrat;
 
-ResizeUi::ResizeUi(
-    int width, int height, const std::string &title, const char *file_name, cv::Mat image
-)
-    : Window(width, height, title, file_name) {
+ResizeUi::ResizeUi(const std::string &title, const char *file_name, cv::Mat image)
+    : Window(title, file_name) {
     cv::Size size = image.size();
 
     resize_width_ = size.width;
     resize_height_ = size.height;
     keep_aspect_ratio_ = false;
 
-    load_font();
-    load_image(file_name);
-    set_dimensions_and_position();
     ui_boxes();
     set_boxes();
 

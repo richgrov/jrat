@@ -2,11 +2,7 @@
 
 namespace jrat {
 
-TestUI::TestUI(int width, int height, const std::string &title, const char *file_name)
-    : Window(width, height, title, file_name) {
-    load_font();
-    load_image(file_name);
-    set_dimensions_and_position();
+TestUI::TestUI(const std::string &title, const char *file_name) : Window(title, file_name) {
     ui_boxes();
     add_checkbox_auto();
     add_checkbox_auto();

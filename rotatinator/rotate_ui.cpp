@@ -2,19 +2,14 @@
 #include "rotatinator.h"
 
 #include <format>
-#include <iostream>
+#include <iostream>
 
 using namespace jrat;
 
-RotateUi::RotateUi(
-    int width, int height, const std::string &title, const char *file_name, cv::Mat &image
-)
-    : Window(width, height, title, file_name) {
+RotateUi::RotateUi(const std::string &title, const char *file_name, cv::Mat &image)
+    : Window(title, file_name) {
     angle_ = 0;
 
-    load_font();
-    load_image(file_name);
-    set_dimensions_and_position();
     ui_boxes();
     set_boxes();
 
