@@ -12,15 +12,13 @@
 
 using namespace jrat;
 
-Window::Window(const std::string &title, const char *image_path)
-    : width_(800),
-      height_(600),
-      font_(LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0)
-      ) {
-
+Window::Window(const std::string &title, const char *image_path) : width_(800), height_(600) {
     InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
     image_path_ = const_cast<char *>(image_path);
+
+    font_ =
+        LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
 
     load_image(image_path);
     set_dimensions_and_position();
