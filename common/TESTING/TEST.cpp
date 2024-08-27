@@ -25,6 +25,8 @@ void TestUI::save_image() {
     close_window();
 }
 
+void TestUI::undo_click() {}
+
 void TestUI::draw() {}
 
 } // namespace jrat

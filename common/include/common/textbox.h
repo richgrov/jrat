@@ -30,6 +30,8 @@ public:
             throw std::runtime_error("Content size longer than max size.");
         }
 
+        std::memset(content_, 0, sizeof(content_));   
+
         for (int i = 0; i < string.size(); i++) {
             content_[i] = string[i];
         }
