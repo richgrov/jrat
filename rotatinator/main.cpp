@@ -1,5 +1,3 @@
-#define RAYGUI_IMPLEMENTATION
-
 #include <iostream>
 
 #include <opencv2/opencv.hpp>
