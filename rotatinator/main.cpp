@@ -23,7 +23,7 @@ int jrat::run(int argc, char **argv) {
     }
 
     if (argc < 3) {
-        RotateUi ui(800, 600, "Rotatinator", image_filepath.c_str(), image);
+        RotateUi ui("Rotatinator", image_filepath.c_str(), image);
         ui.run();
         return 0;
     }

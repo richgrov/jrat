@@ -13,7 +13,7 @@ typedef unsigned char byte;
 
 class Window {
 public:
-    explicit Window(int width, int height, const std::string &title, const char *file_path);
+    explicit Window(const std::string &title, const char *file_path);
 
     ~Window();
 
@@ -24,7 +24,6 @@ protected:
     virtual void save_image() = 0;
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
-    virtual void load_font();
     virtual void update_mouse();
     void add_checkbox_auto();
     void add_checkbox(float x, float y);
@@ -36,8 +35,6 @@ protected:
     void draw_boxes();
     void draw_image();
     void draw_ui_bar();
-    void load_image(const char *file_name);
-    void set_dimensions_and_position();
     void update_boxes();
 
     void set_image_mask(float x, float y, float width, float height) {
@@ -48,8 +45,9 @@ protected:
     }
 
     char *image_path_{};
-    int width_{0};
-    int height_{0};
+    // Temporary values needed to properly initialize raylib
+    int width_{500};
+    int height_{500};
     int text_box_count_{0};
     Font font_{};
     Texture2D img_{};
@@ -69,6 +67,9 @@ protected:
     double angle_{0};
 
 private:
+    void load_image(const char *file_name);
+    void set_dimensions_and_position();
+
     Rectangle img_mask_{};
 };
 

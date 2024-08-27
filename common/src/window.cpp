@@ -17,10 +17,22 @@
 
 using namespace jrat;
 
-Window::Window(int width, int height, const std::string &title, const char *image_path) {
-    InitWindow(width, height, title.c_str());
+namespace {
+
+constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
+
+} // namespace
+
+Window::Window(const std::string &title, const char *image_path) {
+    InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
     image_path_ = const_cast<char *>(image_path);
+
+    font_ =
+        LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
+
+    load_image(image_path);
+    set_dimensions_and_position();
 }
 
 Window::~Window() {
@@ -89,27 +101,16 @@ void jrat::Window::load_image(const char *file_name) {
 }
 
 void jrat::Window::set_dimensions_and_position() {
-    if (img_.height != 0) {
-        width_ = GetMonitorWidth(GetCurrentMonitor());
-        float temp_height = sqrtf((img_.width * img_.width + img_.height * img_.height)) + 15;
-        height_ = temp_height < GetMonitorHeight(GetCurrentMonitor())
-                      ? temp_height
-                      : GetMonitorHeight(GetCurrentMonitor()) - 50;
-    }
+    int monitor = GetCurrentMonitor();
+    width_ = GetMonitorWidth(monitor) / 2;
+    height_ = GetMonitorHeight(monitor) / 2;
+
     SetWindowSize(width_, height_);
-    SetWindowPosition(
-        (GetMonitorWidth(GetCurrentMonitor()) - width_) / 2,
-        (GetMonitorHeight(GetCurrentMonitor()) - height_) / 2
-    );
+    SetWindowPosition(width_ - width_ / 2, height_ - height_ / 2);
 }
 
 void jrat::Window::close_window() {
     running_ = false;
-}
-
-void jrat::Window::load_font() {
-    font_ =
-        LoadFontFromMemory(".ttf", JetBrainsMono_ttf, sizeof(JetBrainsMono_ttf), 50, nullptr, 0);
 }
 
 void jrat::Window::draw_boxes() {
@@ -131,22 +132,25 @@ void jrat::Window::draw_boxes() {
 }
 
 void jrat::Window::draw_image() {
-    float img_width = static_cast<float>(img_.width);
-    float img_height = static_cast<float>(img_.height);
-    float offset_width = img_width / 2;
-    float offset_height = img_height / 2;
+    float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
+    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
+    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_COVERAGE;
 
-    float dest_x = (width_ - img_width) / 2.f + offset_width;
-    float dest_y = (height_ - img_height) / 2.f + offset_height;
+    float scaled_width = static_cast<float>(img_.width) * scale;
+    float scaled_height = static_cast<float>(img_.height) * scale;
+
+    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
 
     Rectangle destination = {
-        .x = dest_x + img_mask_.x,
-        .y = dest_y + img_mask_.y,
-        .width = img_mask_.width,
-        .height = img_mask_.height,
+        .x = left + origin.x + img_mask_.x * scale,
+        .y = top + origin.y + img_mask_.y * scale,
+        .width = img_mask_.width * scale,
+        .height = img_mask_.height * scale,
     };
 
-    Vector2 origin = {offset_width, offset_height};
     DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
 }
 

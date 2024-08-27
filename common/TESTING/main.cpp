@@ -4,9 +4,7 @@
 namespace jrat {
 
 int run(int argc, char **argv) {
-    TestUI test(
-        800, 600, "hello there", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.png"
-    );
+    TestUI test("hello there", "C:/PRO-100/jrat/common/resources/JoshBeautifulDrawing.png");
     test.run();
     return 0;
 }

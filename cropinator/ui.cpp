@@ -8,10 +8,7 @@
 using namespace jrat;
 
 CropUi::CropUi(const char *filepath, cv::Mat &&image)
-    : Window(1280, 720, "Resize Image", filepath), image_(image), filepath_(filepath) {
-    load_font();
-    load_image(filepath);
-    set_dimensions_and_position();
+    : Window("Resize Image", filepath), image_(image), filepath_(filepath) {
     ui_boxes();
 }
 

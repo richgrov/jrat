@@ -9,7 +9,7 @@ namespace jrat {
 class ResizeUi : public Window {
 public:
     ResizeUi() = default;
-    ResizeUi(int width, int height, const std::string &title, const char *file_name, cv::Mat image);
+    ResizeUi(const std::string &title, const char *file_name, cv::Mat image);
 
     virtual void update() override;
     virtual void draw() override;

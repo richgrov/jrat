@@ -10,7 +10,7 @@ namespace jrat {
 class RotateUi : public Window {
 public:
     RotateUi() = default;
-    RotateUi(int width, int height, const std::string &title, const char *file_name, cv::Mat &image);
+    RotateUi(const std::string &title, const char *file_name, cv::Mat &image);
 
     virtual void update() override;
     virtual void draw() override;
