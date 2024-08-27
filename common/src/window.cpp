@@ -14,7 +14,7 @@ using namespace jrat;
 
 namespace {
 
-constexpr float IMAGE_SCREEN_CONVERAGE = 0.9f;
+constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
 
 } // namespace
 
@@ -110,7 +110,7 @@ void jrat::Window::draw_boxes() {
 void jrat::Window::draw_image() {
     float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
     // Amount to scale the image by to ensure it stays within bounds of the window + some padding
-    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_CONVERAGE;
+    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(img_.width) * scale;
     float scaled_height = static_cast<float>(img_.height) * scale;
