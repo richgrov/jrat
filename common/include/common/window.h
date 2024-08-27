@@ -24,6 +24,7 @@ protected:
     virtual void save_image() = 0;
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
+    virtual void load_font();
     virtual void undo_click() = 0;
     virtual void update_mouse();
     void add_checkbox_auto();
