@@ -8,8 +8,6 @@ using namespace jrat;
 
 RotateUi::RotateUi(const std::string &title, const char *file_name, cv::Mat &image)
     : Window(title, file_name) {
-    angle_ = 0;
-
     ui_boxes();
     set_boxes();
 
@@ -22,6 +20,33 @@ void RotateUi::update() {
 }
 
 void RotateUi::draw() {}
+
+void RotateUi::update_image() {
+    cv::Size size = open_image_.size();
+
+    float hypot =
+        sqrtf(static_cast<float>(size.width * size.width + size.height * size.height));
+    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
+    float scale = width_ > height_ ? (height_ - 50) / hypot : width_ / hypot;
+    scale *= 0.9f;
+
+    float scaled_width = static_cast<float>(size.width) * scale;
+    float scaled_height = static_cast<float>(size.height) * scale;
+
+    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+
+    Rectangle destination = {
+        .x = (left + origin.x + img_mask_.x * scale),
+        .y = (top + origin.y + img_mask_.y * scale),
+        .width = size.width * scale,
+        .height = size.height * scale,
+    };
+
+    draw_image(destination, origin, angle_);
+}
 
 void RotateUi::save_image() {
     read_boxes();

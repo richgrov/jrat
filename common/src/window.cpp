@@ -51,7 +51,7 @@ void Window::run() {
 
         draw_ui_bar();
         draw();
-        draw_image();
+        update_image();
         draw_boxes();
         EndDrawing();
     }
@@ -131,27 +131,33 @@ void jrat::Window::draw_boxes() {
     }
 }
 
-void jrat::Window::draw_image() {
-    float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
-    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
-    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_COVERAGE;
+//void jrat::Window::draw_image() {
+//    float hypot =
+//        sqrtf(static_cast<float>(resize_width_ * resize_width_ + resize_height_ * resize_height_));
+//    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
+//    float scale = width_ > height_ ? (height_ - 50) / hypot : width_ / hypot;
+//    scale *= IMAGE_SCREEN_COVERAGE;
+//
+//    float scaled_width = static_cast<float>(resize_width_) * scale;
+//    float scaled_height = static_cast<float>(resize_height_) * scale;
+//
+//    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+//
+//    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+//    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+//
+//    Rectangle destination = {
+//        .x = (left + origin.x + img_mask_.x * scale),
+//        .y = (top + origin.y + img_mask_.y * scale),
+//        .width = resize_width_ * scale,
+//        .height = resize_height_ * scale,
+//    };
+//
+//    DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
+//}
 
-    float scaled_width = static_cast<float>(img_.width) * scale;
-    float scaled_height = static_cast<float>(img_.height) * scale;
-
-    Vector2 origin = {scaled_width / 2, scaled_height / 2};
-
-    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
-
-    Rectangle destination = {
-        .x = left + origin.x + img_mask_.x * scale,
-        .y = top + origin.y + img_mask_.y * scale,
-        .width = img_mask_.width * scale,
-        .height = img_mask_.height * scale,
-    };
-
-    DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
+void jrat::Window::draw_image(Rectangle &destination, Vector2 &origin, double angle) {
+    DrawTexturePro(img_, img_mask_, destination, origin, angle, Color{255, 255, 255, 255});
 }
 
 void jrat::Window::draw_ui_bar() {

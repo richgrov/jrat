@@ -20,9 +20,35 @@ ResizeUi::ResizeUi(const std::string &title, const char *file_name, cv::Mat imag
     save_file_ = file_name;
 }
 
-void ResizeUi::update() {}
+void ResizeUi::update() {
+    read_boxes();
+}
 
 void ResizeUi::draw() {}
+
+void ResizeUi::update_image() {
+    //float hypot = sqrtf(static_cast<float>(resize_width_ * resize_width_ + resize_height_ * resize_height_));
+    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
+    float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_ : static_cast<float>(width_) / resize_width_;
+    scale *= 0.9f;
+
+    float scaled_width = static_cast<float>(resize_width_) * scale;
+    float scaled_height = static_cast<float>(resize_height_) * scale;
+
+    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+
+    Rectangle destination = {
+        .x = (left + origin.x + img_mask_.x * scale),
+        .y = (top + origin.y + img_mask_.y * scale),
+        .width = scaled_width,
+        .height = scaled_height,
+    };
+
+    draw_image(destination, origin, 0);
+}
 
 void ResizeUi::save_image() {
     read_boxes();
@@ -38,9 +64,7 @@ void ResizeUi::read_boxes() {
         resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
         resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
         // todo: read checkbox for keep aspect ratio
-    } catch (const std::exception &) {
-        std::cerr << "textbox couldn't be converted to int";
-    }
+    } catch (const std::exception &) {}
 }
 
 void ResizeUi::set_boxes() {

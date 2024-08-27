@@ -16,11 +16,13 @@ public:
     virtual void draw() override;
     virtual void save_image() override;
     virtual void ui_boxes() override;
+    virtual void update_image() override;
     void read_boxes();
     void set_boxes();
 
 private:
     cv::Mat open_image_;
     std::string save_file_;
+    double angle_{0};
 };
 } // namespace jrat

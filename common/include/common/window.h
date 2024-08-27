@@ -24,6 +24,7 @@ protected:
     virtual void save_image() = 0;
     virtual void ui_boxes() = 0;
     virtual void update() = 0;
+    virtual void update_image() = 0;
     virtual void update_mouse();
     void add_checkbox_auto();
     void add_checkbox(float x, float y);
@@ -32,8 +33,8 @@ protected:
     void create_text_box_left();
     void create_text_box_left(int box_count);
     void create_text_box_left(const char *label);
+    void draw_image(Rectangle &destination, Vector2 &origin, double angle);
     void draw_boxes();
-    void draw_image();
     void draw_ui_bar();
     void update_boxes();
 
@@ -63,14 +64,16 @@ protected:
     std::vector<bool> check_box_checked_;
     bool running_{true};
 
+    Rectangle img_mask_{};
+
     // image manipulation
-    double angle_{0};
+    //double angle_{0};
+    //int resize_width_;
+    //int resize_height_;
 
 private:
     void load_image(const char *file_name);
     void set_dimensions_and_position();
-
-    Rectangle img_mask_{};
 };
 
 } // namespace jrat
