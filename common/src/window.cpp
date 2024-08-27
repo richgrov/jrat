@@ -39,7 +39,6 @@ Window::~Window() {
     if (img_.height != 0) {
         UnloadTexture(img_);
     }
-    CloseWindow();
 }
 
 void Window::run() {
@@ -174,6 +173,7 @@ void jrat::Window::draw_ui_bar() {
         )) { // returns true when clicked, wire up to save functionality
 
         save_image();
+        CloseWindow();
     }
 }
 
