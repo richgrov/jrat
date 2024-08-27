@@ -1,4 +1,3 @@
-#define RAYGUI_IMPLEMENTATION
 #include "TEST.h"
 #include "common/entrypoint.h"
 

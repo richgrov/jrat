@@ -29,7 +29,9 @@ protected:
     void add_checkbox(float x, float y);
     void close_window();
     void create_text_box(float x_pos, float y_pos, float width, float height);
+    void create_text_box_left();
     void create_text_box_left(int box_count);
+    void create_text_box_left(const char *label);
     void draw_boxes();
     void draw_image();
     void draw_ui_bar();
@@ -49,6 +51,8 @@ protected:
     Font font_{};
     Texture2D img_{};
 
+    std::vector<const char *> labels_;
+    std::vector<int> label_positions_;
     std::vector<TextBox> text_boxes_;
     std::vector<Rectangle> check_box_rects_;
 

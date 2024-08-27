@@ -133,16 +133,12 @@ std::string full_command(const std::string &app_name, const std::string args = "
     return (APP_DIR / app_name).string() + " " + args;
 }
 
-std::vector<MenuOption> create_conversion_options() {
-    std::vector<MenuOption> conversions;
-    for (const std::string &type : supported_types) {
-        conversions.push_back(MenuOption{
-            .display = "Convert to ." + type,
-            .id = type,
-            .command = full_command("convertinator.exe", " %1 " + type),
-        });
-    }
-    return conversions;
+MenuOption conversion_option(const std::string &type) {
+    return MenuOption{
+        .display = "Convert to ." + type,
+        .id = type,
+        .command = full_command("convertinator.exe", " %1 " + type),
+    };
 }
 
 const std::vector<MenuOption> operations = {
@@ -155,7 +151,14 @@ const std::vector<MenuOption> operations = {
     {"Flip vertically", "flipv", full_command("flipinator.exe", "%1 v")},
 };
 
-const std::vector<MenuOption> conversions = create_conversion_options();
+const std::vector<MenuOption> conversions = {
+    conversion_option("jpg"), conversion_option("png"), conversion_option("webp"),
+    conversion_option("tif"), conversion_option("exr"), conversion_option("hdr"),
+    conversion_option("bmp"), conversion_option("dib"), conversion_option("jp2"),
+    conversion_option("pbm"), conversion_option("pgm"), conversion_option("pnm"),
+    conversion_option("ppm"), conversion_option("pxm"), conversion_option("sr"),
+    conversion_option("pic"),
+};
 
 void install() {
     std::filesystem::create_directories(APP_DIR);

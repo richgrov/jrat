@@ -11,6 +11,8 @@ TestUI::TestUI(const std::string &title, const char *file_name) : Window(title, 
     add_checkbox_auto();
     add_checkbox_auto();
     add_checkbox(0, 0);
+    create_text_box_left("string test");
+    create_text_box_left("another test");
 }
 
 void TestUI::ui_boxes() {

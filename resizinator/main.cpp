@@ -1,5 +1,3 @@
-#define RAYGUI_IMPLEMENTATION
-
 #include "resizinator.h"
 
 #include "resize_ui.h"
