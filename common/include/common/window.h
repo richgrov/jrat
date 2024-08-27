@@ -66,11 +66,6 @@ protected:
 
     Rectangle img_mask_{};
 
-    // image manipulation
-    //double angle_{0};
-    //int resize_width_;
-    //int resize_height_;
-
 private:
     void load_image(const char *file_name);
     void set_dimensions_and_position();
