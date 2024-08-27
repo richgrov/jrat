@@ -109,23 +109,22 @@ void jrat::Window::draw_boxes() {
 
 void jrat::Window::draw_image() {
     float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
-    float scale = (height_ - 50) / hypot;
+    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
+    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_CONVERAGE;
 
-    float scaled_width = static_cast<float>(img_.width) * scale * IMAGE_SCREEN_CONVERAGE;
-    float scaled_height = static_cast<float>(img_.height) * scale * IMAGE_SCREEN_CONVERAGE;
+    float scaled_width = static_cast<float>(img_.width) * scale;
+    float scaled_height = static_cast<float>(img_.height) * scale;
 
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
-    float scaled_mask_x = img_mask_.x * scale * IMAGE_SCREEN_CONVERAGE;
-    float scaled_mask_y = img_mask_.y * scale * IMAGE_SCREEN_CONVERAGE;
-    float scaled_mask_width = img_mask_.width * scale * IMAGE_SCREEN_CONVERAGE;
-    float scaled_mask_height = img_mask_.height * scale * IMAGE_SCREEN_CONVERAGE;
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
 
     Rectangle destination = {
-        .x = (static_cast<float>(width_) - scaled_width) / 2.f + origin.x + scaled_mask_x,
-        .y = (static_cast<float>(height_ - 50) - scaled_height) / 2.f + origin.y + scaled_mask_y,
-        .width = scaled_mask_width,
-        .height = scaled_mask_height,
+        .x = left + origin.x + img_mask_.x * scale,
+        .y = top + origin.y + img_mask_.y * scale,
+        .width = img_mask_.width * scale,
+        .height = img_mask_.height * scale,
     };
 
     DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
