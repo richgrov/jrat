@@ -23,8 +23,7 @@ void CropUi::update() {
             static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
             img_.height - top - bottom
         );
-    } catch (const std::exception &) {
-    }
+    } catch (const std::exception &) {}
 }
 
 void CropUi::save_image() {
