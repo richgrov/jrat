@@ -7,7 +7,6 @@
 #include "ui.h"
 
 int jrat::run(int argc, char *argv[]) {
-    argv[1] = (char*)"C:/Users/tjenkins/Pictures/cursed.webp";
     if (argc < 1) {
         std::cerr << "usage: cropinator <file name> [left] [right] [top] [bottom]\n";
         return 1;
