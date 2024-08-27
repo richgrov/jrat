@@ -27,10 +27,10 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
 
 void CropUi::update() {
     try {
-        float top = std::stoi(std::string(text_boxes_[0].content_));
-        float left = std::stoi(std::string(text_boxes_[1].content_));
-        float bottom = std::stoi(std::string(text_boxes_[2].content_));
-        float right = std::stoi(std::string(text_boxes_[3].content_));
+        float top = get_textbox_float(text_boxes_[0].content_);
+        float left = get_textbox_float(text_boxes_[1].content_);
+        float bottom = get_textbox_float(text_boxes_[2].content_);
+        float right = get_textbox_float(text_boxes_[3].content_);
 
         Vector4 crop{top, left, bottom, right};
         if (Vector4Equals(undo_.top(), crop)) {
@@ -94,7 +94,7 @@ void jrat::CropUi::undo_click() {
 
     set_image_mask(
         static_cast<float>(undo_.top().y), static_cast<float>(undo_.top().x),
-        img_.width - undo_.top().y - undo_.top().z, img_.height - undo_.top().x - undo_.top().w
+        img_.width - undo_.top().y - undo_.top().w, img_.height - undo_.top().x - undo_.top().z
     );
 }
 

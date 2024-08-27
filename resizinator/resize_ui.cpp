@@ -79,8 +79,8 @@ void ResizeUi::ui_boxes() {
 
 void ResizeUi::read_boxes() {
     try {
-        resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
-        resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
+        resize_width_ = get_textbox_float(text_boxes_[0].content_);
+        resize_height_ = get_textbox_float(text_boxes_[1].content_);
 
         cv::Size size{resize_width_, resize_height_};
         if (undo_.top() == size) {
