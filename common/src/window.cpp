@@ -20,6 +20,18 @@ using namespace jrat;
 namespace {
 
 constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
+constexpr int UI_BAR_HEIGHT = 75;
+constexpr int TEXT_BOX_HEIGHT = 45;
+constexpr int TEXT_BOX_WIDTH = 100;
+constexpr int BUTTON_HEIGHT = 30;
+constexpr int BUTTON_WIDTH = 100;
+constexpr int CHECKBOX_HEIGHT = 30;
+constexpr float X_FONT = 24;
+constexpr int CHECKBOX_WIDTH = CHECKBOX_HEIGHT;
+constexpr int X_VERTICAL_OFFSET = X_FONT + (UI_BAR_HEIGHT - X_FONT)/2;
+constexpr int CHECKBOX_VERTICAL_OFFSET = CHECKBOX_HEIGHT + (UI_BAR_HEIGHT - CHECKBOX_HEIGHT) / 2;
+constexpr int TEXT_BOX_VERTICAL_OFFSET = TEXT_BOX_HEIGHT + (UI_BAR_HEIGHT - TEXT_BOX_HEIGHT)/2;
+constexpr int BUTTON_VERTICAL_OFFSET = BUTTON_HEIGHT + (UI_BAR_HEIGHT - BUTTON_HEIGHT)/2;
 
 } // namespace
 
@@ -33,6 +45,8 @@ Window::Window(const std::string &title, const char *image_path) {
 
     load_image(image_path);
     set_dimensions_and_position();
+    GuiSetStyle(DEFAULT, TEXT_SIZE, 32);
+    GuiSetFont(font_);
 }
 
 Window::~Window() {
@@ -62,9 +76,9 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 
 void jrat::Window::create_text_box_left() {
     float x_pos = 125 * text_box_count_ + 120;
-    float y_pos = height_ - 35;
+    float y_pos = height_ - TEXT_BOX_VERTICAL_OFFSET;
 
-    TextBox text_box = {x_pos, y_pos, 100, 20, text_box_count_ != 0};
+    TextBox text_box = {x_pos, y_pos, TEXT_BOX_WIDTH, TEXT_BOX_HEIGHT, text_box_count_ != 0};
 
     text_boxes_.emplace_back(text_box);
     text_box_count_++;
@@ -78,9 +92,9 @@ void jrat::Window::create_text_box_left(int box_count) {
 
 void jrat::Window::create_text_box_left(const char *label) {
     float x_pos = 125 * text_box_count_ + 120;
-    float y_pos = height_ - 35;
+    float y_pos = height_ - TEXT_BOX_VERTICAL_OFFSET;
 
-    TextBox text_box = {x_pos, y_pos, 100, 20, false};
+    TextBox text_box = {x_pos, y_pos, TEXT_BOX_WIDTH, TEXT_BOX_HEIGHT, false};
 
     text_box_count_++;
     text_boxes_.emplace_back(text_box);
@@ -116,6 +130,7 @@ void jrat::Window::draw_boxes() {
 
     ClearBackground(DARKGRAY);
 
+
     for (int i = 0; i < text_boxes_.size(); i++) {
         GuiTextBox(
             (text_boxes_[i].area()), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
@@ -123,7 +138,7 @@ void jrat::Window::draw_boxes() {
         );
         if (text_boxes_[i].has_x()) {
             DrawTextEx(
-                font_, "X", Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - 36)}, 24.0f,
+                font_, "X", Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - X_VERTICAL_OFFSET)}, X_FONT,
                 1.0f, Color{0, 0, 0, 255}
             );
         }
@@ -141,7 +156,7 @@ void jrat::Window::draw_image() {
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
 
     Rectangle destination = {
         .x = left + origin.x + img_mask_.x * scale,
@@ -154,7 +169,7 @@ void jrat::Window::draw_image() {
 }
 
 void jrat::Window::draw_ui_bar() {
-    DrawRectangle(0, height_ - 50, width_, 50, Color{255, 255, 255, 255});
+    DrawRectangle(0, height_ - UI_BAR_HEIGHT, width_, UI_BAR_HEIGHT, Color{255, 255, 255, 255});
     for (int checkbox_count = 0; checkbox_count < check_box_checked_.size(); checkbox_count++) {
         bool check_bool = check_box_checked_[checkbox_count];
 
@@ -169,14 +184,26 @@ void jrat::Window::draw_ui_bar() {
             label_positions_[2 * label_count + 1], 20, Color{255, 255, 255, 255}
         );
     }
-    if ((GuiButton(Rectangle{(float)(width_ - 110), (float)(height_ - 40), 100, 30}, "")
+    if ((GuiButton(
+            Rectangle{
+                (float)(width_ - 110), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
+                BUTTON_HEIGHT
+            },
+            ""
+        )
         )) { // returns true when clicked, wire up to save functionality
 
         save_image();
         CloseWindow();
     }
 
-    if ((GuiButton(Rectangle{(float)(10), (float)(height_ - 40), 100, 30}, "undo")
+    if ((GuiButton(
+            Rectangle{
+                (float)(10), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
+                BUTTON_HEIGHT
+            },
+            "undo"
+        )
         )) { // returns true when clicked, wire up to undo functionality
 
         undo_click();
@@ -190,15 +217,17 @@ void jrat::Window::update_mouse() {
 void jrat::Window::add_checkbox_auto() {
     check_box_checked_.push_back(false);
     Rectangle rect = {
-        (float)(125 * text_box_count_ + 10 + 40 * check_box_rects_.size()), (float)(height_ - 40),
-        30, 30
+        (float)((TEXT_BOX_WIDTH + 25) * text_box_count_ + 10 +
+                (CHECKBOX_WIDTH + 25) * (check_box_rects_.size() + 1)),
+        (float)(height_ - CHECKBOX_VERTICAL_OFFSET),
+        CHECKBOX_WIDTH, CHECKBOX_HEIGHT
     };
     check_box_rects_.push_back(rect);
 }
 
 void jrat::Window::add_checkbox(float x, float y) {
     check_box_checked_.push_back(false);
-    Rectangle rect = {x, y, 30, 30};
+    Rectangle rect = {x, y, CHECKBOX_WIDTH, CHECKBOX_HEIGHT};
     check_box_rects_.push_back(rect);
 }
 
