@@ -31,8 +31,8 @@ cv::Mat predict_segment_mask(dnn::Net &net, cv::Mat image) {
 } // namespace
 
 int main(int argc, char **argv) {
-    if (argc < 2) {
-        std::cerr << "usage: erasinator <file>\n";
+    if (argc < 3) {
+        std::cerr << "usage: erasinator <file> <model>\n";
         return 1;
     }
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    dnn::Net net = dnn::readNet("model.onnx");
+    dnn::Net net = dnn::readNet(argv[2]);
 
     std::vector<cv::Mat> channels(3);
     cv::split(image, channels);
