@@ -5,6 +5,7 @@
 
 #include <string>
 #include <format>
+#include <raymath.h>
 
 using namespace jrat;
 
@@ -23,12 +24,13 @@ void CropUi::update() {
         float left = std::stoi(std::string(text_boxes_[1].content_));
         float bottom = std::stoi(std::string(text_boxes_[2].content_));
         float right = std::stoi(std::string(text_boxes_[3].content_));
-        if (undo_.top().x == top && undo_.top().y == left && undo_.top().z == bottom &&
-            undo_.top().w == right) {
+
+        Vector4 crop{top, left, bottom, right};
+        if(Vector4Equals(undo_.top(), crop)) {
             return;
         }
 
-        undo_.push(Vector4{top, left, bottom, right});
+        undo_.push(crop);
 
         set_image_mask(
             static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
