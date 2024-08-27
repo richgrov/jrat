@@ -57,5 +57,6 @@ int main(int argc, char **argv) {
     cv::Mat result;
     cv::merge(channels, result);
 
-    cv::imwrite("out.png", result);
+    std::string output_file = file.substr(0, file.find_last_of('.')) + ".png";
+    cv::imwrite(output_file, result);
 }
