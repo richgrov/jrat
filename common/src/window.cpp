@@ -23,7 +23,7 @@ constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
 
 } // namespace
 
-Window::Window(const std::string &title, const char *image_path) : width_(800), height_(600) {
+Window::Window(const std::string &title, const char *image_path) {
     InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
     image_path_ = const_cast<char *>(image_path);

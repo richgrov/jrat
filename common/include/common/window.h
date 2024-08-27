@@ -45,8 +45,9 @@ protected:
     }
 
     char *image_path_{};
-    int width_{0};
-    int height_{0};
+    // Temporary values needed to properly initialize raylib
+    int width_{500};
+    int height_{500};
     int text_box_count_{0};
     Font font_{};
     Texture2D img_{};
