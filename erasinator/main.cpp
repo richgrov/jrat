@@ -1,3 +1,4 @@
+#include "common/supported_types.h"
 #include <iostream>
 
 #include <opencv2/core/mat.hpp>
@@ -30,13 +31,24 @@ cv::Mat predict_segment_mask(dnn::Net &net, cv::Mat image) {
 } // namespace
 
 int main(int argc, char **argv) {
-    dnn::Net net = dnn::readNet("model.onnx");
-
-    cv::Mat image = cv::imread("Image.jpg", cv::IMREAD_COLOR);
-    if (image.data == nullptr) {
-        std::cerr << "not found\n";
+    if (argc < 2) {
+        std::cerr << "usage: erasinator <file>\n";
         return 1;
     }
+
+    std::string file = argv[1];
+    if (!jrat::is_supported(file)) {
+        std::cerr << "Unsupported file type\n";
+        return 1;
+    }
+
+    cv::Mat image = cv::imread(file, cv::IMREAD_COLOR);
+    if (image.empty()) {
+        std::cerr << "No file found at " << file << '\n';
+        return 1;
+    }
+
+    dnn::Net net = dnn::readNet("model.onnx");
 
     std::vector<cv::Mat> channels(3);
     cv::split(image, channels);
