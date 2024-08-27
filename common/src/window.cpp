@@ -116,11 +116,16 @@ void jrat::Window::draw_image() {
 
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
+    float scaled_mask_x = img_mask_.x * scale * IMAGE_SCREEN_CONVERAGE;
+    float scaled_mask_y = img_mask_.y * scale * IMAGE_SCREEN_CONVERAGE;
+    float scaled_mask_width = img_mask_.width * scale * IMAGE_SCREEN_CONVERAGE;
+    float scaled_mask_height = img_mask_.height * scale * IMAGE_SCREEN_CONVERAGE;
+
     Rectangle destination = {
-        .x = (static_cast<float>(width_) - scaled_width) / 2.f + origin.x,
-        .y = (static_cast<float>(height_ - 50) - scaled_height) / 2.f + origin.y,
-        .width = scaled_width,
-        .height = scaled_height,
+        .x = (static_cast<float>(width_) - scaled_width) / 2.f + origin.x + scaled_mask_x,
+        .y = (static_cast<float>(height_ - 50) - scaled_height) / 2.f + origin.y + scaled_mask_y,
+        .width = scaled_mask_width,
+        .height = scaled_mask_height,
     };
 
     DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
