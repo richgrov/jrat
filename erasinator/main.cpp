@@ -1,10 +1,11 @@
-#include "common/supported_types.h"
 #include <iostream>
 
 #include <opencv2/core/mat.hpp>
 #include <opencv2/dnn.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
+
+#include "common/supported_types.h"
 
 namespace dnn = cv::dnn;
 
