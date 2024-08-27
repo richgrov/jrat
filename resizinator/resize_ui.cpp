@@ -25,9 +25,7 @@ void ResizeUi::update() {
     read_boxes();
 }
 
-void ResizeUi::draw() {}
-
-void ResizeUi::update_image() {
+void ResizeUi::draw() {
     float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_ : static_cast<float>(width_) / resize_width_;
     scale *= 0.9f;
 

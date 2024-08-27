@@ -19,9 +19,7 @@ void RotateUi::update() {
     read_boxes();
 }
 
-void RotateUi::draw() {}
-
-void RotateUi::update_image() {
+void RotateUi::draw() {
     cv::Size size = open_image_.size();
 
     float hypot =

@@ -39,7 +39,7 @@ void CropUi::update() {
     } catch (const std::exception &) {}
 }
 
-void CropUi::update_image() {
+void CropUi::draw() {
     float scale = img_.height > img_.width ? (height_ - 50.0f) / img_.height
                                            : static_cast<float>(width_) / img_.width;
     scale *= 0.9f;

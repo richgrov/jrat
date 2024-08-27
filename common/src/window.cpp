@@ -62,9 +62,8 @@ void Window::run() {
         update_boxes();
         BeginDrawing();
 
-        draw_ui_bar();
         draw();
-        update_image();
+        draw_ui_bar();
         draw_boxes();
         EndDrawing();
     }
