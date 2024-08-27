@@ -26,6 +26,29 @@ void CropUi::update() {
     } catch (const std::exception &) {}
 }
 
+void CropUi::update_image() {
+    float scale = img_.height > img_.width ? (height_ - 50.0f) / img_.height
+                                           : static_cast<float>(width_) / img_.width;
+    scale *= 0.9f;
+
+    float scaled_width = static_cast<float>(img_.width) * scale;
+    float scaled_height = static_cast<float>(img_.height) * scale;
+
+    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+
+    Rectangle destination = {
+        .x = (left + origin.x + img_mask_.x * scale),
+        .y = (top + origin.y + img_mask_.y * scale),
+        .width = scaled_width,
+        .height = scaled_height,
+    };
+
+    draw_image(destination, origin, 0);
+}
+
 void CropUi::save_image() {
     int top = get_textbox(0);
     int left = get_textbox(1);
