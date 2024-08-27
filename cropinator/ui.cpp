@@ -29,7 +29,6 @@ void CropUi::update() {
         }
 
         undo_.push(Vector4{top, left, bottom, right});
-        Vector4 something{1, 2, 4, 5};
 
         set_image_mask(
             static_cast<float>(left), static_cast<float>(top), img_.width - left - right,

@@ -7,7 +7,7 @@
 #include "ui.h"
 
 int jrat::run(int argc, char *argv[]) {
-    if (argc < 1) {
+    if (argc < 2) {
         std::cerr << "usage: cropinator <file name> [left] [right] [top] [bottom]\n";
         return 1;
     }
