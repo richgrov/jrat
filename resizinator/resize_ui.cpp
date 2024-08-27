@@ -51,10 +51,12 @@ void ResizeUi::read_boxes() {
     try {
         resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
         resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
-        if (undo_.top().width == resize_width_ && undo_.top().height == resize_height_) {
+
+        cv::Size size{resize_width_, resize_height_};
+        if (undo_.top() == size) {
             return;
         }
-        undo_.push(cv::Size(resize_width_, resize_height_));
+        undo_.push(size);
         // todo: read checkbox for keep aspect ratio
     } catch (const std::exception &) {
         std::cerr << "textbox couldn't be converted to int";
