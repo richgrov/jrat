@@ -27,8 +27,6 @@ void ResizeUi::update() {
 void ResizeUi::draw() {}
 
 void ResizeUi::update_image() {
-    //float hypot = sqrtf(static_cast<float>(resize_width_ * resize_width_ + resize_height_ * resize_height_));
-    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
     float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_ : static_cast<float>(width_) / resize_width_;
     scale *= 0.9f;
 
