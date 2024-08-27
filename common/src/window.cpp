@@ -39,7 +39,6 @@ Window::~Window() {
     if (img_.height != 0) {
         UnloadTexture(img_);
     }
-    CloseWindow();
 }
 
 void Window::run() {
@@ -62,7 +61,7 @@ void jrat::Window::create_text_box(float x_pos, float y_pos, float width, float 
 }
 
 void jrat::Window::create_text_box_left() {
-    float x_pos = 125 * text_box_count_ + 10;
+    float x_pos = 125 * text_box_count_ + 120;
     float y_pos = height_ - 35;
 
     TextBox text_box = {x_pos, y_pos, 100, 20, text_box_count_ != 0};
@@ -78,7 +77,7 @@ void jrat::Window::create_text_box_left(int box_count) {
 }
 
 void jrat::Window::create_text_box_left(const char *label) {
-    float x_pos = 125 * text_box_count_ + 10;
+    float x_pos = 125 * text_box_count_ + 120;
     float y_pos = height_ - 35;
 
     TextBox text_box = {x_pos, y_pos, 100, 20, false};
@@ -180,6 +179,13 @@ void jrat::Window::draw_ui_bar() {
         )) { // returns true when clicked, wire up to save functionality
 
         save_image();
+        CloseWindow();
+    }
+
+    if ((GuiButton(Rectangle{(float)(10), (float)(height_ - 40), 100, 30}, "undo")
+        )) { // returns true when clicked, wire up to undo functionality
+
+        undo_click();
     }
 }
 

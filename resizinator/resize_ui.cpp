@@ -16,6 +16,7 @@ ResizeUi::ResizeUi(const std::string &title, const char *file_name, cv::Mat imag
     ui_boxes();
     set_boxes();
 
+    undo_.push(cv::Size(resize_width_, resize_height_));
     open_image_ = image;
     save_file_ = file_name;
 }
@@ -53,6 +54,17 @@ void ResizeUi::save_image() {
     write_image(open_image_, resize_width_, resize_height_, keep_aspect_ratio_, save_file_);
 }
 
+void jrat::ResizeUi::undo_click() {
+    if (undo_.size() == 1) {
+        return;
+    }
+    undo_.pop();
+    resize_width_ = undo_.top().width;
+    resize_height_ = undo_.top().height;
+    text_boxes_[0].set_content(std::to_string(resize_width_));
+    text_boxes_[1].set_content(std::to_string(resize_height_));
+}
+
 void ResizeUi::ui_boxes() {
     create_text_box_left(2);
 }
@@ -61,6 +73,12 @@ void ResizeUi::read_boxes() {
     try {
         resize_width_ = std::stoi(std::string(text_boxes_[0].content_));
         resize_height_ = std::stoi(std::string(text_boxes_[1].content_));
+
+        cv::Size size{resize_width_, resize_height_};
+        if (undo_.top() == size) {
+            return;
+        }
+        undo_.push(size);
         // todo: read checkbox for keep aspect ratio
     } catch (const std::exception &) {}
 }
