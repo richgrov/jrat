@@ -1,7 +1,9 @@
 FLIPINATOR_EXE DATA "./res/flipinator.exe"
 CONVERTINATOR_EXE DATA "./res/convertinator.exe"
 CROPINATOR_EXE DATA "./res/cropinator.exe"
+ERASINATOR_EXE DATA "./res/erasinator.exe"
 RESIZINATOR_EXE DATA "./res/resizinator.exe"
 ROTATINATOR_EXE DATA "./res/rotatinator.exe"
 
+RMBG_MODEL DATA "../erasinator/rmbg.onnx"
 OPENCV_DLL DATA "./res/opencv_world490.dll"
