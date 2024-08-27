@@ -176,7 +176,7 @@ void jrat::Window::draw_ui_bar() {
         CloseWindow();
     }
 
-    if ((GuiButton(Rectangle{(float)(10), (float)(height_ - 40), 100, 30}, "")
+    if ((GuiButton(Rectangle{(float)(10), (float)(height_ - 40), 100, 30}, "undo")
         )) { // returns true when clicked, wire up to undo functionality
 
         undo_click();
