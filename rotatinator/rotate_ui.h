@@ -24,6 +24,7 @@ public:
 private:
     cv::Mat open_image_;
     std::string save_file_;
+    double angle_{0};
     std::stack<double> undo_;
 };
 } // namespace jrat

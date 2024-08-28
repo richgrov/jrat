@@ -10,9 +10,16 @@
 using namespace jrat;
 
 CropUi::CropUi(const char *filepath, cv::Mat &&image)
-    : Window("Resize Image", filepath), image_(image), filepath_(filepath) {
+    : Window("Resize Image", filepath),
+      image_(image),
+      filepath_(filepath),
+      img_mask_{
+           .x = 0,
+           .y = 0,
+           .width = static_cast<float>(img_.width),
+           .height = static_cast<float>(img_.height),
+      }{
     ui_boxes();
-
     set_boxes();
 
     undo_.push(Vector4{ 0,0,0,0 });
@@ -36,8 +43,30 @@ void CropUi::update() {
             static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
             img_.height - top - bottom
         );
-    } catch (const std::exception &) {
-    }
+    } catch (const std::exception &) {}
+}
+
+void CropUi::draw() {
+    float scale = img_.height > img_.width ? (height_ - UI_BAR_HEIGHT) / img_.height
+                                           : static_cast<float>(width_) / img_.width;
+    scale *= IMAGE_SCREEN_COVERAGE;
+
+    float scaled_width = static_cast<float>(img_.width) * scale;
+    float scaled_height = static_cast<float>(img_.height) * scale;
+
+    Vector2 origin = {scaled_width / 2, scaled_height / 2};
+
+    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
+    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
+
+    Rectangle destination = {
+        .x = left + origin.x + img_mask_.x * scale,
+        .y = top + origin.y + img_mask_.y * scale,
+        .width = scaled_width,
+        .height = scaled_height,
+    };
+
+    draw_image(img_mask_, destination, origin, 0);
 }
 
 void CropUi::save_image() {

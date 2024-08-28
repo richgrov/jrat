@@ -17,24 +17,6 @@
 
 using namespace jrat;
 
-namespace {
-
-constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
-constexpr int UI_BAR_HEIGHT = 75;
-constexpr int TEXT_BOX_HEIGHT = 45;
-constexpr int TEXT_BOX_WIDTH = 100;
-constexpr int BUTTON_HEIGHT = 30;
-constexpr int BUTTON_WIDTH = 100;
-constexpr int CHECKBOX_HEIGHT = 30;
-constexpr float X_FONT = 24;
-constexpr int CHECKBOX_WIDTH = CHECKBOX_HEIGHT;
-constexpr int X_VERTICAL_OFFSET = X_FONT + (UI_BAR_HEIGHT - X_FONT)/2;
-constexpr int CHECKBOX_VERTICAL_OFFSET = CHECKBOX_HEIGHT + (UI_BAR_HEIGHT - CHECKBOX_HEIGHT) / 2;
-constexpr int TEXT_BOX_VERTICAL_OFFSET = TEXT_BOX_HEIGHT + (UI_BAR_HEIGHT - TEXT_BOX_HEIGHT)/2;
-constexpr int BUTTON_VERTICAL_OFFSET = BUTTON_HEIGHT + (UI_BAR_HEIGHT - BUTTON_HEIGHT)/2;
-
-} // namespace
-
 Window::Window(const std::string &title, const char *image_path) {
     InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);
@@ -62,9 +44,8 @@ void Window::run() {
         update_boxes();
         BeginDrawing();
 
-        draw_ui_bar();
         draw();
-        draw_image();
+        draw_ui_bar();
         draw_boxes();
         EndDrawing();
     }
@@ -109,8 +90,6 @@ void jrat::Window::load_image(const char *file_name) {
     }
     Image img = imageToBytes(file_name);
     img_ = LoadTextureFromImage(img);
-    img_mask_.width = static_cast<float>(img_.width);
-    img_mask_.height = static_cast<float>(img_.height);
 }
 
 void jrat::Window::set_dimensions_and_position() {
@@ -145,27 +124,8 @@ void jrat::Window::draw_boxes() {
     }
 }
 
-void jrat::Window::draw_image() {
-    float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
-    // Amount to scale the image by to ensure it stays within bounds of the window + some padding
-    float scale = ((height_ - 50) / hypot) * IMAGE_SCREEN_COVERAGE;
-
-    float scaled_width = static_cast<float>(img_.width) * scale;
-    float scaled_height = static_cast<float>(img_.height) * scale;
-
-    Vector2 origin = {scaled_width / 2, scaled_height / 2};
-
-    float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
-
-    Rectangle destination = {
-        .x = left + origin.x + img_mask_.x * scale,
-        .y = top + origin.y + img_mask_.y * scale,
-        .width = img_mask_.width * scale,
-        .height = img_mask_.height * scale,
-    };
-
-    DrawTexturePro(img_, img_mask_, destination, origin, angle_, Color{255, 255, 255, 255});
+void jrat::Window::draw_image(Rectangle &source, Rectangle &destination, Vector2 &origin, double angle) {
+    DrawTexturePro(img_, source, destination, origin, angle, Color{255, 255, 255, 255});
 }
 
 void jrat::Window::draw_ui_bar() {

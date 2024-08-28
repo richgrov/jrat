@@ -9,6 +9,20 @@
 
 namespace jrat {
 
+constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
+constexpr int UI_BAR_HEIGHT = 75;
+constexpr int TEXT_BOX_HEIGHT = 45;
+constexpr int TEXT_BOX_WIDTH = 100;
+constexpr int BUTTON_HEIGHT = 30;
+constexpr int BUTTON_WIDTH = 100;
+constexpr int CHECKBOX_HEIGHT = 30;
+constexpr int CHECKBOX_WIDTH = CHECKBOX_HEIGHT;
+constexpr float X_FONT = 24;
+constexpr int X_VERTICAL_OFFSET = X_FONT + (UI_BAR_HEIGHT - X_FONT) / 2;
+constexpr int CHECKBOX_VERTICAL_OFFSET = CHECKBOX_HEIGHT + (UI_BAR_HEIGHT - CHECKBOX_HEIGHT) / 2;
+constexpr int TEXT_BOX_VERTICAL_OFFSET = TEXT_BOX_HEIGHT + (UI_BAR_HEIGHT - TEXT_BOX_HEIGHT) / 2;
+constexpr int BUTTON_VERTICAL_OFFSET = BUTTON_HEIGHT + (UI_BAR_HEIGHT - BUTTON_HEIGHT) / 2;
+
 typedef unsigned char byte;
 
 class Window {
@@ -33,17 +47,10 @@ protected:
     void create_text_box_left();
     void create_text_box_left(int box_count);
     void create_text_box_left(const char *label);
+    void draw_image(Rectangle &mask, Rectangle &destination, Vector2 &origin, double angle);
     void draw_boxes();
-    void draw_image();
     void draw_ui_bar();
     void update_boxes();
-
-    void set_image_mask(float x, float y, float width, float height) {
-        img_mask_.x = x;
-        img_mask_.y = y;
-        img_mask_.width = width;
-        img_mask_.height = height;
-    }
 
     char *image_path_{};
     // Temporary values needed to properly initialize raylib
@@ -64,14 +71,9 @@ protected:
     std::vector<bool> check_box_checked_;
     bool running_{true};
 
-    // image manipulation
-    double angle_{0};
-
 private:
     void load_image(const char *file_name);
     void set_dimensions_and_position();
-
-    Rectangle img_mask_{};
 };
 
 } // namespace jrat
