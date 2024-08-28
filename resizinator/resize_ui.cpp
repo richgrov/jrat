@@ -73,7 +73,8 @@ void jrat::ResizeUi::undo_click() {
 }
 
 void ResizeUi::ui_boxes() {
-    create_text_box_left(2);
+    create_text_box_left("width");
+    create_text_box_left("height");
 }
 
 void ResizeUi::read_boxes() {

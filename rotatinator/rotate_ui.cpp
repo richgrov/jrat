@@ -2,8 +2,7 @@
 #include "rotatinator.h"
 
 #include <format>
-#include <iostream>
-
+#include <iostream>
 using namespace jrat;
 
 RotateUi::RotateUi(const std::string &title, const char *file_name, cv::Mat &image)
@@ -67,7 +66,7 @@ void jrat::RotateUi::undo_click() {
 }
 
 void RotateUi::ui_boxes() {
-    create_text_box_left(1);
+    create_text_box_left("rotation degrees");
 }
 
 void RotateUi::read_boxes() {

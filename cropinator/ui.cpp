@@ -99,7 +99,10 @@ void jrat::CropUi::undo_click() {
 }
 
 void CropUi::ui_boxes() {
-    create_text_box_left(4);
+    create_text_box_left("from top");
+    create_text_box_left("from left");
+    create_text_box_left("from bottom");
+    create_text_box_left("from right");
 }
 
 int CropUi::get_textbox(int index) {
