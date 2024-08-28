@@ -1,4 +1,4 @@
-add_executable(erasinator
+jrat_add_window_executable(erasinator
     main.cpp
 )
 
