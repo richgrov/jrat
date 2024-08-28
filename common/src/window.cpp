@@ -17,24 +17,6 @@
 
 using namespace jrat;
 
-namespace {
-
-constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
-constexpr int UI_BAR_HEIGHT = 75;
-constexpr int TEXT_BOX_HEIGHT = 45;
-constexpr int TEXT_BOX_WIDTH = 100;
-constexpr int BUTTON_HEIGHT = 30;
-constexpr int BUTTON_WIDTH = 100;
-constexpr int CHECKBOX_HEIGHT = 30;
-constexpr float X_FONT = 24;
-constexpr int CHECKBOX_WIDTH = CHECKBOX_HEIGHT;
-constexpr int X_VERTICAL_OFFSET = X_FONT + (UI_BAR_HEIGHT - X_FONT)/2;
-constexpr int CHECKBOX_VERTICAL_OFFSET = CHECKBOX_HEIGHT + (UI_BAR_HEIGHT - CHECKBOX_HEIGHT) / 2;
-constexpr int TEXT_BOX_VERTICAL_OFFSET = TEXT_BOX_HEIGHT + (UI_BAR_HEIGHT - TEXT_BOX_HEIGHT)/2;
-constexpr int BUTTON_VERTICAL_OFFSET = BUTTON_HEIGHT + (UI_BAR_HEIGHT - BUTTON_HEIGHT)/2;
-
-} // namespace
-
 Window::Window(const std::string &title, const char *image_path) {
     InitWindow(width_, height_, title.c_str());
     SetTargetFPS(60);

@@ -26,9 +26,9 @@ void ResizeUi::update() {
 }
 
 void ResizeUi::draw() {
-    float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_
+    float scale = resize_height_ > resize_width_ ? (height_ - UI_BAR_HEIGHT) / resize_height_
                                                  : static_cast<float>(width_) / resize_width_;
-    scale *= 0.9f;
+    scale *= IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(resize_width_) * scale;
     float scaled_height = static_cast<float>(resize_height_) * scale;
@@ -36,7 +36,7 @@ void ResizeUi::draw() {
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
 
     Rectangle source = {
         .x = 0.f,
@@ -46,8 +46,8 @@ void ResizeUi::draw() {
     };
 
     Rectangle destination = {
-        .x = (left + origin.x * scale),
-        .y = (top + origin.y * scale),
+        .x = left + origin.x,
+        .y = top + origin.y,
         .width = scaled_width,
         .height = scaled_height,
     };

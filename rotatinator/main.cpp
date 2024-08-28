@@ -9,9 +9,6 @@
 using namespace jrat;
 
 int jrat::run(int argc, char **argv) {
-    argc++;
-    argv[1] =
-        const_cast<char *>("C:/Neumont/Q4/PRO100/jrat/out/build/x64-Debug/rotatinator/WIN_20220816_08_36_18_Pro.jpg");
     if (argc < 2 || std::strcmp(argv[1], "--help") == 0) {
         print_help();
         return 0;

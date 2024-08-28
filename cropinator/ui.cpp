@@ -42,9 +42,9 @@ void CropUi::update() {
 }
 
 void CropUi::draw() {
-    float scale = img_.height > img_.width ? (height_ - 50.0f) / img_.height
+    float scale = img_.height > img_.width ? (height_ - UI_BAR_HEIGHT) / img_.height
                                            : static_cast<float>(width_) / img_.width;
-    scale *= 0.9f;
+    scale *= IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(img_.width) * scale;
     float scaled_height = static_cast<float>(img_.height) * scale;
@@ -52,11 +52,11 @@ void CropUi::draw() {
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
 
     Rectangle destination = {
-        .x = (left + origin.x + img_mask_.x * scale),
-        .y = (top + origin.y + img_mask_.y * scale),
+        .x = left + origin.x + img_mask_.x * scale,
+        .y = top + origin.y + img_mask_.y * scale,
         .width = scaled_width,
         .height = scaled_height,
     };

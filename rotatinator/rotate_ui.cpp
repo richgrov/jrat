@@ -23,8 +23,8 @@ void RotateUi::update() {
 void RotateUi::draw() {
     float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
     // Amount to scale the image by to ensure it stays within bounds of the window + some padding
-    float scale = width_ > height_ ? (height_ - 50) / hypot : width_ / hypot;
-    scale *= 0.9f;
+    float scale = width_ > height_ ? (height_ - UI_BAR_HEIGHT) / hypot : width_ / hypot;
+    scale *= IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(img_.width) * scale;
     float scaled_height = static_cast<float>(img_.height) * scale;
@@ -32,7 +32,7 @@ void RotateUi::draw() {
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
-    float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
+    float top = (static_cast<float>(height_ - UI_BAR_HEIGHT) - scaled_height) / 2.f;
 
     Rectangle source = {
         .x = 0.f,
@@ -42,8 +42,8 @@ void RotateUi::draw() {
     };
 
     Rectangle destination = {
-        .x = (left + origin.x + origin.x * scale),
-        .y = (top + origin.y + origin.y * scale),
+        .x = left + origin.x,
+        .y = top + origin.y,
         .width = img_.width * scale,
         .height = img_.height * scale,
     };
