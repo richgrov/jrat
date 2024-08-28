@@ -26,7 +26,8 @@ void ResizeUi::update() {
 }
 
 void ResizeUi::draw() {
-    float scale = resize_height_ > resize_width_ ? (height_ - UI_BAR_HEIGHT) / resize_height_
+    float scale = resize_height_ > resize_width_
+        ? (static_cast<float>(height_) - UI_BAR_HEIGHT) / resize_height_
                                                  : static_cast<float>(width_) / resize_width_;
     scale *= IMAGE_SCREEN_COVERAGE;
 
