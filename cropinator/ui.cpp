@@ -12,8 +12,10 @@ using namespace jrat;
 CropUi::CropUi(const char *filepath, cv::Mat &&image)
     : Window("Resize Image", filepath), image_(image), filepath_(filepath) {
     ui_boxes();
-
     set_boxes();
+
+    img_mask_.width = static_cast<float>(img_.width);
+    img_mask_.height = static_cast<float>(img_.height);
 
     undo_.push(Vector4{ 0,0,0,0 });
 }
@@ -59,7 +61,7 @@ void CropUi::draw() {
         .height = scaled_height,
     };
 
-    draw_image(destination, origin, 0);
+    draw_image(img_mask_, destination, origin, 0);
 }
 
 void CropUi::save_image() {

@@ -108,8 +108,6 @@ void jrat::Window::load_image(const char *file_name) {
     }
     Image img = imageToBytes(file_name);
     img_ = LoadTextureFromImage(img);
-    img_mask_.width = static_cast<float>(img_.width);
-    img_mask_.height = static_cast<float>(img_.height);
 }
 
 void jrat::Window::set_dimensions_and_position() {
@@ -144,8 +142,8 @@ void jrat::Window::draw_boxes() {
     }
 }
 
-void jrat::Window::draw_image(Rectangle &destination, Vector2 &origin, double angle) {
-    DrawTexturePro(img_, img_mask_, destination, origin, angle, Color{255, 255, 255, 255});
+void jrat::Window::draw_image(Rectangle &source, Rectangle &destination, Vector2 &origin, double angle) {
+    DrawTexturePro(img_, source, destination, origin, angle, Color{255, 255, 255, 255});
 }
 
 void jrat::Window::draw_ui_bar() {

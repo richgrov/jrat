@@ -2,7 +2,8 @@
 #include "rotatinator.h"
 
 #include <format>
-#include <iostream>
+#include <iostream>
+
 using namespace jrat;
 
 RotateUi::RotateUi(const std::string &title, const char *file_name, cv::Mat &image)
@@ -20,30 +21,34 @@ void RotateUi::update() {
 }
 
 void RotateUi::draw() {
-    cv::Size size = open_image_.size();
-
-    float hypot =
-        sqrtf(static_cast<float>(size.width * size.width + size.height * size.height));
+    float hypot = sqrtf(static_cast<float>(img_.width * img_.width + img_.height * img_.height));
     // Amount to scale the image by to ensure it stays within bounds of the window + some padding
     float scale = width_ > height_ ? (height_ - 50) / hypot : width_ / hypot;
     scale *= 0.9f;
 
-    float scaled_width = static_cast<float>(size.width) * scale;
-    float scaled_height = static_cast<float>(size.height) * scale;
+    float scaled_width = static_cast<float>(img_.width) * scale;
+    float scaled_height = static_cast<float>(img_.height) * scale;
 
     Vector2 origin = {scaled_width / 2, scaled_height / 2};
 
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
     float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
 
-    Rectangle destination = {
-        .x = (left + origin.x + img_mask_.x * scale),
-        .y = (top + origin.y + img_mask_.y * scale),
-        .width = size.width * scale,
-        .height = size.height * scale,
+    Rectangle source = {
+        .x = 0.f,
+        .y = 0.f,
+        .width = static_cast<float>(img_.width),
+        .height = static_cast<float>(img_.height),
     };
 
-    draw_image(destination, origin, angle_);
+    Rectangle destination = {
+        .x = (left + origin.x + origin.x * scale),
+        .y = (top + origin.y + origin.y * scale),
+        .width = img_.width * scale,
+        .height = img_.height * scale,
+    };
+
+    draw_image(source, destination, origin, angle_);
 }
 
 void RotateUi::save_image() {

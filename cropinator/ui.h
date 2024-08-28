@@ -25,6 +25,14 @@ private:
     cv::Mat image_;
     std::string filepath_;
     std::stack<Vector4> undo_;
+    Rectangle img_mask_{};
+
+    void set_image_mask(float x, float y, float width, float height) {
+        img_mask_.x = x;
+        img_mask_.y = y;
+        img_mask_.width = width;
+        img_mask_.height = height;
+    }
 };
 
 } // namespace jrat

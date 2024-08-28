@@ -26,7 +26,8 @@ void ResizeUi::update() {
 }
 
 void ResizeUi::draw() {
-    float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_ : static_cast<float>(width_) / resize_width_;
+    float scale = resize_height_ > resize_width_ ? (height_ - 50.0f) / resize_height_
+                                                 : static_cast<float>(width_) / resize_width_;
     scale *= 0.9f;
 
     float scaled_width = static_cast<float>(resize_width_) * scale;
@@ -37,14 +38,21 @@ void ResizeUi::draw() {
     float left = (static_cast<float>(width_) - scaled_width) / 2.f;
     float top = (static_cast<float>(height_ - 50) - scaled_height) / 2.f;
 
+    Rectangle source = {
+        .x = 0.f,
+        .y = 0.f,
+        .width = static_cast<float>(img_.width),
+        .height = static_cast<float>(img_.height),
+    };
+
     Rectangle destination = {
-        .x = (left + origin.x + img_mask_.x * scale),
-        .y = (top + origin.y + img_mask_.y * scale),
+        .x = (left + origin.x * scale),
+        .y = (top + origin.y * scale),
         .width = scaled_width,
         .height = scaled_height,
     };
 
-    draw_image(destination, origin, 0);
+    draw_image(source, destination, origin, 0);
 }
 
 void ResizeUi::save_image() {

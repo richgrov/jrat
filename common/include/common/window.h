@@ -33,17 +33,10 @@ protected:
     void create_text_box_left();
     void create_text_box_left(int box_count);
     void create_text_box_left(const char *label);
-    void draw_image(Rectangle &destination, Vector2 &origin, double angle);
+    void draw_image(Rectangle &mask, Rectangle &destination, Vector2 &origin, double angle);
     void draw_boxes();
     void draw_ui_bar();
     void update_boxes();
-
-    void set_image_mask(float x, float y, float width, float height) {
-        img_mask_.x = x;
-        img_mask_.y = y;
-        img_mask_.width = width;
-        img_mask_.height = height;
-    }
 
     char *image_path_{};
     // Temporary values needed to properly initialize raylib
@@ -63,8 +56,6 @@ protected:
     int active_text_box_{-1};
     std::vector<bool> check_box_checked_;
     bool running_{true};
-
-    Rectangle img_mask_{};
 
 private:
     void load_image(const char *file_name);
