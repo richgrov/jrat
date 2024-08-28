@@ -52,13 +52,6 @@ protected:
     void draw_ui_bar();
     void update_boxes();
 
-    void set_image_mask(float x, float y, float width, float height) {
-        img_mask_.x = x;
-        img_mask_.y = y;
-        img_mask_.width = width;
-        img_mask_.height = height;
-    }
-
     float get_textbox_float(char *content) {
         bool empty = content[0] == '\0';
         return empty ? 0 : std::atoi(content);
