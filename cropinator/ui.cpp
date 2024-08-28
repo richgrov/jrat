@@ -27,6 +27,10 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
 
 void CropUi::update() {
     try {
+        text_boxes_[0].check_is_number();
+        text_boxes_[1].check_is_number();
+        text_boxes_[2].check_is_number();
+        text_boxes_[3].check_is_number();
         float top = get_textbox_float(text_boxes_[0].content_);
         float left = get_textbox_float(text_boxes_[1].content_);
         float bottom = get_textbox_float(text_boxes_[2].content_);

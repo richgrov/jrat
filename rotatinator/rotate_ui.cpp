@@ -2,12 +2,13 @@
 #include "rotatinator.h"
 
 #include <format>
-#include <iostream>
-
+#include <iostream>
 using namespace jrat;
 
 RotateUi::RotateUi(const std::string &title, const char *file_name, cv::Mat &image)
     : Window(title, file_name) {
+    angle_ = 0;
+
     ui_boxes();
     set_boxes();
 
@@ -43,6 +44,7 @@ void RotateUi::ui_boxes() {
 
 void RotateUi::read_boxes() {
     try {
+        text_boxes_[0].check_is_number();
         angle_ = get_textbox_float(text_boxes_[0].content_);
         if (undo_.top() == angle_) {
             return;

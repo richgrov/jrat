@@ -38,6 +38,15 @@ public:
         }
     }
 
+    void check_is_number() {
+        for (int i = 0; i < strlen(content_); i++) {
+            if (!std::isdigit(content_[i])) {
+                content_[i] = '\0';
+                return;
+            }
+        }
+    }
+
 private:
     bool has_x_{false};
     Rectangle area_;

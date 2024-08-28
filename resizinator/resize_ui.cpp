@@ -79,6 +79,8 @@ void ResizeUi::ui_boxes() {
 
 void ResizeUi::read_boxes() {
     try {
+        text_boxes_[0].check_is_number();
+        text_boxes_[1].check_is_number();
         resize_width_ = get_textbox_float(text_boxes_[0].content_);
         resize_height_ = get_textbox_float(text_boxes_[1].content_);
 
