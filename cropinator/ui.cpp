@@ -17,7 +17,7 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
            .x = 0,
            .y = 0,
            .width = static_cast<float>(img_.width),
-           .height = static_cast<float>(img_.height)
+           .height = static_cast<float>(img_.height),
       }{
     ui_boxes();
     set_boxes();
