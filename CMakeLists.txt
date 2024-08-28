@@ -9,6 +9,7 @@ find_package(OpenCV REQUIRED)
 add_subdirectory(thirdparty/raylib)
 
 add_subdirectory(common)
+add_subdirectory(erasinator)
 add_subdirectory(convertinator)
 add_subdirectory(cropinator)
 add_subdirectory(flipinator)
