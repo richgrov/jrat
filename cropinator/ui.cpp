@@ -64,8 +64,8 @@ void CropUi::draw() {
     Rectangle destination = {
         .x = left + origin.x + img_mask_.x * scale,
         .y = top + origin.y + img_mask_.y * scale,
-        .width = scaled_width,
-        .height = scaled_height,
+        .width = img_mask_.width * scale,
+        .height = img_mask_.height * scale,
     };
 
     draw_image(img_mask_, destination, origin, 0);
