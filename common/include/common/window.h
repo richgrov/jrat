@@ -10,8 +10,8 @@
 namespace jrat {
 
 constexpr float IMAGE_SCREEN_COVERAGE = 0.9f;
-constexpr int UI_BAR_HEIGHT = 75;
-constexpr int TEXT_BOX_HEIGHT = 45;
+constexpr int UI_BAR_HEIGHT = 85;
+constexpr int TEXT_BOX_HEIGHT = 40;
 constexpr int TEXT_BOX_WIDTH = 100;
 constexpr int BUTTON_HEIGHT = 30;
 constexpr int BUTTON_WIDTH = 100;

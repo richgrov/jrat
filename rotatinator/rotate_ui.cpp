@@ -67,7 +67,7 @@ void jrat::RotateUi::undo_click() {
 }
 
 void RotateUi::ui_boxes() {
-    create_text_box_left(1);
+    create_text_box_left("Degrees");
 }
 
 void RotateUi::read_boxes() {

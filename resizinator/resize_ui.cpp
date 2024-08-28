@@ -27,8 +27,8 @@ void ResizeUi::update() {
 
 void ResizeUi::draw() {
     float scale = resize_height_ > resize_width_
-        ? (static_cast<float>(height_) - UI_BAR_HEIGHT) / resize_height_
-                                                 : static_cast<float>(width_) / resize_width_;
+                      ? (static_cast<float>(height_) - UI_BAR_HEIGHT) / resize_height_
+                      : static_cast<float>(width_) / resize_width_;
     scale *= IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(resize_width_) * scale;
@@ -73,7 +73,8 @@ void jrat::ResizeUi::undo_click() {
 }
 
 void ResizeUi::ui_boxes() {
-    create_text_box_left(2);
+    create_text_box_left("Width");
+    create_text_box_left("Height");
 }
 
 void ResizeUi::read_boxes() {
@@ -87,7 +88,8 @@ void ResizeUi::read_boxes() {
         }
         undo_.push(size);
         // todo: read checkbox for keep aspect ratio
-    } catch (const std::exception &) {}
+    } catch (const std::exception &) {
+    }
 }
 
 void ResizeUi::set_boxes() {

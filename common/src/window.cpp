@@ -81,7 +81,7 @@ void jrat::Window::create_text_box_left(const char *label) {
     text_boxes_.emplace_back(text_box);
     labels_.push_back(label);
     label_positions_.push_back(x_pos);
-    label_positions_.push_back(y_pos - 35);
+    label_positions_.push_back(y_pos - 20);
 }
 
 void jrat::Window::load_image(const char *file_name) {
@@ -109,7 +109,6 @@ void jrat::Window::draw_boxes() {
 
     ClearBackground(DARKGRAY);
 
-
     for (int i = 0; i < text_boxes_.size(); i++) {
         GuiTextBox(
             (text_boxes_[i].area()), text_boxes_[i].content_, text_boxes_[i].get_max_length(),
@@ -117,14 +116,17 @@ void jrat::Window::draw_boxes() {
         );
         if (text_boxes_[i].has_x()) {
             DrawTextEx(
-                font_, "X", Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - X_VERTICAL_OFFSET)}, X_FONT,
-                1.0f, Color{0, 0, 0, 255}
+                font_, "X",
+                Vector2{text_boxes_[i].area().x - 18.5f, (float)(height_ - X_VERTICAL_OFFSET)},
+                X_FONT, 1.0f, Color{0, 0, 0, 255}
             );
         }
     }
 }
 
-void jrat::Window::draw_image(Rectangle &source, Rectangle &destination, Vector2 &origin, double angle) {
+void jrat::Window::draw_image(
+    Rectangle &source, Rectangle &destination, Vector2 &origin, double angle
+) {
     DrawTexturePro(img_, source, destination, origin, angle, Color{255, 255, 255, 255});
 }
 
@@ -141,7 +143,7 @@ void jrat::Window::draw_ui_bar() {
     for (int label_count = 0; label_count < labels_.size(); label_count++) {
         DrawText(
             labels_[label_count], label_positions_[2 * label_count],
-            label_positions_[2 * label_count + 1], 20, Color{255, 255, 255, 255}
+            label_positions_[2 * label_count + 1], 20, Color{0, 0, 0, 255}
         );
     }
     if ((GuiButton(
@@ -149,9 +151,8 @@ void jrat::Window::draw_ui_bar() {
                 (float)(width_ - 110), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
                 BUTTON_HEIGHT
             },
-            ""
-        )
-        )) { // returns true when clicked, wire up to save functionality
+            "Save"
+        ))) { // returns true when clicked, wire up to save functionality
 
         save_image();
         CloseWindow();
@@ -159,12 +160,10 @@ void jrat::Window::draw_ui_bar() {
 
     if ((GuiButton(
             Rectangle{
-                (float)(10), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
-                BUTTON_HEIGHT
+                (float)(10), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH, BUTTON_HEIGHT
             },
-            "undo"
-        )
-        )) { // returns true when clicked, wire up to undo functionality
+            "Undo"
+        ))) { // returns true when clicked, wire up to undo functionality
 
         undo_click();
     }
@@ -179,8 +178,7 @@ void jrat::Window::add_checkbox_auto() {
     Rectangle rect = {
         (float)((TEXT_BOX_WIDTH + 25) * text_box_count_ + 10 +
                 (CHECKBOX_WIDTH + 25) * (check_box_rects_.size() + 1)),
-        (float)(height_ - CHECKBOX_VERTICAL_OFFSET),
-        CHECKBOX_WIDTH, CHECKBOX_HEIGHT
+        (float)(height_ - CHECKBOX_VERTICAL_OFFSET), CHECKBOX_WIDTH, CHECKBOX_HEIGHT
     };
     check_box_rects_.push_back(rect);
 }
