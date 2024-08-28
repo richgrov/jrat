@@ -4,7 +4,6 @@
 #include <opencv2/core/mat.hpp>
 
 #include <stack>
-#include <stack>
 #include <string>
 
 namespace jrat {
