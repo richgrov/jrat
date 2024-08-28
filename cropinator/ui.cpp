@@ -3,9 +3,9 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-#include <string>
 #include <format>
 #include <raymath.h>
+#include <string>
 
 using namespace jrat;
 
@@ -14,15 +14,15 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
       image_(image),
       filepath_(filepath),
       img_mask_{
-           .x = 0,
-           .y = 0,
-           .width = static_cast<float>(img_.width),
-           .height = static_cast<float>(img_.height),
-      }{
+          .x = 0,
+          .y = 0,
+          .width = static_cast<float>(img_.width),
+          .height = static_cast<float>(img_.height),
+      } {
     ui_boxes();
     set_boxes();
 
-    undo_.push(Vector4{ 0,0,0,0 });
+    undo_.push(Vector4{0, 0, 0, 0});
 }
 
 void CropUi::update() {
@@ -33,7 +33,7 @@ void CropUi::update() {
         float right = std::stoi(std::string(text_boxes_[3].content_));
 
         Vector4 crop{top, left, bottom, right};
-        if(Vector4Equals(undo_.top(), crop)) {
+        if (Vector4Equals(undo_.top(), crop)) {
             return;
         }
 
@@ -43,12 +43,14 @@ void CropUi::update() {
             static_cast<float>(left), static_cast<float>(top), img_.width - left - right,
             img_.height - top - bottom
         );
-    } catch (const std::exception &) {}
+    } catch (const std::exception &) {
+    }
 }
 
 void CropUi::draw() {
-    float scale = img_.height > img_.width ? (height_ - UI_BAR_HEIGHT) / img_.height
-                                           : static_cast<float>(width_) / img_.width;
+    float scale = img_.height > img_.width
+                      ? static_cast<float>(height_ - UI_BAR_HEIGHT) / img_.height
+                      : static_cast<float>(width_) / img_.width;
     scale *= IMAGE_SCREEN_COVERAGE;
 
     float scaled_width = static_cast<float>(img_.width) * scale;
@@ -82,7 +84,7 @@ void CropUi::save_image() {
 
 void jrat::CropUi::undo_click() {
     if (undo_.size() == 1) {
-        return; 
+        return;
     }
     undo_.pop();
     text_boxes_[0].set_content(std::to_string((int)undo_.top().x));
@@ -90,9 +92,9 @@ void jrat::CropUi::undo_click() {
     text_boxes_[2].set_content(std::to_string((int)undo_.top().z));
     text_boxes_[3].set_content(std::to_string((int)undo_.top().w));
 
-    set_image_mask(static_cast<float>(undo_.top().y), static_cast<float>(undo_.top().x),
-                   img_.width - undo_.top().y - undo_.top().w,
-                   img_.height - undo_.top().x - undo_.top().z 
+    set_image_mask(
+        static_cast<float>(undo_.top().y), static_cast<float>(undo_.top().x),
+        img_.width - undo_.top().y - undo_.top().z, img_.height - undo_.top().x - undo_.top().w
     );
 }
 
