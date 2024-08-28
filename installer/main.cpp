@@ -141,6 +141,8 @@ MenuOption conversion_option(const std::string &type) {
     };
 }
 
+const std::string erasinator_args = "%1 \"" + APP_DIR.string() + "\\rmbg.onnx\"";
+
 const std::vector<MenuOption> operations = {
     {"Rotate 90 clockwise", "rotate90cw", full_command("rotatinator.exe", "%1 90 %1")},
     {"Rotate 90 counter-clockwise", "rotate90ccw", full_command("rotatinator.exe", "%1 -90 %1")},
@@ -149,6 +151,7 @@ const std::vector<MenuOption> operations = {
     {"Crop...", "crop", full_command("cropinator.exe", "%1")},
     {"Flip horizontally", "fliph", full_command("flipinator.exe", "%1 h")},
     {"Flip vertically", "flipv", full_command("flipinator.exe", "%1 v")},
+    {"Remove background", "rmbg", full_command("erasinator.exe", erasinator_args)},
 };
 
 const std::vector<MenuOption> conversions = {
@@ -170,6 +173,8 @@ void install() {
     install_file("CROPINATOR_EXE", "cropinator.exe");
     install_file("RESIZINATOR_EXE", "resizinator.exe");
     install_file("ROTATINATOR_EXE", "rotatinator.exe");
+    install_file("ERASINATOR_EXE", "erasinator.exe");
+    install_file("RMBG_MODEL", "rmbg.onnx");
     install_file("OPENCV_DLL", "opencv_world490.dll");
 
     std::string supported_file_list = build_supported_file_list(supported_types);
