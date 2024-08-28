@@ -10,7 +10,7 @@
 using namespace jrat;
 
 CropUi::CropUi(const char *filepath, cv::Mat &&image)
-    : Window("Resize Image", filepath),
+    : Window("Crop Image", filepath),
       image_(image),
       filepath_(filepath),
       img_mask_{
