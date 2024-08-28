@@ -1,4 +1,4 @@
-# JRAT
+![JRAT](.github/logo.png)
 
 **J**ust **R**ight-click **A**ny**T**hing
 
