@@ -1,8 +1,8 @@
-# jrat
+# JRAT
 
-**J**ust **R**ight-Click **A**ny**t**hing
+**J**ust **R**ight-click **A**ny**T**hing
 
-~~Josh Richard Tyson Andrew~~
+~~Josh Richard Andrew Tyson~~
 
 Right click an image for common manipulation tasks such as crop, resize, convert, flip, etc.
 
