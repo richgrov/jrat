@@ -149,7 +149,7 @@ void jrat::Window::draw_ui_bar() {
                 (float)(width_ - 110), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
                 BUTTON_HEIGHT
             },
-            ""
+            "Save"
         )
         )) { // returns true when clicked, wire up to save functionality
 
@@ -162,7 +162,7 @@ void jrat::Window::draw_ui_bar() {
                 (float)(10), (float)(height_ - BUTTON_VERTICAL_OFFSET), BUTTON_WIDTH,
                 BUTTON_HEIGHT
             },
-            "undo"
+            "Undo"
         )
         )) { // returns true when clicked, wire up to undo functionality
 
