@@ -13,12 +13,11 @@ CropUi::CropUi(const char *filepath, cv::Mat &&image)
     : Window("Resize Image", filepath),
       image_(image),
       filepath_(filepath),
-      img_mask_(
-          {.x = 0,
+      img_mask_{.x = 0,
            .y = 0,
            .width = static_cast<float>(img_.width),
-           .height = static_cast<float>(img_.height)}
-      ) {
+           .height = static_cast<float>(img_.height)
+      }{
     ui_boxes();
     set_boxes();
 
