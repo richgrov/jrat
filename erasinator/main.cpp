@@ -5,6 +5,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 
+#include "common/entrypoint.h"
 #include "common/supported_types.h"
 
 namespace dnn = cv::dnn;
@@ -31,7 +32,7 @@ cv::Mat predict_segment_mask(dnn::Net &net, cv::Mat image) {
 
 } // namespace
 
-int main(int argc, char **argv) {
+int jrat::run(int argc, char **argv) {
     if (argc < 3) {
         std::cerr << "usage: erasinator <file> <model>\n";
         return 1;
@@ -60,4 +61,5 @@ int main(int argc, char **argv) {
 
     std::string output_file = file.substr(0, file.find_last_of('.')) + ".png";
     cv::imwrite(output_file, result);
+    return 0;
 }
